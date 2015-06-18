@@ -28,7 +28,7 @@ public class Client implements Serializable {
 	
 	/**
 	 * Checks whether a client with given id exist or not.
-	 * @param id
+	 * @param id, unique id
 	 * @return the customer if exist
 	 */
 	protected ClientData search(String id) {
