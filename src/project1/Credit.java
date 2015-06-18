@@ -67,7 +67,7 @@ public class Credit implements Serializable {
 	 * a method to print a credit card
 	 */
 	protected void printCard() {
-		System.out.println("Number: " + this.getNumber() + " " + "Expiration: " + this.getExpiration());
+		System.out.println("Credit Card Number: " + this.getNumber() + " " + "Credit Card Expiration: " + this.getExpiration());
 	}
 
 }
