@@ -1,1 +1,8 @@
-Use the java files that are in src folder.
+Use the java files that are in src folder, this will make it easier for all of us
+for keeping it up to date since GitHub manages the updates to the files by
+each members.
+
+TODO
+----
+  Need to finish sequence diagrams
+  Need to check your functions are working properly and fix or add them as needed
