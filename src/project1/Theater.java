@@ -221,5 +221,4 @@ public class Theater implements Serializable {
 	protected void listAllPlays() {
 		client.ListAllPlays();
 	}
-
 }
