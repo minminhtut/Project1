@@ -51,50 +51,52 @@ public class UserInterface {
 	private static final int HELP = 13;
 	
 	private UserInterface() {
-	    if (yesOrNo("Look for saved data and  use it?")) {
-	      retrieve();
-	    } else {
-	      theater = Theater.instance();
-	    }
+		if (yesOrNo("Look for saved data and  use it?")) {
+		retrieve();
+		} else {
+		theater = Theater.instance();
+		}
 	}
 	
+
 	/**
-	   * Prompts for a command from the keyboard
-	   * 
-	   * @return a valid command
-	   * 
-	   */
-	  public int getCommand() {
-	    do {
-	      try {
-	        int value = Integer.parseInt(getToken("Enter command:" + HELP + " for help"));
-	        if (value >= EXIT && value <= HELP) {
-	          return value;
-	        }
-	      } catch (NumberFormatException nfe) {
-	        System.out.println("Enter a number");
-	      }
-	    } while (true);
-	  }
-	  /**
-	   * Displays the help screen
-	   * 
-	   */
-	  public void help() {
-	    System.out.println("Enter a number between 0 and 12 as explained below:");
-	    System.out.println(EXIT + " to Exit");
-	    System.out.println(ADD_CLIENT + " to Add Client");
-	    System.out.println(REMOVE_CLIENT + " to Remove Client");
-	    System.out.println(LIST_ALL_CLIENT + " to List all Client");
-	    System.out.println(ADD_CUSTOMER + " to Add Customert");
-	    System.out.println(REMOVE_CUSTOMER + " to Remove Customer");
-	    System.out.println(ADD_CREDIT_CARD + " to Add Credit Card");
-	    System.out.println(REMOVE_CREDIT_CARD + " to Remove Credit Card");
-	    System.out.println(LIST_ALL_CUSTOMERS + " to List all Customers");
-	    System.out.println(ADD_PLAY + " to Add Play");
-	    System.out.println(LIST_ALL_PLAY + " to List all Plays");
-	    System.out.println(HELP + " for help");
-	  }
+	 * Prompts for a command from the keyboard
+	 * 
+	 * @return a valid command
+	 */
+	public int getCommand() {
+		do {
+			try {
+				int value = Integer.parseInt(getToken("Enter command:" + HELP + " for help"));
+					if (value >= EXIT && value <= HELP) {
+					return value;
+				}
+			} 
+			catch (NumberFormatException nfe) {
+				System.out.println("Enter a number");
+			}
+			} while (true);
+	}
+	  
+	/**
+	* Displays the help screen
+	* 
+	*/
+	public void help() {
+		System.out.println("Enter a number between 0 and 12 as explained below:");
+		System.out.println(EXIT + " to Exit");
+		System.out.println(ADD_CLIENT + " to Add Client");
+		System.out.println(REMOVE_CLIENT + " to Remove Client");
+		System.out.println(LIST_ALL_CLIENT + " to List all Client");
+		System.out.println(ADD_CUSTOMER + " to Add Customert");
+		System.out.println(REMOVE_CUSTOMER + " to Remove Customer");
+		System.out.println(ADD_CREDIT_CARD + " to Add Credit Card");
+		System.out.println(REMOVE_CREDIT_CARD + " to Remove Credit Card");
+		System.out.println(LIST_ALL_CUSTOMERS + " to List all Customers");
+		System.out.println(ADD_PLAY + " to Add Play");
+		System.out.println(LIST_ALL_PLAY + " to List all Plays");
+		System.out.println(HELP + " for help");
+	}
 	
 	/**
 	   * Supports the singleton pattern
