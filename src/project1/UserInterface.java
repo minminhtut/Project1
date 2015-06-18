@@ -28,9 +28,6 @@ import java.util.StringTokenizer;
  * The authors do not make any claims regarding the correctness of the code in this module
  * and are not responsible for any loss or damage resulting from its use.  
  */
-
-
-
 public class UserInterface {
 	private static UserInterface userInterface;
 	private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
