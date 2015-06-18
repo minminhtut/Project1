@@ -78,7 +78,7 @@ public class Client implements Serializable {
 	 * @param name
 	 * @param start
 	 * @param end
-	 * @return
+	 * @return true if the play is added
 	 */
 	//protected boolean addPlay(String id, String name, Date start, Date end) {
 	protected boolean addPlay(ClientData client, Play play) {
