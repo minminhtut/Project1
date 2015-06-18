@@ -34,7 +34,7 @@ public class Client implements Serializable {
 	protected ClientData search(String id) {
 		for (Iterator<ClientData> iterator = this.clients.iterator(); iterator.hasNext(); ) {
 			ClientData aClient =  iterator.next();
-		    if (aClient.getId() == id) {
+		    if (aClient.getId().equals(id)) {
 		    	  return aClient;
 		    }
 		}
@@ -62,14 +62,12 @@ public class Client implements Serializable {
 	 * @return true if the client was removed
 	 */
 	protected boolean removeClient(ClientData removeClient) {
-		for (Iterator<ClientData> iterator = this.clients.iterator(); iterator.hasNext(); ) {
-			ClientData aClient =  iterator.next();
-			if(aClient.getId().equals(removeClient.getId())) {
-				iterator.remove();
-		        return true;
-			}
+		if(removeClient != null) {
+			clients.remove(removeClient);
+			return true;
 		}
-		return false;
+		else
+			return false;
 	}
 	
 	/**

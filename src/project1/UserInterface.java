@@ -242,7 +242,7 @@ public class UserInterface {
 		  String id = getToken("Enter  ID");
 		  ClientData removeClient = theater.removeClient(id);
 		  if(removeClient == null)
-			  System.out.println("Could not add the client");
+			  System.out.println("Could not remove the client");
 		  else
 			  System.out.println(removeClient.getName() + " was successfully removed.");
 			  
