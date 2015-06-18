@@ -378,6 +378,7 @@ public class UserInterface {
 		        case RETRIEVE_DATA:
 		                                break;
 		        case HELP:
+		        	help();
 		                                break;
 		      }
 		    }
