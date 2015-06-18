@@ -1,6 +1,7 @@
 package project1;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
@@ -49,8 +50,9 @@ public class Credit implements Serializable {
 	 * a getter method for the expiration date of a credit card
 	 * @return expiration
 	 */
-	protected Calendar getExpiration() {
-		return expiration;
+	protected String getExpiration() {
+		SimpleDateFormat date = new SimpleDateFormat("MM-yyyy");
+		return date.format(expiration.getTime());
 	}
 
 	/**
@@ -65,7 +67,7 @@ public class Credit implements Serializable {
 	 * a method to print a credit card
 	 */
 	protected void printCard() {
-		System.out.println("Number: " + this.getNumber() + " " + "Expiration: " + this.getExpiration().toString());
+		System.out.println("Number: " + this.getNumber() + " " + "Expiration: " + this.getExpiration());
 	}
 
 }
