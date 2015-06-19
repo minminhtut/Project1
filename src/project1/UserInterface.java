@@ -295,7 +295,7 @@ public class UserInterface {
 	public void addCreditCard() {
 		String id = getToken("Enter the customer's ID");
 		long number = getLong("Enter the Credit Card Number");
-		Calendar expiration = getDate("Enter the expiration Date in dd/mm/yy");
+		Calendar expiration = getDate("Enter the expiration Date in mm/dd/yy");
 		
 		Credit result = theater.addCreditCard(id, number, expiration);
 		
