@@ -149,7 +149,7 @@ public class Theater implements Serializable {
 	  * Case 5: Remove a Customer
 	  * @author Min Htut
 	  * 
-	  * @param removeCustomer, a customer that need to be removed.
+	  * @param id, String object of a unique customer's identification.
 	  */
 	protected CustomerData removeCustomer(String id) {
 		CustomerData removeCustomer = customer.search(id);
