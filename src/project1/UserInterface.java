@@ -92,6 +92,8 @@ public class UserInterface {
 		System.out.println(LIST_ALL_CUSTOMERS + " to List all Customers");
 		System.out.println(ADD_PLAY + " to Add Play");
 		System.out.println(LIST_ALL_PLAY + " to List all Plays");
+		System.out.println(STORE_DATA + " to save Data");
+		System.out.println(RETRIEVE_DATA + " to Retrieve Data");
 		System.out.println(HELP + " for help");
 	}
 	
@@ -334,9 +336,45 @@ public class UserInterface {
 		
 	}
 	
+	/**
+	 * a method to list plays
+	 */
 	public void listAllPlays() {
 		theater.listAllPlays();
 	}
+	
+	/**
+	   * Method to be called for saving the theater object.
+	   * Uses the appropriate Library method for saving.
+	   *  
+	   */
+	  private void save() {
+	    if (theater.save()) {
+	      System.out.println(" The theater has been successfully saved in the file TheaterData \n" );
+	    } else {
+	      System.out.println(" There has been an error in saving \n" );
+	    }
+	  }
+	  
+	  /**
+	   * Method to be called for retrieving saved data.
+	   * Uses the appropriate Theater method for retrieval.
+	   *  
+	   */
+	private void theaterRetrieve() {
+	    try {
+	      Theater temptheater = theater.retrieve();
+	      if (temptheater != null) {
+	        System.out.println(" The theater has been successfully retrieved from the file TheaterData \n" );
+	        theater = temptheater;
+	      } else {
+	        System.out.println("File doesnt exist; creating new library" );
+	        theater = theater.instance();
+	      }
+	    } catch(Exception cnfe) {
+	      cnfe.printStackTrace();
+	    }
+	  }
 	 
 	 public void process() {
 		    int command;
@@ -374,8 +412,10 @@ public class UserInterface {
 		        	listAllPlays();
 		            break;
 		        case STORE_DATA:
-		                                break;
+		        	save();
+		            break;
 		        case RETRIEVE_DATA:
+		        	theaterRetrieve();
 		                                break;
 		        case HELP:
 		        	help();

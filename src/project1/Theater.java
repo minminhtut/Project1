@@ -62,7 +62,7 @@ public class Theater implements Serializable {
 	   * Serializes the Theater object
 	   * @return true iff the data could be saved
 	   */
-	  public static  boolean save() {
+	  public static boolean save() {
 	    try {
 	      FileOutputStream file = new FileOutputStream("TheaterData");
 	      output = new ObjectOutputStream(file);
