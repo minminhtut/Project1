@@ -1,28 +1,31 @@
 package project1;
 
+/**
+ * This class contains variables for a Play object.
+ * 
+ * @author Legionaires
+ *
+ */
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-/**
- * This class contains variables for a play object.
- * @author Legionaires
- *
- */
 public class Play implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String name;
 	private Calendar start;
 	private Calendar end;
-	
+
 	/**
 	 * a constructor without parameters
 	 */
 	protected Play() {
 	}
-	
+
 	/**
 	 * create a play with given name, starting date, and ending date
+	 * 
 	 * @param name
 	 * @param start
 	 * @param end
@@ -35,7 +38,8 @@ public class Play implements Serializable {
 
 	/**
 	 * a getter method to get the name of a play
-	 * @return
+	 * 
+	 * @return name
 	 */
 	protected String getName() {
 		return name;
@@ -43,6 +47,7 @@ public class Play implements Serializable {
 
 	/**
 	 * a setter method to set the name of a play
+	 * 
 	 * @param name
 	 */
 	protected void setName(String name) {
@@ -51,6 +56,7 @@ public class Play implements Serializable {
 
 	/**
 	 * a getter method to get the starting date
+	 * 
 	 * @return start
 	 */
 	protected String getStart() {
@@ -60,6 +66,7 @@ public class Play implements Serializable {
 
 	/**
 	 * a setter method to set the starting date
+	 * 
 	 * @param start
 	 */
 	protected void setStart(Calendar start) {
@@ -68,6 +75,7 @@ public class Play implements Serializable {
 
 	/**
 	 * a getter method to get the ending date
+	 * 
 	 * @return end
 	 */
 	protected String getEnd() {
@@ -77,12 +85,13 @@ public class Play implements Serializable {
 
 	/**
 	 * a setter method to set the ending date
+	 * 
 	 * @param end
 	 */
 	protected void setEnd(Calendar end) {
 		this.end = end;
 	}
-	
+
 	/**
 	 * a method to print a play
 	 */

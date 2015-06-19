@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * This class contains variables for a customer object.
+ * This class contains variables for a CustomerData object.
+ * 
  * @author Legionaires
  *
  */
@@ -29,6 +30,7 @@ public class CustomerData extends Credit implements Serializable {
 
 	/**
 	 * create a customer with a given id, name, address and phone number
+	 * 
 	 * @param id
 	 * @param name
 	 * @param address
@@ -45,6 +47,7 @@ public class CustomerData extends Credit implements Serializable {
 
 	/**
 	 * getter method to get id
+	 * 
 	 * @return id
 	 */
 	protected String getId() {
@@ -53,6 +56,7 @@ public class CustomerData extends Credit implements Serializable {
 
 	/**
 	 * a setter method to set id
+	 * 
 	 * @param id
 	 */
 	protected void setId(String id) {
@@ -61,6 +65,7 @@ public class CustomerData extends Credit implements Serializable {
 
 	/**
 	 * a getter method to get the name
+	 * 
 	 * @return name
 	 */
 	protected String getName() {
@@ -69,6 +74,7 @@ public class CustomerData extends Credit implements Serializable {
 
 	/**
 	 * a setter method to set the name
+	 * 
 	 * @param name
 	 */
 	protected void setName(String name) {
@@ -77,6 +83,7 @@ public class CustomerData extends Credit implements Serializable {
 
 	/**
 	 * a getter method to get an address
+	 * 
 	 * @return address
 	 */
 	protected String getAddress() {
@@ -85,6 +92,7 @@ public class CustomerData extends Credit implements Serializable {
 
 	/**
 	 * a setter method to set an address
+	 * 
 	 * @param address
 	 */
 	protected void setAddress(String address) {
@@ -93,6 +101,7 @@ public class CustomerData extends Credit implements Serializable {
 
 	/**
 	 * a getter method to get a phone number
+	 * 
 	 * @return
 	 */
 	protected String getPhone() {
@@ -101,6 +110,7 @@ public class CustomerData extends Credit implements Serializable {
 
 	/**
 	 * a setter method to get a phone number
+	 * 
 	 * @param phone
 	 */
 	protected void setPhone(String phone) {
@@ -109,6 +119,7 @@ public class CustomerData extends Credit implements Serializable {
 
 	/**
 	 * a getter method to get the list of credit cards
+	 * 
 	 * @return
 	 */
 	protected List<Credit> getCards() {
@@ -117,35 +128,39 @@ public class CustomerData extends Credit implements Serializable {
 
 	/**
 	 * a setter method to set the list of credit cards
+	 * 
 	 * @param cards
 	 */
 	protected void setCards(List<Credit> cards) {
 		this.cards = cards;
 	}
-	
+
 	/**
 	 * Checks whether a card with a given number exists.
+	 * 
 	 * @param number
 	 * @return the card if exist
 	 */
 	protected Credit search(long number) {
-		for (Iterator<Credit> iterator = this.cards.iterator(); iterator.hasNext(); ) {
-			Credit aCard =  iterator.next();
-		    if (aCard.getNumber() == number) {
-		    	  return aCard;
-		    }
+		for (Iterator<Credit> iterator = this.cards.iterator(); iterator
+				.hasNext();) {
+			Credit aCard = iterator.next();
+			if (aCard.getNumber() == number) {
+				return aCard;
+			}
 		}
 		return null;
 	}
-	
+
 	/**
 	 * a method to add a credit card
+	 * 
 	 * @param number
 	 * @param expiration
 	 * @return true, the card was added
 	 */
 	protected boolean addCreditCard(Credit card) {
-		if(this.search(card.getNumber()) ==  null) {
+		if (this.search(card.getNumber()) == null) {
 			cards.add(card);
 			return true;
 		}
@@ -153,32 +168,35 @@ public class CustomerData extends Credit implements Serializable {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * a method to remove a credit card
+	 * 
 	 * @param number
 	 * @return true if the card was removed
 	 */
 	protected boolean removeCreditCard(Credit card) {
-		for (ListIterator<Credit> iterator = this.cards.listIterator(); iterator.hasNext(); ) {
+		for (ListIterator<Credit> iterator = this.cards.listIterator(); iterator.hasNext();) {
 			Credit aCard = iterator.next();
-			if(aCard.getNumber() == card.getNumber()) {
+			if (aCard.getNumber() == card.getNumber()) {
 				iterator.remove();
-		        return true;
+				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	/**
 	 * print a customer
 	 */
 	protected void printCustomer() {
-		System.out.println("Id: " + this.getId() + " Name: " + this.getName() + " Address: " + this.getAddress() + " Phone: " + this.getPhone());
-		for (ListIterator<Credit> iterator = this.cards.listIterator(); iterator.hasNext(); ) {
+		System.out.println("Id: " + this.getId() + " Name: " + this.getName() +
+						   " Address: " + this.getAddress() + " Phone: " + this.getPhone());
+		for (ListIterator<Credit> iterator = this.cards.listIterator(); iterator
+				.hasNext();) {
 			Credit aCard = iterator.next();
 			aCard.printCard();
 		}
 	}
-	
+
 }
