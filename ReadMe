@@ -2,10 +2,13 @@ Use the java files that are in src folder, this will make it easier for all of u
 for keeping it up to date since GitHub manages the updates to the files by
 each members.
 
-06/18/2015 - The program is working with all caseses.  We just need to make it look neat and pretty.
+06/18/2015 - The program has functoins for all caseses.  However, we need to follow the handout
+             regarding their behavior. I will take care of cases from 5 to 8 as we agreeded and
+             sequence diagrams regarding those cases.
 
 TODO
 ----
   Need to do sequence diagrams.
-  Need to check or test the program to make sure it is rock solid.
+  Need to follow the guidlines of program 1 handout.
+  Need to check or test the program to make sure it is rock solid because it still crashes on certain functions.
   Need to make it look neat.
