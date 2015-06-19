@@ -1,8 +1,8 @@
 package project1;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * This class contains variables for a play object.
@@ -53,8 +53,9 @@ public class Play implements Serializable {
 	 * a getter method to get the starting date
 	 * @return start
 	 */
-	protected Calendar getStart() {
-		return start;
+	protected String getStart() {
+		SimpleDateFormat date = new SimpleDateFormat("MM-dd-yyyy");
+		return date.format(start.getTime());
 	}
 
 	/**
@@ -69,8 +70,9 @@ public class Play implements Serializable {
 	 * a getter method to get the ending date
 	 * @return end
 	 */
-	protected Calendar getEnd() {
-		return end;
+	protected String getEnd() {
+		SimpleDateFormat date = new SimpleDateFormat("MM-dd-yyyy");
+		return date.format(end.getTime());
 	}
 
 	/**
@@ -85,6 +87,6 @@ public class Play implements Serializable {
 	 * a method to print a play
 	 */
 	protected void printPlay() {
-		System.out.println("Name: " + this.getName() + " Start: " + this.getStart().toString() + " End: " + this.getEnd().toString());
+		System.out.println("Name: " + this.getName() + " Start: " + this.getStart() + " End: " + this.getEnd());
 	}
 }

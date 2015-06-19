@@ -290,7 +290,7 @@ public class UserInterface {
 	public void addCreditCard() {
 		String id = getToken("Enter  ID");
 		long number = getLong("Enter the Credit Card Number");
-		Calendar expiration = getDate("Enter the expiration Date");
+		Calendar expiration = getDate("Enter the expiration Date in dd/mm/yy");
 		Credit result = theater.addCreditCard(id, number, expiration);
 		if(result == null)
 			  System.out.println("Could not add the credit card");
@@ -324,8 +324,8 @@ public class UserInterface {
 	public void addPlay() {
 		String id = getToken("Enter the client ID");
 		String name = getToken("Enter the name of the show");
-		Calendar start = getDate("Enter the starting date");
-		Calendar end = getDate("Enter the endinging date");
+		Calendar start = getDate("Enter the starting date in mm/dd/yy");
+		Calendar end = getDate("Enter the endinging date in mm/dd/yy");
 		Play result = theater.addPlay(id, name, start, end);
 		if(result == null)
 			System.out.println("Could not add the play");

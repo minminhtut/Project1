@@ -40,7 +40,6 @@ public class ClientData extends Play implements Serializable {
 		this.address = new String(address);
 		this.phone = new String(phone);
 		this.balance = 0;
-		plays = new LinkedList<Play>();
 		this.id = new String(CLIENT_STRING + (MemberIdServer.instance()).getId());
 	}
 
@@ -198,5 +197,15 @@ public class ClientData extends Play implements Serializable {
 			aPlay.printPlay();
 		}
 		
+	}
+	
+	/**
+	 * print shows
+	 */
+	protected void printPlay() {
+		for (ListIterator<Play> iterator = this.plays.listIterator(); iterator.hasNext(); ) {
+			Play aPlay = iterator.next();
+			aPlay.printPlay();
+		}
 	}
 }

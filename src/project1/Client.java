@@ -78,7 +78,6 @@ public class Client implements Serializable {
 	 * @param end
 	 * @return true if the play is added
 	 */
-	//protected boolean addPlay(String id, String name, Date start, Date end) {
 	protected boolean addPlay(ClientData client, Play play) {
 		for (Iterator<ClientData> iterator = this.clients.iterator(); iterator.hasNext(); ) {
 			ClientData aClient =  iterator.next();

@@ -207,10 +207,14 @@ public class Theater implements Serializable {
 	 */
 	protected Play addPlay(String id, String name, Calendar start, Calendar end) {
 		ClientData aClient = client.search(id);
-		Play aPlay = new Play(name, start, end);
-		boolean flag = client.addPlay(aClient, aPlay);
-		if(flag == true)
-			return aPlay;
+		if(aClient != null) {
+			Play aPlay = new Play(name, start, end);
+			boolean flag = client.addPlay(aClient, aPlay);
+			if(flag == true)
+				return aPlay;
+			else
+				return null;
+		}
 		else
 			return null;
 	}
