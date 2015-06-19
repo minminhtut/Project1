@@ -5,5 +5,5 @@ apply all check list, and click on Commit and Push to apply the changes to GitHu
 other the team mates.
 
 Follow the behavior guide lines for assigned functions from Project 1 hand out. Check
-and test the functions. Complete the sequence diagrams for the function and consolidate
+and test the functions. Complete the sequence diagrams for the functions and consolidate
 them in a single PDF.
