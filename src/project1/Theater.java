@@ -39,7 +39,7 @@ public class Theater implements Serializable {
 	}
 	
 	/**
-	   * Retrieves a deserialized version of the Theater from disk
+	   * Retrieves a de-serialized version of the Theater from disk
 	   * @return a Theater object
 	   */
 	  public static Theater retrieve() {
@@ -146,9 +146,11 @@ public class Theater implements Serializable {
 	}
 	
 	/**
-	 * case 5: remove a customer
-	 * @param id
-	 */
+	  * Case 5: Remove a Customer
+	  * @author Min Htut
+	  * 
+	  * @param removeCustomer, a customer that need to be removed.
+	  */
 	protected CustomerData removeCustomer(String id) {
 		CustomerData removeCustomer = customer.search(id);
 		customer.removeCustomer(removeCustomer);
@@ -156,13 +158,17 @@ public class Theater implements Serializable {
 	}
 	
 	/**
-	 * case 6: add credit to a customer
-	 * @param id
-	 * @param number
-	 * @param expiration
+	 * Case 6: Add a Credit Card to a customer
+	 * @author Min Htut
+	 * 
+	 * @param id, String object of a unique customer's identification
+	 * @param number, Long variable of a credit number 
+	 * @param expiration, Calendar Object of the expiration date
+	 * @return newCredit, Credit Object of the credit which is added
 	 */
 	protected Credit addCreditCard(String id, long number, Calendar expiration) {
 		Credit newCredit = new Credit(number, expiration);
+		
 		boolean flag = customer.addCreditCard(id, newCredit);
 		if(flag == true)
 			return newCredit;
@@ -172,12 +178,15 @@ public class Theater implements Serializable {
 	
 	
 	/**
-	 * case 7: remove credit card from a customer
-	 * @param id
-	 * @param number
+	 * Case 7: Remove a Credit Card from a customer
+	 * @author Min Htut
+	 * 
+	 * @param id, String object of a unique customer's identification
+	 * @param number, Long variable of a credit number
 	 */
 	protected Credit removeCreditCard(String id, long number) {
 		CustomerData aCustomer = customer.search(id);
+		
 		if(aCustomer == null) {
 			return null;
 		}
@@ -192,7 +201,8 @@ public class Theater implements Serializable {
 	}
 	
 	/**
-	 * case 8: list all customers
+	 * Case 8: Listing all Customers
+	 * @author Min Htut
 	 */
 	protected void listAllCustomers() {
 		customer.listAllCustomers();

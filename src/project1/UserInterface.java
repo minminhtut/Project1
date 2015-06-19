@@ -265,7 +265,7 @@ public class UserInterface {
 		  String address = getToken("Enter the address");
 		  String phone = getToken("Enter the phone number");
 		  long number = getLong("Enter the Credit Card Number");
-		  Calendar expiration = getDate("Enter the expiration Date");
+		  Calendar expiration = getDate("Enter the expiration Date in mm/dd/yy");
 		  CustomerData newCustomer = theater.addCustomer(name, address, phone, number, expiration);
 		  if(newCustomer == null)
 			  System.out.println("Could not add the customer");
@@ -273,40 +273,48 @@ public class UserInterface {
 			  System.out.println(newCustomer.getName() + " was successfully added.");
 	  }
 	  
-	  /**
-	   * Method to be called for removing customer
-	   */
-	  public void removeCustomer() {
-		  String id = getToken("Enter  ID");
-		  CustomerData removeCustomer = theater.removeCustomer(id);
-		  if(removeCustomer == null)
-			  System.out.println("Could not remove the customer");
-		  else
-			  System.out.println(removeCustomer.getName() + " was successfully removed.");
-		  
-	  }
+	/**
+	  * Interface Method to Remove a Customer
+	  * @author Min Htut
+	  */
+	public void removeCustomer() {
+		String id = getToken("Enter the customer's ID");
+		
+		CustomerData removeCustomer = theater.removeCustomer(id);
+		
+		if(removeCustomer == null)
+			System.out.println("Could not remove the customer");
+		else
+			System.out.println(removeCustomer.getName() + " was successfully removed.");
+	}
 
-	  /**
-	   * Method to be called for adding credit card
-	   */
+	/**
+	  * Interface Method to Add a Credit Card
+	  * @author Min Htut
+	  */
 	public void addCreditCard() {
-		String id = getToken("Enter  ID");
+		String id = getToken("Enter the customer's ID");
 		long number = getLong("Enter the Credit Card Number");
 		Calendar expiration = getDate("Enter the expiration Date in dd/mm/yy");
+		
 		Credit result = theater.addCreditCard(id, number, expiration);
+		
 		if(result == null)
-			  System.out.println("Could not add the credit card");
-		  else
-			  System.out.println(result.getNumber() + " was successfully added.");
+			System.out.println("Could not add the credit card");
+		else
+			System.out.println(result.getNumber() + " was successfully added.");
 	}
 	
 	/**
-	 * Method to be called for removing the credit card
-	 */
+	  * Interface Method to Remove a Credit Card from a Customer
+	  * @author Min Htut
+	  */
 	public void removeCreditCard() {
-		String id = getToken("Enter  ID");
+		String id = getToken("Enter the customer's ID");
 		long number = getLong("Enter the Credit Card Number");
+		
 		Credit card = theater.removeCreditCard(id, number);
+		
 		if(card == null)
 			System.out.println("Could not remove the credit card");
 		else
@@ -314,8 +322,9 @@ public class UserInterface {
 	}
 	
 	/**
-	 * Method to be called for listing all customers
-	 */
+	  * Interface Method to List all Customers
+	  * @author Min Htut
+	  */
 	public void listAllCustomers() {
 		theater.listAllCustomers();
 	}
@@ -350,9 +359,9 @@ public class UserInterface {
 	   */
 	  private void save() {
 	    if (theater.save()) {
-	      System.out.println(" The theater has been successfully saved in the file TheaterData \n" );
+	      System.out.println("The theater has been successfully saved in the file TheaterData \n" );
 	    } else {
-	      System.out.println(" There has been an error in saving \n" );
+	      System.out.println("There has been an error in saving \n" );
 	    }
 	  }
 	  
@@ -365,7 +374,7 @@ public class UserInterface {
 	    try {
 	      Theater temptheater = theater.retrieve();
 	      if (temptheater != null) {
-	        System.out.println(" The theater has been successfully retrieved from the file TheaterData \n" );
+	        System.out.println("The theater has been successfully retrieved from the file TheaterData \n" );
 	        theater = temptheater;
 	      } else {
 	        System.out.println("File doesnt exist; creating new library" );
@@ -375,13 +384,19 @@ public class UserInterface {
 	      cnfe.printStackTrace();
 	    }
 	  }
-	 
-	 public void process() {
-		    int command;
-		    help();
-		    while ((command = getCommand()) != EXIT) {
-		      switch (command) {
-		        case ADD_CLIENT:
+
+	/**
+	   * Orchestrates the whole process.
+	   * Calls the appropriate method for the different functionalties.
+	   *  
+	   */
+	public void process() {
+		int command;
+		help();
+		
+		while ((command = getCommand()) != EXIT) {
+			switch (command) {
+				case ADD_CLIENT:
 		        	addClient();
 		            break;
 		        case REMOVE_CLIENT:
@@ -416,13 +431,13 @@ public class UserInterface {
 		            break;
 		        case RETRIEVE_DATA:
 		        	theaterRetrieve();
-		                                break;
+		        	break;
 		        case HELP:
 		        	help();
-		                                break;
-		      }
-		    }
-		  }
+		        	break;
+			}
+		}
+	}
 	 
 	 public static void main(String[] args) {
 		    UserInterface.instance().process();

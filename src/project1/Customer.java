@@ -64,10 +64,12 @@ public class Customer implements Serializable {
 	}
 	
 	/**
-	 * a method to remove a customer
-	 * @param id
-	 * @return true if the customer is removed
-	 */
+	  * a method for Removing a Customer
+	  * @author Min Htut
+	  * 
+	  * @param removeCustomer, CustomerData object
+	  * @return true if the customer is removed
+	  */
 	protected boolean removeCustomer(CustomerData removeCustomer) {
 		for (ListIterator<CustomerData> iterator = this.customers.listIterator(); iterator.hasNext(); ) {
 			CustomerData aCustomer = iterator.next();
@@ -80,10 +82,11 @@ public class Customer implements Serializable {
 	}
 	
 	/**
-	 * a method to add a credit card to a customer
-	 * @param id
-	 * @param number
-	 * @param expiration
+	 * a method for Adding a Credit Card to a Customer
+	 * @author Min Htut
+	 * 
+	 * @param id, String object of a unique customer's identification
+	 * @param card, Credit object of a credit card to be added
 	 * @return true if the card was added
 	 */
 	protected boolean addCreditCard(String id, Credit card) {
@@ -99,17 +102,21 @@ public class Customer implements Serializable {
 	
 	/**
 	 * a method to remove a credit card from a customer
-	 * @param id
-	 * @param number
-	 * @return
+	 * @author Min Htut
+	 * 
+	 * @param aCustomer, CustomerData object of a customer
+	 * @param aCard, Credit Object of a credit card which needed to be removed.
+	 * @return if the card was removed
 	 */
 	protected boolean removeCreditCard(CustomerData aCustomer, Credit aCard) {
 		for (Iterator<CustomerData> iterator = this.customers.iterator(); iterator.hasNext(); ) {
 			CustomerData temp =  iterator.next();
 			if (temp.getId().equals(aCustomer.getId())) {
-				if(temp.getCards().size() > 1) {
-					temp.removeCreditCard(aCard);
-					return true;
+				if(temp.getCards().size() > 1) { // proceed only if the customer has more than one card.
+					if(aCard != null) {
+						temp.removeCreditCard(aCard);
+						return true;
+					}
 				}
 			}
 		}
@@ -118,6 +125,7 @@ public class Customer implements Serializable {
 	
 	/**
 	 * a method to print all customers
+	 * @author Min Htut
 	 */
 	protected void listAllCustomers() {
 		for (ListIterator<CustomerData> iterator = this.customers.listIterator(); iterator.hasNext(); ) {
