@@ -3,9 +3,9 @@ all of us for keeping it up to date since GitHub manages the updates to
 the files by each members. Please Fetch from upstream before you change
 or modify your files; commit and Push up to Stream when you are done.
 
-06/18/2015 - The program has functoins for all caseses.  However, we
-             need to follow the handout regarding their behavior. I
-             will take care of cases from 5 to 8 as we agreeded and
+06/18/2015 - The program has functions for all cases.  However, we
+             need to follow the hand out regarding their behavior. I
+             will take care of cases from 5 to 8 as we agreed and
              sequence diagrams regarding those cases.
              
              I am completed with ensuring the cases from 5 to 8 is
@@ -15,7 +15,5 @@ or modify your files; commit and Push up to Stream when you are done.
 TODO
 ----
   - Need to do sequence diagrams.
-  - Need to follow the guidlines of program 1 handout.
-  - Need to check or test the program to ensure that it will not crashe 
-    on certain functions.
-  - Need to make it neat.
+  - Need to follow the guidlines of Project 1 hand out.
+  - Need to check and test your functions.
