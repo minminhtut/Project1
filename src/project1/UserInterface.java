@@ -379,7 +379,7 @@ public class UserInterface {
 		try {
 			Theater temptheater = Theater.retrieve();
 			if (temptheater != null) {
-				System.out.println("The theater has been successfully retrieved from the file TheaterData \n");
+				System.out.println("The theater has been successfully retrieved from the file TheaterData\n");
 				theater = temptheater;
 			}
 			else {
@@ -446,7 +446,7 @@ public class UserInterface {
 	}
 
 	/**
-	 * the driver method
+	 * the driver method for the project
 	 * @param args
 	 */
 	public static void main(String[] args) {
