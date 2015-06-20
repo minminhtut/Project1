@@ -446,9 +446,6 @@ public class UserInterface {
 	}
 
 	/**
-	 * 
-	 * 
-	 * 
 	 * the driver method
 	 * @param args
 	 */
