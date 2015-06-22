@@ -2,6 +2,7 @@ package project1;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -80,7 +81,7 @@ public class Play implements Serializable {
     protected Calendar getEnd() {
         return end;
     }
-
+    
     /**
      * a setter method to set the ending date
      *
@@ -89,11 +90,29 @@ public class Play implements Serializable {
     protected void setEnd(Calendar end) {
         this.end = end;
     }
-
+    /**
+     * a getter method to get the ending date String
+     *
+     * @return end
+     */
+    protected String getEndString() {
+        SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+        return date.format(end.getTime());
+    }
+    
+    /**
+     * a getter method to get the ending date String
+     *
+     * @return end
+     */
+    protected String getStartString() {
+        SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+        return date.format(start.getTime());
+    }
     /**
      * a method to print a play
      */
     protected void printPlay() {
-        System.out.println("Name: " + this.getName() + " Start: " + this.getStart().toString() + " End: " + this.getEnd().toString());
+        System.out.println("Name: " + this.getName() + " Start: " + this.getStartString() + " End: " + this.getEndString());
     }
 }

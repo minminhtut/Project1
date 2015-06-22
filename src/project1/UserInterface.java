@@ -226,14 +226,20 @@ public class UserInterface {
 	 * Method to be called for adding a client
 	 */
 	public void addClient() {
-		String name = getToken("Enter the name");
-		String address = getToken("Enter the address");
-		String phone = getToken("Enter the phone number");
-		ClientData aClient = theater.addClient(name, address, phone);
-		if(aClient == null)
-			System.out.println("Could not add the client");
-		else
-			System.out.println(aClient.getName() + " was successfully added.");
+		String name = getToken("Enter the Client name");
+		String address = getToken("Enter the Client address");
+		String phone = getToken("Enter the Client phone number");
+		ClientData newClient = theater.addClient(name, address, phone);
+		if(newClient == null) {
+                    System.out.println("Could not add the client");
+                } else {
+                    System.out.println("Client was successfully added");
+                    System.out.println("Name: "+newClient.getName());
+                    System.out.println("ID: "+newClient.getId());
+                    System.out.println("Address: "+newClient.getAddress());
+                    System.out.println("Phone: "+newClient.getPhone()+"\n");
+                }
+			
 
 	}
 
@@ -267,10 +273,16 @@ public class UserInterface {
 		long number = getLong("Enter the Credit Card Number");
 		Calendar expiration = getDate("Enter the expiration Date");
 		CustomerData newCustomer = theater.addCustomer(name, address, phone, number, expiration);
-		if(newCustomer == null)
-			System.out.println("Could not add the customer");
-		else
-			System.out.println(newCustomer.getName() + " was successfully added.");
+		if(newCustomer == null) {
+                    System.out.println("Could not add the customer");
+                } else {
+                    System.out.println(newCustomer.getName() + "Customer was successfully added");
+                    System.out.println("Name: "+newCustomer.getName());
+                    System.out.println("ID: "+newCustomer.getId());
+                    System.out.println("Address: "+newCustomer.getAddress());
+                    System.out.println("Phone: "+newCustomer.getPhone()+"\n");
+                }
+
 	}
 
 	/**
@@ -293,11 +305,14 @@ public class UserInterface {
 		String id = getToken("Enter  ID");
 		long number = getLong("Enter the Credit Card Number");
 		Calendar expiration = getDate("Enter the expiration Date");
-		Credit result = theater.addCreditCard(id, number, expiration);
-		if(result == null)
-			System.out.println("Could not add the credit card");
-		else
-			System.out.println(result.getNumber() + " was successfully added.");
+		Credit newCreditCard = theater.addCreditCard(id, number, expiration);
+                if (newCreditCard == null) {
+                    System.out.println("Could not add the credit card");
+                } else {
+                    System.out.println("Credit Card was successfully added");
+                    System.out.println("Credit Card Number: "+newCreditCard.getNumber());
+                    System.out.println("Credit Card Expiration: "+newCreditCard.getExpiration()+"\n");
+                }		
 	}
 
 	/**
@@ -324,15 +339,25 @@ public class UserInterface {
 	 * Method to be called for adding a play
 	 */
 	public void addPlay() {
+                if (theater.noClients()) {
+                    System.out.println("You currently have no clients. Please add one first.");
+                    addClient();
+                    System.out.println("Now add the play:");
+                }
 		String id = getToken("Enter the client ID");
 		String name = getToken("Enter the name of the show");
 		Calendar start = getDate("Enter the starting date");
 		Calendar end = getDate("Enter the endinging date");
-		Play result = theater.addPlay(id, name, start, end);
-		if(result == null)
-			System.out.println("Could not add the play");
-		else
-			System.out.println(result.getName() + " was successfully added.");
+		Play newPlay = theater.addPlay(id, name, start, end);
+		if(newPlay == null) {
+                    System.out.println("Could not add the play");
+                } else {
+                    System.out.println("Play was successfully added:");
+                    System.out.println("Play Name: "+newPlay.getName());
+                    System.out.println("Start Date: "+newPlay.getStartString());
+                    System.out.println("End Date: "+newPlay.getEndString());
+                }
+
 
 	}
 	

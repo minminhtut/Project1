@@ -233,5 +233,11 @@ public class Theater implements Serializable {
     protected void listAllPlays() {
         client.ListAllPlays();
     }
-
+    
+    /**
+     * a method to list all shows
+     */
+    public boolean noClients() {
+        return client.noClients();
+    }
 }
