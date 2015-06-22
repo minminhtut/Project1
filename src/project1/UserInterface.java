@@ -361,7 +361,7 @@ public class UserInterface {
 	 * @return none
 	 */
 	public void storeData(){
-		theater.save();
+		Theater.save();
 	}
 	
 	public void process() {
