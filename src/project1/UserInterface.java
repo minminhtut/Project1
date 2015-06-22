@@ -64,7 +64,7 @@ public class UserInterface {
 	public int getCommand() {
 		do {
 			try {
-				int value = Integer.parseInt(getToken("Enter a command: \n"));
+				int value = Integer.parseInt(getToken("Enter a command: "));
 				if (value >= EXIT && value <= HELP) {
 					return value;
 				}
@@ -289,7 +289,7 @@ public class UserInterface {
 	 * Method to be called for removing customer
 	 */
 	public void removeCustomer() {
-		String id = getToken("Enter  ID");
+		String id = getToken("Enter the ID number of the Customer");
 		CustomerData removeCustomer = theater.removeCustomer(id);
 		if(removeCustomer == null)
 			System.out.println("Could not remove the customer");
@@ -302,7 +302,7 @@ public class UserInterface {
 	 * Method to be called for adding credit card
 	 */
 	public void addCreditCard() {
-		String id = getToken("Enter  ID");
+		String id = getToken("Enter the ID number of the Customer");
 		long number = getLong("Enter the Credit Card Number");
 		Calendar expiration = getDate("Enter the expiration Date");
 		Credit newCreditCard = theater.addCreditCard(id, number, expiration);
@@ -319,7 +319,7 @@ public class UserInterface {
 	 * Method to be called for removing the credit card
 	 */
 	public void removeCreditCard() {
-		String id = getToken("Enter  ID");
+		String id = getToken("Enter the ID number of the Customer");
 		long number = getLong("Enter the Credit Card Number");
 		Credit card = theater.removeCreditCard(id, number);
 		if(card == null)
