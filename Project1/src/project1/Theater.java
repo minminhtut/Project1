@@ -62,7 +62,7 @@ public class Theater implements Serializable {
     /**
      * Serializes the Theater object
      *
-     * @return true iff the data could be saved
+     * @return true if the data could be saved
      */
     public static boolean save() {
         try {
@@ -129,8 +129,8 @@ public class Theater implements Serializable {
      *
      * @param id
      */
-    protected ClientData removeClient(String id) {
-        ClientData removeClient = client.search(id);
+    protected ClientData removeClient(String clientID) {
+        ClientData removeClient = client.searchClientID(clientID);
         client.removeClient(removeClient);
         return removeClient;
     }
@@ -156,8 +156,8 @@ public class Theater implements Serializable {
      *
      * @param id
      */
-    protected CustomerData removeCustomer(String id) {
-        CustomerData removeCustomer = customer.search(id);
+    protected CustomerData removeCustomer(String customerID) {
+        CustomerData removeCustomer = customer.searchCustomerID(customerID);
         customer.removeCustomer(removeCustomer);
         return removeCustomer;
     }
@@ -186,11 +186,11 @@ public class Theater implements Serializable {
      * @param number
      */
     protected Credit removeCreditCard(String id, long number) {
-        CustomerData aCustomer = customer.search(id);
+        CustomerData aCustomer = customer.searchCustomerID(id);
         if (aCustomer == null) {
             return null;
         } else {
-            Credit aCard = aCustomer.search(number);
+            Credit aCard = aCustomer.searchCredit(number);
             boolean flag = customer.removeCreditCard(aCustomer, aCard);
             if (flag == true) {
                 return aCard;
@@ -216,7 +216,7 @@ public class Theater implements Serializable {
      * @param end
      */
     protected Play addPlay(String id, String name, Calendar start, Calendar end) {
-        ClientData aClient = client.search(id);
+        ClientData aClient = client.searchClientID(id);
         Play aPlay = new Play(name, start, end);
         boolean flag = client.addPlay(aClient, aPlay);
         if (flag == true) {

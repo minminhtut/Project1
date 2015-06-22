@@ -9,7 +9,7 @@ public class Client implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private static Client client;
-    private List<ClientData> clients = new LinkedList<ClientData>();
+    private List<ClientData> clientList = new LinkedList<ClientData>();
 
     private Client() {
     }
@@ -33,8 +33,8 @@ public class Client implements Serializable {
      * @param id
      * @return the customer if exist
      */
-    protected ClientData search(String id) {
-        for (Iterator<ClientData> iterator = this.clients.iterator(); iterator.hasNext();) {
+    protected ClientData searchClientID(String id) {
+        for (Iterator<ClientData> iterator = this.clientList.iterator(); iterator.hasNext();) {
             ClientData aClient = iterator.next();
             if (aClient.getId().equals(id)) {
                 return aClient;
@@ -50,8 +50,8 @@ public class Client implements Serializable {
      * @return false if customer dosen't exist
      */
     protected boolean addClient(ClientData newClient) {
-        if (this.search(newClient.getId()) == null) {
-            clients.add(newClient);
+        if (this.searchClientID(newClient.getId()) == null) {
+            clientList.add(newClient);
             return true;
         } else {
             return false;
@@ -66,7 +66,7 @@ public class Client implements Serializable {
      */
     protected boolean removeClient(ClientData removeClient) {
         if (removeClient != null) {
-            clients.remove(removeClient);
+            clientList.remove(removeClient);
             return true;
         } else {
             return false;
@@ -84,10 +84,10 @@ public class Client implements Serializable {
      */
     //protected boolean addPlay(String id, String name, Date start, Date end) {
     protected boolean addPlay(ClientData client, Play play) {
-        for (Iterator<ClientData> iterator = this.clients.iterator(); iterator.hasNext();) {
+        for (Iterator<ClientData> iterator = this.clientList.iterator(); iterator.hasNext();) {
             ClientData aClient = iterator.next();
             if (aClient.getId().equals(client.getId())) {
-                Play result = aClient.search(play.getName());
+                Play result = aClient.searchPlaytName(play.getName());
                 if (result == null) {
                     aClient.addPlay(play);
                     return true;
@@ -101,7 +101,7 @@ public class Client implements Serializable {
      * a method to list all clients
      */
     protected void listAllClients() {
-        for (Iterator<ClientData> iterator = this.clients.iterator(); iterator.hasNext();) {
+        for (Iterator<ClientData> iterator = this.clientList.iterator(); iterator.hasNext();) {
             ClientData aClient = iterator.next();
             aClient.printClient();
         }
@@ -112,7 +112,7 @@ public class Client implements Serializable {
      * a method to list all shows
      */
     protected void ListAllPlays() {
-        for (Iterator<ClientData> iterator = this.clients.iterator(); iterator.hasNext();) {
+        for (Iterator<ClientData> iterator = this.clientList.iterator(); iterator.hasNext();) {
             ClientData aClient = iterator.next();
             aClient.printPlay();
         }

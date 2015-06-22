@@ -16,7 +16,7 @@ public class Customer implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private static Customer customer;
-    private List<CustomerData> customers = new LinkedList<CustomerData>();
+    private List<CustomerData> customerList = new LinkedList<CustomerData>();
 
     private Customer() {
     }
@@ -40,10 +40,10 @@ public class Customer implements Serializable {
      * @param id
      * @return the customer if exist
      */
-    protected CustomerData search(String id) {
-        for (Iterator<CustomerData> iterator = this.customers.iterator(); iterator.hasNext();) {
+    protected CustomerData searchCustomerID(String customerID) {
+        for (Iterator<CustomerData> iterator = this.customerList.iterator(); iterator.hasNext();) {
             CustomerData aCustomer = iterator.next();
-            if (aCustomer.getId().equals(id)) {
+            if (aCustomer.getId().equals(customerID)) {
                 return aCustomer;
             }
         }
@@ -57,8 +57,8 @@ public class Customer implements Serializable {
      * @return null if the customer dosent exist
      */
     protected boolean addCustomer(CustomerData newCustomer) {
-        if (this.search(newCustomer.getId()) == null) {
-            customers.add(newCustomer);
+        if (this.searchCustomerID(newCustomer.getId()) == null) {
+            customerList.add(newCustomer);
             return true;
         } else {
             return false;
@@ -72,7 +72,7 @@ public class Customer implements Serializable {
      * @return true if the customer is removed
      */
     protected boolean removeCustomer(CustomerData removeCustomer) {
-        for (ListIterator<CustomerData> iterator = this.customers.listIterator(); iterator.hasNext();) {
+        for (ListIterator<CustomerData> iterator = this.customerList.listIterator(); iterator.hasNext();) {
             CustomerData aCustomer = iterator.next();
             if (aCustomer.getId().equals(removeCustomer.getId())) {
                 iterator.remove();
@@ -91,7 +91,7 @@ public class Customer implements Serializable {
      * @return true if the card was added
      */
     protected boolean addCreditCard(String id, Credit card) {
-        for (Iterator<CustomerData> iterator = this.customers.iterator(); iterator.hasNext();) {
+        for (Iterator<CustomerData> iterator = this.customerList.iterator(); iterator.hasNext();) {
             CustomerData aCustomer = iterator.next();
             if (aCustomer.getId().equals(id)) {
                 aCustomer.addCreditCard(card);
@@ -109,7 +109,7 @@ public class Customer implements Serializable {
      * @return
      */
     protected boolean removeCreditCard(CustomerData aCustomer, Credit aCard) {
-        for (Iterator<CustomerData> iterator = this.customers.iterator(); iterator.hasNext();) {
+        for (Iterator<CustomerData> iterator = this.customerList.iterator(); iterator.hasNext();) {
             CustomerData temp = iterator.next();
             if (temp.getId().equals(aCustomer.getId())) {
                 if (temp.getCards().size() > 1) {
@@ -125,7 +125,7 @@ public class Customer implements Serializable {
      * a method to print all customers
      */
     protected void listAllCustomers() {
-        for (ListIterator<CustomerData> iterator = this.customers.listIterator(); iterator.hasNext();) {
+        for (ListIterator<CustomerData> iterator = this.customerList.listIterator(); iterator.hasNext();) {
             CustomerData aCustomer = iterator.next();
             aCustomer.printCustomer();
         }

@@ -142,7 +142,7 @@ public class CustomerData extends Credit implements Serializable {
      * @param number
      * @return the card if exist
      */
-    protected Credit search(long number) {
+    protected Credit searchCredit(long number) {
         for (Iterator<Credit> iterator = this.cards.iterator(); iterator.hasNext();) {
             Credit aCard = iterator.next();
             if (aCard.getNumber() == number) {
@@ -160,7 +160,7 @@ public class CustomerData extends Credit implements Serializable {
      * @return true, the card was added
      */
     protected boolean addCreditCard(Credit card) {
-        if (this.search(card.getNumber()) == null) {
+        if (this.searchCredit(card.getNumber()) == null) {
             cards.add(card);
             return true;
         } else {
