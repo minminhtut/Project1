@@ -67,6 +67,7 @@ public class Customer implements Serializable {
 
     /**
      * a method to remove a customer
+     * @author Min Htut
      *
      * @param id
      * @return true if the customer is removed
@@ -84,6 +85,7 @@ public class Customer implements Serializable {
 
     /**
      * a method to add a credit card to a customer
+     * @author Min Htut
      *
      * @param id
      * @param number
@@ -103,6 +105,7 @@ public class Customer implements Serializable {
 
     /**
      * a method to remove a credit card from a customer
+     * @author Min Htut
      *
      * @param id
      * @param number
@@ -123,6 +126,7 @@ public class Customer implements Serializable {
 
     /**
      * a method to print all customers
+     * @author Min Htut
      */
     protected void listAllCustomers() {
         for (ListIterator<CustomerData> iterator = this.customerList.listIterator(); iterator.hasNext();) {

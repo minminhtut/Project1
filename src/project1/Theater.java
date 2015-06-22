@@ -152,7 +152,8 @@ public class Theater implements Serializable {
     }
 
     /**
-     * case 5: remove a customer
+     * Case 5: Remove a Customer
+     * @author Min Htut
      *
      * @param id
      */
@@ -163,7 +164,8 @@ public class Theater implements Serializable {
     }
 
     /**
-     * case 6: add credit to a customer
+     * Case 6: Add Credit to a Customer
+     * @author Min Htut
      *
      * @param id
      * @param number
@@ -180,7 +182,8 @@ public class Theater implements Serializable {
     }
 
     /**
-     * case 7: remove credit card from a customer
+     * Case 7: Remove Credit Card from a Customer
+     * @author Min Htut
      *
      * @param id
      * @param number
@@ -202,6 +205,7 @@ public class Theater implements Serializable {
 
     /**
      * case 8: list all customers
+     * @author Min Htut
      */
     protected void listAllCustomers() {
         customer.listAllCustomers();

@@ -265,7 +265,7 @@ public class UserInterface {
 		String address = getToken("Enter the address");
 		String phone = getToken("Enter the phone number");
 		long number = getLong("Enter the Credit Card Number");
-		Calendar expiration = getDate("Enter the expiration Date");
+		Calendar expiration = getDate("Enter the expiration Date in mm/dd/yy");
 		CustomerData newCustomer = theater.addCustomer(name, address, phone, number, expiration);
 		if(newCustomer == null)
 			System.out.println("Could not add the customer");
@@ -275,6 +275,7 @@ public class UserInterface {
 
 	/**
 	 * Method to be called for removing customer
+	 * @author Min Htut
 	 */
 	public void removeCustomer() {
 		String id = getToken("Enter  ID");
@@ -288,11 +289,12 @@ public class UserInterface {
 
 	/**
 	 * Method to be called for adding credit card
+	 * @author Min Htut
 	 */
 	public void addCreditCard() {
 		String id = getToken("Enter  ID");
 		long number = getLong("Enter the Credit Card Number");
-		Calendar expiration = getDate("Enter the expiration Date");
+		Calendar expiration = getDate("Enter the expiration Date in mm/dd/yy");
 		Credit result = theater.addCreditCard(id, number, expiration);
 		if(result == null)
 			System.out.println("Could not add the credit card");
@@ -302,6 +304,7 @@ public class UserInterface {
 
 	/**
 	 * Method to be called for removing the credit card
+	 * @author Min Htut
 	 */
 	public void removeCreditCard() {
 		String id = getToken("Enter  ID");
@@ -315,6 +318,7 @@ public class UserInterface {
 
 	/**
 	 * Method to be called for listing all customers
+	 * @author Min Htut
 	 */
 	public void listAllCustomers() {
 		theater.listAllCustomers();
