@@ -21,8 +21,6 @@ public class Theater implements Serializable {
     private Theater() {
         this.client = Client.instance();
         this.customer = Customer.instance();
-        this.seats = 0;
-        this.name = new String();
     }
 
     /**
