@@ -206,6 +206,7 @@ public class Theater implements Serializable {
     protected void listAllCustomers() {
         customer.listAllCustomers();
     }
+    
 
     /**
      * case 9: add a play/show for a client
@@ -218,8 +219,8 @@ public class Theater implements Serializable {
     protected Play addPlay(String id, String name, Calendar start, Calendar end) {
         ClientData aClient = client.searchClientID(id);
         Play aPlay = new Play(name, start, end);
-        boolean flag = client.addPlay(aClient, aPlay);
-        if (flag == true) {
+        boolean playAdded = client.addPlay(aClient, aPlay);
+        if (playAdded == true) {
             return aPlay;
         } else {
             return null;

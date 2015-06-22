@@ -329,6 +329,7 @@ public class UserInterface {
      * Method to be called for adding a play
      */
     public void addPlay() {
+        theater.listAllClients();
         String id = getToken("Enter the client ID");
         String name = getToken("Enter the name of the show");
         Calendar start = getDate("Enter the starting date");
@@ -341,9 +342,19 @@ public class UserInterface {
         }
 
     }
-
+    
+    /**
+     * Method to be called for listing all the plays
+     */
     public void listAllPlays() {
         theater.listAllPlays();
+    }
+    
+    /**
+     * Method to be called for saving theater object
+     */
+    public void save() {
+        theater.save();
     }
 
     public void process() {
@@ -382,8 +393,10 @@ public class UserInterface {
                     listAllPlays();
                     break;
                 case STORE_DATA:
+                    save();
                     break;
                 case RETRIEVE_DATA:
+                    retrieve();
                     break;
                 case HELP:
                     help();
