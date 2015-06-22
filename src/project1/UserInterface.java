@@ -15,13 +15,17 @@ import java.util.StringTokenizer;
  * @Copyright (c) 2010
  *
  * Redistribution and use with or without modification, are permitted provided
- * that the following conditions are met: - the use is for academic purpose only
- * - Redistributions of source code must retain the above copyright notice, this
- * list of conditions and the following disclaimer. - Neither the name of Brahma
- * Dathan or Sarnath Ramnath may be used to endorse or promote products derived
- * from this software without specific prior written permission. The authors do
- * not make any claims regarding the correctness of the code in this module and
- * are not responsible for any loss or damage resulting from its use.
+ * that the following conditions are met:
+ *
+ * - the use is for academic purpose only - Redistributions of source code must
+ * retain the above copyright notice, this list of conditions and the following
+ * disclaimer. - Neither the name of Brahma Dathan or Sarnath Ramnath may be
+ * used to endorse or promote products derived from this software without
+ * specific prior written permission.
+ *
+ * The authors do not make any claims regarding the correctness of the code in
+ * this module and are not responsible for any loss or damage resulting from its
+ * use.
  */
 public class UserInterface {
 
@@ -71,6 +75,7 @@ public class UserInterface {
 
     /**
      * Displays the help screen
+     *
      */
     public void help() {
         System.out.println("Enter a number between 0 and 12 as explained below:");
@@ -85,8 +90,6 @@ public class UserInterface {
         System.out.println(LIST_ALL_CUSTOMERS + " to List all Customers");
         System.out.println(ADD_PLAY + " to Add Play");
         System.out.println(LIST_ALL_PLAY + " to List all Plays");
-        System.out.println(STORE_DATA + " to save Data");
-        System.out.println(RETRIEVE_DATA + " to Retrieve Data");
         System.out.println(HELP + " for help");
     }
 
@@ -106,8 +109,8 @@ public class UserInterface {
     /**
      * Gets a token after prompting
      *
-     * @param prompt, whatever the user wants as prompt
-     * @return the token from the keyboard
+     * @param prompt - whatever the user wants as prompt
+     * @return - the token from the keyboard
      *
      */
     public String getToken(String prompt) {
@@ -128,7 +131,7 @@ public class UserInterface {
     /**
      * Converts the string to a number
      *
-     * @param prompt, the string for prompting
+     * @param prompt the string for prompting
      * @return the integer corresponding to the string
      *
      */
@@ -147,7 +150,7 @@ public class UserInterface {
     /**
      * Converts the string to a number
      *
-     * @param prompt, the string for prompting
+     * @param prompt the string for prompting
      * @return the long corresponding to the string
      *
      */
@@ -166,7 +169,7 @@ public class UserInterface {
     /**
      * Prompts for a date and gets a date object
      *
-     * @param prompt, the prompt
+     * @param prompt the prompt
      * @return the data as a Calendar object
      */
     public Calendar getDate(String prompt) {
@@ -174,8 +177,7 @@ public class UserInterface {
             try {
                 Calendar date = new GregorianCalendar();
                 String item = getToken(prompt);
-                DateFormat dateFormat = SimpleDateFormat
-                        .getDateInstance(DateFormat.SHORT);
+                DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.SHORT);
                 date.setTime(dateFormat.parse(item));
                 return date;
             } catch (Exception fe) {
@@ -187,7 +189,7 @@ public class UserInterface {
     /**
      * Queries for a yes or no and returns true for yes and false for no
      *
-     * @param prompt, The string to be prepended to the yes/no prompt
+     * @param prompt The string to be prepended to the yes/no prompt
      * @return true for yes and false for no
      *
      */
@@ -202,13 +204,13 @@ public class UserInterface {
     /**
      * Method to be called for retrieving saved data. Uses the appropriate
      * Library method for retrieval.
+     *
      */
     private void retrieve() {
         try {
             Theater tempTheater = Theater.retrieve();
             if (tempTheater != null) {
-                System.out
-                        .println(" The theater has been successfully retrieved from the file TheaterData \n");
+                System.out.println(" The theater has been successfully retrieved from the file TheaterData \n");
                 theater = tempTheater;
             } else {
                 System.out.println("File doesnt exist; creating new Theater");
@@ -264,9 +266,8 @@ public class UserInterface {
         String address = getToken("Enter the address");
         String phone = getToken("Enter the phone number");
         long number = getLong("Enter the Credit Card Number");
-        Calendar expiration = getDate("Enter the expiration Date in mm/dd/yy");
-        CustomerData newCustomer = theater.addCustomer(name, address, phone,
-                number, expiration);
+        Calendar expiration = getDate("Enter the expiration Date");
+        CustomerData newCustomer = theater.addCustomer(name, address, phone, number, expiration);
         if (newCustomer == null) {
             System.out.println("Could not add the customer");
         } else {
@@ -275,34 +276,27 @@ public class UserInterface {
     }
 
     /**
-     * Interface Method to Remove a Customer
-     *
-     * @author Min Htut
+     * Method to be called for removing customer
      */
     public void removeCustomer() {
-        String id = getToken("Enter the customer's ID");
-
+        String id = getToken("Enter  ID");
         CustomerData removeCustomer = theater.removeCustomer(id);
-
         if (removeCustomer == null) {
             System.out.println("Could not remove the customer");
         } else {
             System.out.println(removeCustomer.getName() + " was successfully removed.");
         }
+
     }
 
     /**
-     * Interface Method to Add a Credit Card
-     *
-     * @author Min Htut
+     * Method to be called for adding credit card
      */
     public void addCreditCard() {
-        String id = getToken("Enter the customer's ID");
+        String id = getToken("Enter  ID");
         long number = getLong("Enter the Credit Card Number");
-        Calendar expiration = getDate("Enter the expiration Date in mm/dd/yy");
-
+        Calendar expiration = getDate("Enter the expiration Date");
         Credit result = theater.addCreditCard(id, number, expiration);
-
         if (result == null) {
             System.out.println("Could not add the credit card");
         } else {
@@ -311,16 +305,12 @@ public class UserInterface {
     }
 
     /**
-     * Interface Method to Remove a Credit Card from a Customer
-     *
-     * @author Min Htut
+     * Method to be called for removing the credit card
      */
     public void removeCreditCard() {
-        String id = getToken("Enter the customer's ID");
+        String id = getToken("Enter  ID");
         long number = getLong("Enter the Credit Card Number");
-
         Credit card = theater.removeCreditCard(id, number);
-
         if (card == null) {
             System.out.println("Could not remove the credit card");
         } else {
@@ -329,9 +319,7 @@ public class UserInterface {
     }
 
     /**
-     * Interface Method to List all Customers
-     *
-     * @author Min Htut
+     * Method to be called for listing all customers
      */
     public void listAllCustomers() {
         theater.listAllCustomers();
@@ -343,8 +331,8 @@ public class UserInterface {
     public void addPlay() {
         String id = getToken("Enter the client ID");
         String name = getToken("Enter the name of the show");
-        Calendar start = getDate("Enter the starting date in mm/dd/yy");
-        Calendar end = getDate("Enter the endinging date in mm/dd/yy");
+        Calendar start = getDate("Enter the starting date");
+        Calendar end = getDate("Enter the endinging date");
         Play result = theater.addPlay(id, name, start, end);
         if (result == null) {
             System.out.println("Could not add the play");
@@ -354,52 +342,13 @@ public class UserInterface {
 
     }
 
-    /**
-     * a method to list plays
-     */
     public void listAllPlays() {
         theater.listAllPlays();
     }
 
-    /**
-     * Method to be called for saving the theater object. Uses the appropriate
-     * Library method for saving.
-     */
-    private void save() {
-        if (Theater.save()) {
-            System.out.println("The theater has been successfully saved in the file TheaterData \n");
-        } else {
-            System.out.println("There has been an error in saving \n");
-        }
-    }
-
-    /**
-     * Method to be called for retrieving saved data. Uses the appropriate
-     * Theater method for retrieval.
-     */
-    private void theaterRetrieve() {
-        try {
-            Theater temptheater = Theater.retrieve();
-            if (temptheater != null) {
-                System.out.println("The theater has been successfully retrieved from the file TheaterData\n");
-                theater = temptheater;
-            } else {
-                System.out.println("File doesnt exist; creating new library");
-                theater = Theater.instance();
-            }
-        } catch (Exception cnfe) {
-            cnfe.printStackTrace();
-        }
-    }
-
-    /**
-     * Orchestrates the whole process. Calls the appropriate method for the
-     * different functionalties.
-     */
     public void process() {
         int command;
         help();
-
         while ((command = getCommand()) != EXIT) {
             switch (command) {
                 case ADD_CLIENT:
@@ -433,10 +382,8 @@ public class UserInterface {
                     listAllPlays();
                     break;
                 case STORE_DATA:
-                    save();
                     break;
                 case RETRIEVE_DATA:
-                    theaterRetrieve();
                     break;
                 case HELP:
                     help();
@@ -445,13 +392,10 @@ public class UserInterface {
         }
     }
 
-    /**
-     * the driver method for the project
-     *
-     * @param args
-     */
     public static void main(String[] args) {
         UserInterface.instance().process();
     }
 
 }
+
+///test123456

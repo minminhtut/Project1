@@ -1,15 +1,15 @@
 package project1;
 
+import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
- * This class contains variables for a Play object.
+ * This class contains variables for a play object.
  *
  * @author Legionaires
  *
  */
-import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 public class Play implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,7 +39,7 @@ public class Play implements Serializable {
     /**
      * a getter method to get the name of a play
      *
-     * @return name
+     * @return
      */
     protected String getName() {
         return name;
@@ -59,9 +59,8 @@ public class Play implements Serializable {
      *
      * @return start
      */
-    protected String getStart() {
-        SimpleDateFormat date = new SimpleDateFormat("MM-dd-yyyy");
-        return date.format(start.getTime());
+    protected Calendar getStart() {
+        return start;
     }
 
     /**
@@ -78,9 +77,8 @@ public class Play implements Serializable {
      *
      * @return end
      */
-    protected String getEnd() {
-        SimpleDateFormat date = new SimpleDateFormat("MM-dd-yyyy");
-        return date.format(end.getTime());
+    protected Calendar getEnd() {
+        return end;
     }
 
     /**
@@ -96,6 +94,6 @@ public class Play implements Serializable {
      * a method to print a play
      */
     protected void printPlay() {
-        System.out.println("Name: " + this.getName() + " Start: " + this.getStart() + " End: " + this.getEnd());
+        System.out.println("Name: " + this.getName() + " Start: " + this.getStart().toString() + " End: " + this.getEnd().toString());
     }
 }

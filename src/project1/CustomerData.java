@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * This class contains variables for a CustomerData object.
+ * This class contains variables for a customer object.
  *
  * @author Legionaires
  *
@@ -142,9 +142,8 @@ public class CustomerData extends Credit implements Serializable {
      * @param number
      * @return the card if exist
      */
-    protected Credit search(long number) {
-        for (Iterator<Credit> iterator = this.cards.iterator(); iterator
-                .hasNext();) {
+    protected Credit searchCredit(long number) {
+        for (Iterator<Credit> iterator = this.cards.iterator(); iterator.hasNext();) {
             Credit aCard = iterator.next();
             if (aCard.getNumber() == number) {
                 return aCard;
@@ -161,7 +160,7 @@ public class CustomerData extends Credit implements Serializable {
      * @return true, the card was added
      */
     protected boolean addCreditCard(Credit card) {
-        if (this.search(card.getNumber()) == null) {
+        if (this.searchCredit(card.getNumber()) == null) {
             cards.add(card);
             return true;
         } else {
@@ -190,10 +189,8 @@ public class CustomerData extends Credit implements Serializable {
      * print a customer
      */
     protected void printCustomer() {
-        System.out.println("Id: " + this.getId() + " Name: " + this.getName()
-                + " Address: " + this.getAddress() + " Phone: " + this.getPhone());
-        for (ListIterator<Credit> iterator = this.cards.listIterator(); iterator
-                .hasNext();) {
+        System.out.println("Id: " + this.getId() + " Name: " + this.getName() + " Address: " + this.getAddress() + " Phone: " + this.getPhone());
+        for (ListIterator<Credit> iterator = this.cards.listIterator(); iterator.hasNext();) {
             Credit aCard = iterator.next();
             aCard.printCard();
         }

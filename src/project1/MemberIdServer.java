@@ -25,10 +25,11 @@ public class MemberIdServer implements Serializable {
     private static final long serialVersionUID = 1L;
     private int idCounter;
     private static MemberIdServer server;
-
     /*
      * Private constructor for singleton pattern
+     * 
      */
+
     private MemberIdServer() {
         idCounter = 1;
     }
@@ -78,14 +79,12 @@ public class MemberIdServer implements Serializable {
             cnfe.printStackTrace();
         }
     }
-
     /*
      * Supports serialization
-     * 
      * @param output the stream to be written to
      */
-    private void writeObject(java.io.ObjectOutputStream output)
-            throws IOException {
+
+    private void writeObject(java.io.ObjectOutputStream output) throws IOException {
         try {
             output.defaultWriteObject();
             output.writeObject(server);
@@ -93,14 +92,12 @@ public class MemberIdServer implements Serializable {
             ioe.printStackTrace();
         }
     }
-
     /*
      * Supports serialization
-     * 
      * @param input the stream to be read from
      */
-    private void readObject(java.io.ObjectInputStream input)
-            throws IOException, ClassNotFoundException {
+
+    private void readObject(java.io.ObjectInputStream input) throws IOException, ClassNotFoundException {
         try {
             input.defaultReadObject();
             if (server == null) {

@@ -1,15 +1,15 @@
 package project1;
 
-/**
- * This class contains variables for a Credit card object.
- *
- * @author Legionaires
- *
- */
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+/**
+ * This class contains variables for a credit card object.
+ *
+ * @author Legionaires
+ *
+ */
 public class Credit implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,12 +25,12 @@ public class Credit implements Serializable {
     /**
      * create a credit card with a given number and an expiration date
      *
-     * @param newNumber, the number of a credit card
-     * @param newExpiration, an expiration date
+     * @param n, the number of a credit card
+     * @param e, an expiration date
      */
-    protected Credit(long newNumber, Calendar newExpiration) {
-        this.number = newNumber;
-        this.expiration = newExpiration;
+    protected Credit(long n, Calendar e) {
+        this.number = n;
+        this.expiration = e;
     }
 
     /**
@@ -45,10 +45,10 @@ public class Credit implements Serializable {
     /**
      * a setter method for the number of a credit card
      *
-     * @param newNumber, the number of a credit card
+     * @param n, the number of a credit card
      */
-    protected void setNumber(int newNumber) {
-        this.number = newNumber;
+    protected void setNumber(int number) {
+        this.number = number;
     }
 
     /**
@@ -64,10 +64,10 @@ public class Credit implements Serializable {
     /**
      * a setter method for the expiration date of a credit card
      *
-     * @param newExpiration, an expiration date
+     * @param e, an expiration date
      */
-    protected void setExpiration(Calendar newExpiration) {
-        this.expiration = newExpiration;
+    protected void setExpiration(Calendar expiration) {
+        this.expiration = expiration;
     }
 
     /**

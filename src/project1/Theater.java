@@ -1,23 +1,5 @@
 package project1;
 
-/**
- *
- * @author Brahma Dathan and Sarnath Ramnath
- * @Copyright (c) 2010
- *
- * Redistribution and use with or without modification, are permitted provided
- * that the following conditions are met:
- *
- * - the use is for academic purpose only - Redistributions of source code must
- * retain the above copyright notice, this list of conditions and the following
- * disclaimer. - Neither the name of Brahma Dathan or Sarnath Ramnath may be
- * used to endorse or promote products derived from this software without
- * specific prior written permission.
- *
- * The authors do not make any claims regarding the correctness of the code in
- * this module and are not responsible for any loss or damage resulting from its
- * use.
- */
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -39,8 +21,8 @@ public class Theater implements Serializable {
     private Theater() {
         this.client = Client.instance();
         this.customer = Customer.instance();
-        this.seats = 100;
-        this.name = new String("Legionaires");
+        this.seats = 0;
+        this.name = new String();
     }
 
     /**
@@ -57,39 +39,7 @@ public class Theater implements Serializable {
     }
 
     /**
-     * a getter method to get the name of theater
-     *
-     * @return name
-     */
-    protected String getName() {
-        return name;
-    }
-
-    /**
-     * a setter method to set the name of theater
-     */
-    protected void setName(String name) {
-        this.name = new String(name);
-    }
-
-    /**
-     * a getter method to get the numbers of seats
-     *
-     * @return seats
-     */
-    protected int getSeats() {
-        return seats;
-    }
-
-    /**
-     * a setter method to set the numbers of seats
-     */
-    protected void setSeats(int seats) {
-        this.seats = seats;
-    }
-
-    /**
-     * Retrieves a de-serialized version of the Theater from disk
+     * Retrieves a deserialized version of the Theater from disk
      *
      * @return a Theater object
      */
@@ -112,7 +62,7 @@ public class Theater implements Serializable {
     /**
      * Serializes the Theater object
      *
-     * @return true iff the data could be saved
+     * @return true if the data could be saved
      */
     public static boolean save() {
         try {
@@ -130,7 +80,7 @@ public class Theater implements Serializable {
     /**
      * Writes the object to the output stream
      *
-     * @param output, the stream to be written to
+     * @param output the stream to be written to
      */
     private void writeObject(java.io.ObjectOutputStream output) {
         try {
@@ -162,9 +112,7 @@ public class Theater implements Serializable {
     }
 
     /**
-     * Case 1: Add a Client
-     *
-     * @author
+     * case 1: add a client
      *
      * @param name
      * @param address
@@ -177,29 +125,25 @@ public class Theater implements Serializable {
     }
 
     /**
-     * Case 2: Remove a Client
-     *
-     * @author
+     * case 2: remove a client
      *
      * @param id
      */
-    protected ClientData removeClient(String id) {
-        ClientData removeClient = client.search(id);
+    protected ClientData removeClient(String clientID) {
+        ClientData removeClient = client.searchClientID(clientID);
         client.removeClient(removeClient);
         return removeClient;
     }
 
     /**
-     * Case 3: List all Clients
-     *
-     * @author
+     * case 3: list all client
      */
     protected void listAllClients() {
         client.listAllClients();
     }
 
     /**
-     * Case 4: Add a Customer
+     * case 4: add a customer
      */
     protected CustomerData addCustomer(String name, String address, String phone, long number, Calendar expiration) {
         CustomerData newCustomer = new CustomerData(name, address, phone, number, expiration);
@@ -208,31 +152,25 @@ public class Theater implements Serializable {
     }
 
     /**
-     * Case 5: Remove a Customer
+     * case 5: remove a customer
      *
-     * @author Min Htut
-     *
-     * @param id, String object of a unique customer's identification.
+     * @param id
      */
-    protected CustomerData removeCustomer(String id) {
-        CustomerData removeCustomer = customer.search(id);
+    protected CustomerData removeCustomer(String customerID) {
+        CustomerData removeCustomer = customer.searchCustomerID(customerID);
         customer.removeCustomer(removeCustomer);
         return removeCustomer;
     }
 
     /**
-     * Case 6: Add a Credit Card to a customer
+     * case 6: add credit to a customer
      *
-     * @author Min Htut
-     *
-     * @param id, String object of a unique customer's identification
-     * @param number, Long variable of a credit number
-     * @param expiration, Calendar Object of the expiration date
-     * @return newCredit, Credit Object of the credit which is added
+     * @param id
+     * @param number
+     * @param expiration
      */
     protected Credit addCreditCard(String id, long number, Calendar expiration) {
         Credit newCredit = new Credit(number, expiration);
-
         boolean flag = customer.addCreditCard(id, newCredit);
         if (flag == true) {
             return newCredit;
@@ -242,20 +180,17 @@ public class Theater implements Serializable {
     }
 
     /**
-     * Case 7: Remove a Credit Card from a customer
+     * case 7: remove credit card from a customer
      *
-     * @author Min Htut
-     *
-     * @param id, String object of a unique customer's identification
-     * @param number, Long variable of a credit number
+     * @param id
+     * @param number
      */
     protected Credit removeCreditCard(String id, long number) {
-        CustomerData aCustomer = customer.search(id);
-
+        CustomerData aCustomer = customer.searchCustomerID(id);
         if (aCustomer == null) {
             return null;
         } else {
-            Credit aCard = aCustomer.search(number);
+            Credit aCard = aCustomer.searchCredit(number);
             boolean flag = customer.removeCreditCard(aCustomer, aCard);
             if (flag == true) {
                 return aCard;
@@ -266,16 +201,14 @@ public class Theater implements Serializable {
     }
 
     /**
-     * Case 8: Listing all Customers
-     *
-     * @author Min Htut
+     * case 8: list all customers
      */
     protected void listAllCustomers() {
         customer.listAllCustomers();
     }
 
     /**
-     * Case 9: add a play/show for a client
+     * case 9: add a play/show for a client
      *
      * @param id
      * @param name
@@ -283,24 +216,21 @@ public class Theater implements Serializable {
      * @param end
      */
     protected Play addPlay(String id, String name, Calendar start, Calendar end) {
-        ClientData aClient = client.search(id);
-        if (aClient != null) {
-            Play aPlay = new Play(name, start, end);
-            boolean flag = client.addPlay(aClient, aPlay);
-            if (flag == true) {
-                return aPlay;
-            } else {
-                return null;
-            }
+        ClientData aClient = client.searchClientID(id);
+        Play aPlay = new Play(name, start, end);
+        boolean flag = client.addPlay(aClient, aPlay);
+        if (flag == true) {
+            return aPlay;
         } else {
             return null;
         }
     }
 
     /**
-     * Case 10: list all play/show
+     * case 10: list all play/show
      */
     protected void listAllPlays() {
         client.ListAllPlays();
     }
+
 }
