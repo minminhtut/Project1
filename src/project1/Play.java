@@ -3,7 +3,6 @@ package project1;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * This class contains variables for a play object.
