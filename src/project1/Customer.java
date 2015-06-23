@@ -1,5 +1,10 @@
 package project1;
 
+/**
+ * This file contains Customer Object for Project 1.
+ * @author Legionaires
+ */
+
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -7,10 +12,8 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * This class contains variables for a customer object.
- *
- * @author Legionaires
- *
+ * the class Customer holds data regarding the customers
+ * 
  */
 public class Customer implements Serializable {
 
@@ -37,7 +40,7 @@ public class Customer implements Serializable {
     /**
      * Checks whether a customer with given id exist or not.
      *
-     * @param id
+     * @param customerID
      * @return the customer if exist
      */
     protected CustomerData searchCustomerID(String customerID) {
@@ -54,7 +57,7 @@ public class Customer implements Serializable {
      * a method to add a customer
      *
      * @param newCustomer
-     * @return null if the customer dosent exist
+     * @return null if the customer dosen't exist
      */
     protected boolean addCustomer(CustomerData newCustomer) {
         if (this.searchCustomerID(newCustomer.getId()) == null) {
@@ -69,7 +72,7 @@ public class Customer implements Serializable {
      * a method to remove a customer
      * @author Min Htut
      *
-     * @param id
+     * @param removeCustomer, CustomerData Object of a customer to be removed.
      * @return true if the customer is removed
      */
     protected boolean removeCustomer(CustomerData removeCustomer) {
@@ -88,8 +91,7 @@ public class Customer implements Serializable {
      * @author Min Htut
      *
      * @param id
-     * @param number
-     * @param expiration
+     * @param card, Credit Object of a credit card to be added to the customer
      * @return true if the card was added
      */
     protected boolean addCreditCard(String id, Credit card) {
@@ -107,8 +109,8 @@ public class Customer implements Serializable {
      * a method to remove a credit card from a customer
      * @author Min Htut
      *
-     * @param id
-     * @param number
+     * @param aCustomer, CustomerData Object of a customer
+     * @param aCard, Credit Object of a credit card to be removed from the customer
      * @return
      */
     protected boolean removeCreditCard(CustomerData aCustomer, Credit aCard) {
