@@ -1,14 +1,17 @@
 package project1;
 
+/**
+ * This file contains Credit Object for Project 1.
+ * @author Legionaires
+ */
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
- * This class contains variables for a credit card object.
- *
- * @author Legionaires
- *
+ * the class Credit which holds data for a credit card
+ * 
  */
 public class Credit implements Serializable {
 
@@ -25,12 +28,12 @@ public class Credit implements Serializable {
     /**
      * create a credit card with a given number and an expiration date
      *
-     * @param n, the number of a credit card
-     * @param e, an expiration date
+     * @param newNumber
+     * @param newExpiration
      */
-    protected Credit(long n, Calendar e) {
-        this.number = n;
-        this.expiration = e;
+    protected Credit(long newNumber, Calendar newExpiration) {
+        this.number = newNumber;
+        this.expiration = newExpiration;
     }
 
     /**
@@ -45,16 +48,16 @@ public class Credit implements Serializable {
     /**
      * a setter method for the number of a credit card
      *
-     * @param n, the number of a credit card
+     * @param newNumber
      */
-    protected void setNumber(int number) {
-        this.number = number;
+    protected void setNumber(int newNumber) {
+        this.number = newNumber;
     }
 
     /**
      * a getter method for the expiration date of a credit card
      *
-     * @return expiration
+     * @return a String object of an expiration date
      */
     protected String getExpiration() {
         SimpleDateFormat date = new SimpleDateFormat("MM-yyyy");
@@ -64,10 +67,10 @@ public class Credit implements Serializable {
     /**
      * a setter method for the expiration date of a credit card
      *
-     * @param e, an expiration date
+     * @param newExpiration
      */
-    protected void setExpiration(Calendar expiration) {
-        this.expiration = expiration;
+    protected void setExpiration(Calendar newExpiration) {
+        this.expiration = newExpiration;
     }
 
     /**
