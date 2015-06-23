@@ -1,10 +1,20 @@
 package project1;
 
+/**
+ * This file contains Client Object for Project 1.
+ * @author Legionaires
+ */
+
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * the class Client
+ * @author Legionaires
+ *
+ */
 public class Client implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -15,7 +25,7 @@ public class Client implements Serializable {
     }
 
     /**
-     * support the singleton pattern
+     * Support the singleton pattern
      *
      * @return the singleton object
      */
@@ -44,7 +54,7 @@ public class Client implements Serializable {
     }
 
     /**
-     * a method to add a client
+     * A method to add a client
      *
      * @param newClient
      * @return false if customer dosen't exist
@@ -59,9 +69,9 @@ public class Client implements Serializable {
     }
 
     /**
-     * a method to remove a client
+     * A method to remove a client
      *
-     * @param id
+     * @param id, ClientData Object which contains the client to be removed.
      * @return true if the client was removed
      */
     protected boolean removeClient(ClientData removeClient) {
@@ -74,12 +84,10 @@ public class Client implements Serializable {
     }
 
     /**
-     * a method to add a play to the client
+     * A method to add a play to the client
      *
-     * @param id
-     * @param name
-     * @param start
-     * @param end
+     * @param client, ClientData Object which contains the client.
+     * @param play, Play Object which contains a play to be added to the client.
      * @return true if the play is added
      */
     //protected boolean addPlay(String id, String name, Date start, Date end) {
@@ -98,7 +106,7 @@ public class Client implements Serializable {
     }
 
     /**
-     * a method to list all clients
+     * A method to list all clients
      */
     protected void listAllClients() {
         for (Iterator<ClientData> iterator = this.clientList.iterator(); iterator.hasNext();) {
@@ -109,7 +117,7 @@ public class Client implements Serializable {
     }
 
     /**
-     * a method to list all shows
+     * A method to list all shows
      */
     protected void ListAllPlays() {
         for (Iterator<ClientData> iterator = this.clientList.iterator(); iterator.hasNext();) {
@@ -120,7 +128,7 @@ public class Client implements Serializable {
     }
     
     /**
-     * a method to check is client list is empty
+     * A method to check is client list is empty
      */
     public boolean noClients() {
         return this.clientList.isEmpty();
