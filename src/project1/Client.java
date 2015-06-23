@@ -60,8 +60,8 @@ public class Client implements Serializable {
      * @return false if customer dosen't exist
      */
     protected boolean addClient(ClientData newClient) {
-        if (this.searchClientID(newClient.getId()) == null) {
-            clientList.add(newClient);
+        if (searchClientID(newClient.getId()) == null) {
+            this.clientList.add(newClient);
             return true;
         } else {
             return false;
@@ -76,7 +76,7 @@ public class Client implements Serializable {
      */
     protected boolean removeClient(ClientData removeClient) {
         if (removeClient != null) {
-            clientList.remove(removeClient);
+            this.clientList.remove(removeClient);
             return true;
         } else {
             return false;

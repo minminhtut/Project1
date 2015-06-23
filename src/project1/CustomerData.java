@@ -1,5 +1,10 @@
 package project1;
 
+/**
+ * This file contains Customer Object for Project 1.
+ * @author Legionaires
+ */
+
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -8,9 +13,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * This class contains variables for a customer object.
- *
- * @author Legionaires
+ * the Class CustomerData contains data for a single customer
  *
  */
 public class CustomerData extends Credit implements Serializable {
@@ -32,18 +35,19 @@ public class CustomerData extends Credit implements Serializable {
     /**
      * create a customer with a given id, name, address and phone number
      *
-     * @param id
-     * @param name
-     * @param address
-     * @param phone
+     * @param newName
+     * @param newAddress
+     * @param newPhone
+     * @param newNumber
+     * @param expiration
      */
-    protected CustomerData(String name, String address, String phone, long number, Calendar expiration) {
-        this.name = new String(name);
+    protected CustomerData(String newName, String newAddress, String newPhone, long newNumber, Calendar expiration) {
+        this.name = new String(newName);
         this.address = new String(address);
         this.phone = new String(phone);
         this.id = new String(CUSTOMER_STRING + (MemberIdServer.instance()).getId());
-        Credit aCard = new Credit(number, expiration);
-        cards.add(aCard);
+        Credit aCard = new Credit(newNumber, expiration);
+        this.cards.add(aCard);
     }
 
     /**
@@ -52,7 +56,7 @@ public class CustomerData extends Credit implements Serializable {
      * @return id
      */
     protected String getId() {
-        return id;
+        return this.id;
     }
 
     /**
@@ -60,7 +64,7 @@ public class CustomerData extends Credit implements Serializable {
      *
      * @param id
      */
-    protected void setId(String id) {
+    protected void setId() {
         this.id = CUSTOMER_STRING + (MemberIdServer.instance()).getId();
     }
 
@@ -70,25 +74,25 @@ public class CustomerData extends Credit implements Serializable {
      * @return name
      */
     protected String getName() {
-        return name;
+        return this.name;
     }
 
     /**
      * a setter method to set the name
      *
-     * @param name
+     * @param newName
      */
-    protected void setName(String name) {
-        this.name = new String(name);
+    protected void setName(String newName) {
+        this.name = new String(newName);
     }
 
     /**
      * a getter method to get an address
      *
-     * @return address
+     * @return newAddress
      */
     protected String getAddress() {
-        return address;
+        return this.address;
     }
 
     /**
@@ -96,8 +100,8 @@ public class CustomerData extends Credit implements Serializable {
      *
      * @param address
      */
-    protected void setAddress(String address) {
-        this.address = address;
+    protected void setAddress(String newAddress) {
+        this.address = newAddress;
     }
 
     /**
@@ -106,7 +110,7 @@ public class CustomerData extends Credit implements Serializable {
      * @return
      */
     protected String getPhone() {
-        return phone;
+        return this.phone;
     }
 
     /**
@@ -114,8 +118,8 @@ public class CustomerData extends Credit implements Serializable {
      *
      * @param phone
      */
-    protected void setPhone(String phone) {
-        this.phone = phone;
+    protected void setPhone(String newPhone) {
+        this.phone = newPhone;
     }
 
     /**
@@ -132,8 +136,8 @@ public class CustomerData extends Credit implements Serializable {
      *
      * @param cards
      */
-    protected void setCards(List<Credit> cards) {
-        this.cards = cards;
+    protected void setCards(List<Credit> newCards) {
+        this.cards = newCards;
     }
 
     /**
@@ -155,13 +159,12 @@ public class CustomerData extends Credit implements Serializable {
     /**
      * a method to add a credit card
      *
-     * @param number
-     * @param expiration
+     * @param card, Credit Object of a credit card to be added
      * @return true, the card was added
      */
     protected boolean addCreditCard(Credit card) {
         if (this.searchCredit(card.getNumber()) == null) {
-            cards.add(card);
+            this.cards.add(card);
             return true;
         } else {
             return false;
@@ -171,7 +174,7 @@ public class CustomerData extends Credit implements Serializable {
     /**
      * a method to remove a credit card
      *
-     * @param number
+     * @param card, Credit Object of a credit card to be added
      * @return true if the card was removed
      */
     protected boolean removeCreditCard(Credit card) {

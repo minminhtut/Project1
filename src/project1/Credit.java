@@ -42,7 +42,7 @@ public class Credit implements Serializable {
      * @return number
      */
     protected long getNumber() {
-        return number;
+        return this.number;
     }
 
     /**
@@ -61,7 +61,7 @@ public class Credit implements Serializable {
      */
     protected String getExpiration() {
         SimpleDateFormat date = new SimpleDateFormat("MM-yyyy");
-        return date.format(expiration.getTime());
+        return date.format(this.expiration.getTime());
     }
 
     /**

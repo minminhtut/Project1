@@ -44,7 +44,7 @@ public class ClientData extends Play implements Serializable {
         this.address = new String(address);
         this.phone = new String(phone);
         this.balance = 0;
-        playList = new LinkedList<Play>();
+        this.playList = new LinkedList<Play>();
         this.id = new String(CLIENT_STRING + (MemberIdServer.instance()).getId());
     }
 
@@ -54,7 +54,7 @@ public class ClientData extends Play implements Serializable {
      * @return id
      */
     protected String getId() {
-        return id;
+        return this.id;
     }
 
     /**
@@ -72,7 +72,7 @@ public class ClientData extends Play implements Serializable {
      * @return name
      */
     protected String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -80,17 +80,17 @@ public class ClientData extends Play implements Serializable {
      *
      * @param name
      */
-    protected void setName(String name) {
-        this.name = name;
+    protected void setName(String newName) {
+        this.name = newName;
     }
 
     /**
      * a getter method to get an address
      *
-     * @return
+     * @return address
      */
     protected String getAddress() {
-        return address;
+        return this.address;
     }
 
     /**
@@ -98,17 +98,17 @@ public class ClientData extends Play implements Serializable {
      *
      * @param address
      */
-    protected void setAddress(String address) {
-        this.address = address;
+    protected void setAddress(String newAddress) {
+        this.address = newAddress;
     }
 
     /**
      * a getter method to get a phone number
      *
-     * @return
+     * @return phone
      */
     protected String getPhone() {
-        return phone;
+        return this.phone;
     }
 
     /**
@@ -144,7 +144,7 @@ public class ClientData extends Play implements Serializable {
      * @return playList
      */
     protected List<Play> getPlays() {
-        return playList;
+        return this.playList;
     }
 
     /**
@@ -152,8 +152,8 @@ public class ClientData extends Play implements Serializable {
      *
      * @param playlist
      */
-    protected void setPlays(List<Play> playlist) {
-        this.playList = playlist;
+    protected void setPlays(List<Play> newPlaylist) {
+        this.playList = newPlaylist;
     }
 
     /**

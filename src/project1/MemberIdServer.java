@@ -31,7 +31,7 @@ public class MemberIdServer implements Serializable {
      */
 
     private MemberIdServer() {
-        idCounter = 1;
+        this.idCounter = 1;
     }
 
     /**
@@ -53,7 +53,7 @@ public class MemberIdServer implements Serializable {
      * @return id of the member
      */
     public int getId() {
-        return idCounter++;
+        return this.idCounter++;
     }
 
     /**

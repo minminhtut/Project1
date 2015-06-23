@@ -61,7 +61,7 @@ public class Customer implements Serializable {
      */
     protected boolean addCustomer(CustomerData newCustomer) {
         if (this.searchCustomerID(newCustomer.getId()) == null) {
-            customerList.add(newCustomer);
+            this.customerList.add(newCustomer);
             return true;
         } else {
             return false;

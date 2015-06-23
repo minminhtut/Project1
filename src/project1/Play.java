@@ -1,13 +1,16 @@
 package project1;
 
+/**
+ * This file contains Client Object for Project 1.
+ * @author Legionaires
+ */
+
 import java.io.Serializable;
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 
 /**
- * This class contains variables for a play object.
- *
- * @author Legionaires
+ * the Class Play contains data for a single play
  *
  */
 public class Play implements Serializable {
@@ -26,14 +29,14 @@ public class Play implements Serializable {
     /**
      * create a play with given name, starting date, and ending date
      *
-     * @param name
-     * @param start
-     * @param end
+     * @param newName
+     * @param newStart
+     * @param newEnd
      */
-    protected Play(String name, Calendar start, Calendar end) {
-        this.name = new String(name);
-        this.start = start;
-        this.end = end;
+    protected Play(String newName, Calendar newStart, Calendar newEnd) {
+        this.name = new String(newName);
+        this.start = newStart;
+        this.end = newEnd;
     }
 
     /**
@@ -42,16 +45,16 @@ public class Play implements Serializable {
      * @return
      */
     protected String getName() {
-        return name;
+        return this.name;
     }
 
     /**
      * a setter method to set the name of a play
      *
-     * @param name
+     * @param newName
      */
-    protected void setName(String name) {
-        this.name = name;
+    protected void setName(String newName) {
+        this.name = newName;
     }
 
     /**
@@ -60,7 +63,7 @@ public class Play implements Serializable {
      * @return start
      */
     protected Calendar getStart() {
-        return start;
+        return this.start;
     }
 
     /**
@@ -68,8 +71,8 @@ public class Play implements Serializable {
      *
      * @param start
      */
-    protected void setStart(Calendar start) {
-        this.start = start;
+    protected void setStart(Calendar newStart) {
+        this.start = newStart;
     }
 
     /**
@@ -78,7 +81,7 @@ public class Play implements Serializable {
      * @return end
      */
     protected Calendar getEnd() {
-        return end;
+        return this.end;
     }
     
     /**
@@ -86,8 +89,8 @@ public class Play implements Serializable {
      *
      * @param end
      */
-    protected void setEnd(Calendar end) {
-        this.end = end;
+    protected void setEnd(Calendar newEnd) {
+        this.end = newEnd;
     }
     /**
      * a getter method to get the ending date String
@@ -96,7 +99,7 @@ public class Play implements Serializable {
      */
     protected String getEndString() {
         SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
-        return date.format(end.getTime());
+        return date.format(this.end.getTime());
     }
     
     /**
@@ -106,7 +109,7 @@ public class Play implements Serializable {
      */
     protected String getStartString() {
         SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
-        return date.format(start.getTime());
+        return date.format(this.start.getTime());
     }
     /**
      * a method to print a play
