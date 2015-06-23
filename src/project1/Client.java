@@ -117,21 +117,22 @@ public class Client implements Serializable {
     }
 
     /**
-     * A method to list all shows
+     * a method to list all shows
      */
     protected void ListAllPlays() {
         for (Iterator<ClientData> iterator = this.clientList.iterator(); iterator.hasNext();) {
-            ClientData aClient = iterator.next();
-            aClient.printPlay();
+            ClientData cliendata = iterator.next();
+            cliendata.ListAllPlays();
         }
 
     }
     
     /**
-     * A method to check is client list is empty
+     * a method to check is client list is empty
      */
     public boolean noClients() {
         return this.clientList.isEmpty();
     }
+
 
 }
