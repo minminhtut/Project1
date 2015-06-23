@@ -215,4 +215,14 @@ public class ClientData extends Play implements Serializable {
         }
 
     }
+    /**
+     * print a client
+     */
+    protected void ListAllPlays() {
+        for (ListIterator<Play> iterator = this.playList.listIterator(); iterator.hasNext();) {
+            Play aPlay = iterator.next();
+            aPlay.printPlay();
+        }
+    }
+
 }
