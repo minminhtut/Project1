@@ -339,24 +339,26 @@ public class UserInterface {
 	 * Method to be called for adding a play
 	 */
 	public void addPlay() {
-                if (theater.noClients()) {
-                    System.out.println("You currently have no clients. Please add one first.");
-                    addClient();
-                    System.out.println("Now add the play:");
-                }
+		if (theater.noClients()) {
+			System.out
+					.println("You currently have no clients. Please add one first.");
+			addClient();
+			System.out.println("Now add the play:");
+		}
 		String id = getToken("Enter the client ID");
 		String name = getToken("Enter the name of the show");
 		Calendar start = getDate("Enter the starting date");
 		Calendar end = getDate("Enter the endinging date");
 		Play newPlay = theater.addPlay(id, name, start, end);
 		if(newPlay == null) {
-                    System.out.println("Could not add the play");
-                } else {
-                    System.out.println("Play was successfully added:");
-                    System.out.println("Play Name: "+newPlay.getName());
-                    System.out.println("Start Date: "+newPlay.getStartString());
-                    System.out.println("End Date: "+newPlay.getEndString());
-                }
+			System.out.println("Could not add the play");
+		}
+		else {
+			System.out.println("Play was successfully added:");
+			System.out.println("Play Name: " + newPlay.getName());
+			System.out.println("Start Date: " + newPlay.getStartString());
+			System.out.println("End Date: " + newPlay.getEndString());
+		}
 
 
 	}
