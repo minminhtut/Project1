@@ -1,5 +1,10 @@
 package project1;
 
+/**
+ * This file contains ClintData Object for Project 1.
+ * @author Legionaires
+ */
+
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -7,10 +12,8 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * This class contains variables for a client object.
- *
- * @author Legionaires
- *
+ * the class ClientData which holds data for a single Client
+ * 
  */
 public class ClientData extends Play implements Serializable {
 
@@ -32,7 +35,6 @@ public class ClientData extends Play implements Serializable {
     /**
      * create a client from given id, name, address and phone number
      *
-     * @param id
      * @param name
      * @param address
      * @param phone
@@ -60,7 +62,7 @@ public class ClientData extends Play implements Serializable {
      *
      * @param id
      */
-    protected void setId(String id) {
+    protected void setId() {
         this.id = CLIENT_STRING + (MemberIdServer.instance()).getId();
     }
 
@@ -157,7 +159,7 @@ public class ClientData extends Play implements Serializable {
     /**
      * Checks whether a play with a given name exists.
      *
-     * @param number
+     * @param name
      * @return the card if exist
      */
     protected Play searchPlaytName(String name) {
@@ -173,10 +175,8 @@ public class ClientData extends Play implements Serializable {
     /**
      * a method to add a play to the list
      *
-     * @param name
-     * @param start
-     * @param end
-     * @return
+     * @param play, Play Object of a play
+     * @return true if the play exist.
      */
     protected boolean addPlay(Play play) {
         if (this.searchPlaytName(play.getName()) == null) {
