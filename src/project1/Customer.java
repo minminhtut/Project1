@@ -32,7 +32,8 @@ public class Customer implements Serializable {
     protected static Customer instance() {
         if (customer == null) {
             return (customer = new Customer());
-        } else {
+        }
+        else {
             return customer;
         }
     }
@@ -63,7 +64,8 @@ public class Customer implements Serializable {
         if (this.searchCustomerID(newCustomer.getId()) == null) {
             this.customerList.add(newCustomer);
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }

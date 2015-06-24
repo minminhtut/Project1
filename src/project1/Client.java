@@ -12,7 +12,6 @@ import java.util.List;
 
 /**
  * the class Client
- * @author Legionaires
  *
  */
 public class Client implements Serializable {
@@ -32,7 +31,8 @@ public class Client implements Serializable {
     protected static Client instance() {
         if (client == null) {
             return (client = new Client());
-        } else {
+        }
+        else {
             return client;
         }
     }
@@ -63,7 +63,8 @@ public class Client implements Serializable {
         if (searchClientID(newClient.getId()) == null) {
             this.clientList.add(newClient);
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -78,7 +79,8 @@ public class Client implements Serializable {
         if (removeClient != null) {
             this.clientList.remove(removeClient);
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }

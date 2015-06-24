@@ -1,5 +1,10 @@
 package project1;
 
+/**
+ * This file contains Theater Object for Project 1.
+ * @author Legionaires
+ */
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,8 +19,8 @@ public class Theater implements Serializable {
     private static Theater theater;
     private Client client;
     private Customer customer;
-    private String name;
-    private int seats;
+    private String name;	// required by project 1 hand out
+    private int seats;		// required by project 1 hand out
     private static ObjectOutputStream output;
 
     private Theater() {
@@ -31,7 +36,8 @@ public class Theater implements Serializable {
     protected static Theater instance() {
         if (theater == null) {
             return (theater = new Theater());
-        } else {
+        }
+        else {
             return theater;
         }
     }
@@ -48,10 +54,12 @@ public class Theater implements Serializable {
             input.readObject();
             MemberIdServer.retrieve(input);
             return theater;
-        } catch (IOException ioe) {
+        }
+        catch (IOException ioe) {
             ioe.printStackTrace();
             return null;
-        } catch (ClassNotFoundException cnfe) {
+        }
+        catch (ClassNotFoundException cnfe) {
             cnfe.printStackTrace();
             return null;
         }
@@ -69,7 +77,8 @@ public class Theater implements Serializable {
             output.writeObject(theater);
             output.writeObject(MemberIdServer.instance());
             return true;
-        } catch (IOException ioe) {
+        }
+        catch (IOException ioe) {
             ioe.printStackTrace();
             return false;
         }
@@ -84,7 +93,8 @@ public class Theater implements Serializable {
         try {
             output.defaultWriteObject();
             output.writeObject(theater);
-        } catch (IOException ioe) {
+        }
+        catch (IOException ioe) {
             System.out.println(ioe);
         }
     }
@@ -99,12 +109,15 @@ public class Theater implements Serializable {
             input.defaultReadObject();
             if (theater == null) {
                 theater = (Theater) input.readObject();
-            } else {
+            }
+            else {
                 input.readObject();
             }
-        } catch (IOException ioe) {
+        }
+        catch (IOException ioe) {
             ioe.printStackTrace();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -172,7 +185,8 @@ public class Theater implements Serializable {
         boolean flag = customer.addCreditCard(id, newCredit);
         if (flag == true) {
             return newCredit;
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -187,12 +201,14 @@ public class Theater implements Serializable {
         CustomerData aCustomer = customer.searchCustomerID(id);
         if (aCustomer == null) {
             return null;
-        } else {
+        }
+        else {
             Credit aCard = aCustomer.searchCredit(number);
             boolean flag = customer.removeCreditCard(aCustomer, aCard);
             if (flag == true) {
                 return aCard;
-            } else {
+            }
+            else {
                 return null;
             }
         }
@@ -220,7 +236,8 @@ public class Theater implements Serializable {
         boolean playAdded = client.addPlay(aClient, aPlay);
         if (playAdded == true) {
             return aPlay;
-        } else {
+        }
+        else {
             return null;
         }
     }
