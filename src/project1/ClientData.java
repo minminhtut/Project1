@@ -182,7 +182,8 @@ public class ClientData extends Play implements Serializable {
         if (this.searchPlaytName(play.getName()) == null) {
             playList.add(play);
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -224,5 +225,4 @@ public class ClientData extends Play implements Serializable {
             aPlay.printPlay();
         }
     }
-
 }

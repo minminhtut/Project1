@@ -73,9 +73,11 @@ public class MemberIdServer implements Serializable {
     public static void retrieve(ObjectInputStream input) {
         try {
             server = (MemberIdServer) input.readObject();
-        } catch (IOException ioe) {
+        }
+        catch (IOException ioe) {
             ioe.printStackTrace();
-        } catch (Exception cnfe) {
+        }
+        catch (Exception cnfe) {
             cnfe.printStackTrace();
         }
     }
@@ -88,7 +90,8 @@ public class MemberIdServer implements Serializable {
         try {
             output.defaultWriteObject();
             output.writeObject(server);
-        } catch (IOException ioe) {
+        }
+        catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
@@ -102,10 +105,12 @@ public class MemberIdServer implements Serializable {
             input.defaultReadObject();
             if (server == null) {
                 server = (MemberIdServer) input.readObject();
-            } else {
+            }
+            else {
                 input.readObject();
             }
-        } catch (IOException ioe) {
+        }
+        catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }

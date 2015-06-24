@@ -166,7 +166,8 @@ public class CustomerData extends Credit implements Serializable {
         if (this.searchCredit(card.getNumber()) == null) {
             this.cards.add(card);
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }

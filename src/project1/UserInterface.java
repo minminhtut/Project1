@@ -50,7 +50,8 @@ public class UserInterface {
 	private UserInterface() {
 		if (yesOrNo("Look for saved data and  use it?")) {
 			retrieve();
-		} else {
+		}
+		else {
 			theater = Theater.instance();
 		}
 	}
@@ -105,7 +106,8 @@ public class UserInterface {
 	public static UserInterface instance() {
 		if (userInterface == null) {
 			return userInterface = new UserInterface();
-		} else {
+		}
+		else {
 			return userInterface;
 		}
 	}
@@ -213,7 +215,8 @@ public class UserInterface {
 			if (tempTheater != null) {
 				System.out.println(" The theater has been successfully retrieved from the file TheaterData \n" );
 				theater = tempTheater;
-			} else {
+			}
+			else {
 				System.out.println("File doesnt exist; creating new Theater" );
 				theater = Theater.instance();
 			}
@@ -230,17 +233,16 @@ public class UserInterface {
 		String address = getToken("Enter the Client address");
 		String phone = getToken("Enter the Client phone number");
 		ClientData newClient = theater.addClient(name, address, phone);
-		if(newClient == null) {
-                    System.out.println("Could not add the client");
-                } else {
-                    System.out.println("Client was successfully added");
-                    System.out.println("Name: "+newClient.getName());
-                    System.out.println("ID: "+newClient.getId());
-                    System.out.println("Address: "+newClient.getAddress());
-                    System.out.println("Phone: "+newClient.getPhone()+"\n");
-                }
-			
-
+		if (newClient == null) {
+			System.out.println("Could not add the client");
+		}
+		else {
+			System.out.println("Client was successfully added");
+			System.out.println("Name: " + newClient.getName());
+			System.out.println("ID: " + newClient.getId());
+			System.out.println("Address: " + newClient.getAddress());
+			System.out.println("Phone: " + newClient.getPhone() + "\n");
+		}
 	}
 
 	/**
@@ -273,15 +275,17 @@ public class UserInterface {
 		long number = getLong("Enter the Credit Card Number");
 		Calendar expiration = getDate("Enter the expiration Date");
 		CustomerData newCustomer = theater.addCustomer(name, address, phone, number, expiration);
-		if(newCustomer == null) {
-                    System.out.println("Could not add the customer");
-                } else {
-                    System.out.println(newCustomer.getName() + "Customer was successfully added");
-                    System.out.println("Name: "+newCustomer.getName());
-                    System.out.println("ID: "+newCustomer.getId());
-                    System.out.println("Address: "+newCustomer.getAddress());
-                    System.out.println("Phone: "+newCustomer.getPhone()+"\n");
-                }
+		if (newCustomer == null) {
+			System.out.println("Could not add the customer");
+		}
+		else {
+			System.out.println(newCustomer.getName()
+					+ "Customer was successfully added");
+			System.out.println("Name: " + newCustomer.getName());
+			System.out.println("ID: " + newCustomer.getId());
+			System.out.println("Address: " + newCustomer.getAddress());
+			System.out.println("Phone: " + newCustomer.getPhone() + "\n");
+		}
 
 	}
 
@@ -306,13 +310,16 @@ public class UserInterface {
 		long number = getLong("Enter the Credit Card Number");
 		Calendar expiration = getDate("Enter the expiration Date");
 		Credit newCreditCard = theater.addCreditCard(id, number, expiration);
-                if (newCreditCard == null) {
-                    System.out.println("Could not add the credit card");
-                } else {
-                    System.out.println("Credit Card was successfully added");
-                    System.out.println("Credit Card Number: "+newCreditCard.getNumber());
-                    System.out.println("Credit Card Expiration: "+newCreditCard.getExpiration()+"\n");
-                }		
+		if (newCreditCard == null) {
+			System.out.println("Could not add the credit card");
+		}
+		else {
+			System.out.println("Credit Card was successfully added");
+			System.out.println("Credit Card Number: "
+					+ newCreditCard.getNumber());
+			System.out.println("Credit Card Expiration: "
+					+ newCreditCard.getExpiration() + "\n");
+		}		
 	}
 
 	/**
@@ -340,8 +347,7 @@ public class UserInterface {
 	 */
 	public void addPlay() {
 		if (theater.noClients()) {
-			System.out
-					.println("You currently have no clients. Please add one first.");
+			System.out.println("You currently have no clients. Please add one first.");
 			addClient();
 			System.out.println("Now add the play:");
 		}
@@ -404,6 +410,7 @@ public class UserInterface {
 			switch (command) {
 			case EXIT:
 				saveAndExit();
+				break;
 			case ADD_CLIENT:
 				addClient();
 				break;
