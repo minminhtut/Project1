@@ -128,7 +128,8 @@ public class UserInterface {
 				if (tokenizer.hasMoreTokens()) {
 					return tokenizer.nextToken();
 				}
-			} catch (IOException ioe) {
+			}
+			catch (IOException ioe) {
 				System.exit(0);
 			}
 		} while (true);
@@ -146,7 +147,8 @@ public class UserInterface {
 				String item = getToken(prompt);
 				Integer number = Integer.valueOf(item);
 				return number.intValue();
-			} catch (NumberFormatException nfe) {
+			}
+			catch (NumberFormatException nfe) {
 				System.out.println("Please input a number ");
 			}
 		} while (true);
@@ -164,7 +166,8 @@ public class UserInterface {
 				String item = getToken(prompt);
 				Long number = Long.valueOf(item);
 				return number.longValue();
-			} catch (NumberFormatException nfe) {
+			}
+			catch (NumberFormatException nfe) {
 				System.out.println("Please input a number ");
 			}
 		} while (true);
@@ -183,7 +186,8 @@ public class UserInterface {
 				DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.SHORT);
 				date.setTime(dateFormat.parse(item));
 				return date;
-			} catch (Exception fe) {
+			}
+			catch (Exception fe) {
 				System.out.println("Please input a date as mm/dd/yy");
 			}
 		} while (true);
@@ -397,7 +401,8 @@ public class UserInterface {
 		boolean successStore = Theater.save();
                 if (successStore) {
                     System.out.println("Data Saved");
-                } else {
+                }
+                else {
                     System.out.println("No Data Saved");
                 }
                 
