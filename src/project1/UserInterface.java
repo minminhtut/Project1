@@ -388,7 +388,13 @@ public class UserInterface {
 	 * @return none
 	 */
 	public void storeData(){
-		Theater.save();
+		boolean successStore = Theater.save();
+                if (successStore) {
+                    System.out.println("Data Saved");
+                } else {
+                    System.out.println("No Data Saved");
+                }
+                
 	}
 	
 	public void process() {
