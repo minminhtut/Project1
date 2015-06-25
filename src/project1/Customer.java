@@ -15,13 +15,13 @@ import java.util.ListIterator;
  * the class Customer holds data regarding the customers
  * 
  */
-public class Customer implements Serializable {
+public class Customer extends CustomerData implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private static Customer customer;
     private List<CustomerData> customerList = new LinkedList<CustomerData>();
 
-    private Customer() {
+    public Customer() {
     }
 
     /**
@@ -29,7 +29,7 @@ public class Customer implements Serializable {
      *
      * @return the singleton object
      */
-    protected static Customer instance() {
+    public static Customer instance() {
         if (customer == null) {
             return (customer = new Customer());
         }
@@ -44,8 +44,8 @@ public class Customer implements Serializable {
      * @param customerID
      * @return the customer if exist
      */
-    protected CustomerData searchCustomerID(String customerID) {
-        for (Iterator<CustomerData> iterator = this.customerList.iterator(); iterator.hasNext();) {
+    public CustomerData searchCustomerID(String customerID) {
+        for (Iterator<CustomerData> iterator = customerList.iterator(); iterator.hasNext();) {
             CustomerData aCustomer = iterator.next();
             if (aCustomer.getId().equals(customerID)) {
                 return aCustomer;
@@ -60,9 +60,9 @@ public class Customer implements Serializable {
      * @param newCustomer
      * @return null if the customer dosen't exist
      */
-    protected boolean addCustomer(CustomerData newCustomer) {
-        if (this.searchCustomerID(newCustomer.getId()) == null) {
-            this.customerList.add(newCustomer);
+    public boolean addCustomer(CustomerData newCustomer) {
+        if (searchCustomerID(newCustomer.getId()) == null) {
+            customerList.add(newCustomer);
             return true;
         }
         else {
@@ -77,8 +77,8 @@ public class Customer implements Serializable {
      * @param removeCustomer, CustomerData Object of a customer to be removed.
      * @return true if the customer is removed
      */
-    protected boolean removeCustomer(CustomerData removeCustomer) {
-        for (ListIterator<CustomerData> iterator = this.customerList.listIterator(); iterator.hasNext();) {
+    public boolean removeCustomer(CustomerData removeCustomer) {
+        for (ListIterator<CustomerData> iterator = customerList.listIterator(); iterator.hasNext();) {
             CustomerData aCustomer = iterator.next();
             if (aCustomer.getId().equals(removeCustomer.getId())) {
                 iterator.remove();
@@ -96,8 +96,8 @@ public class Customer implements Serializable {
      * @param card, Credit Object of a credit card to be added to the customer
      * @return true if the card was added
      */
-    protected boolean addCreditCard(String id, Credit card) {
-        for (Iterator<CustomerData> iterator = this.customerList.iterator(); iterator.hasNext();) {
+    public boolean addCreditCard(String id, Credit card) {
+        for (Iterator<CustomerData> iterator = customerList.iterator(); iterator.hasNext();) {
             CustomerData aCustomer = iterator.next();
             if (aCustomer.getId().equals(id)) {
                 aCustomer.addCreditCard(card);
@@ -115,8 +115,8 @@ public class Customer implements Serializable {
      * @param aCard, Credit Object of a credit card to be removed from the customer
      * @return
      */
-    protected boolean removeCreditCard(CustomerData aCustomer, Credit aCard) {
-        for (Iterator<CustomerData> iterator = this.customerList.iterator(); iterator.hasNext();) {
+    public boolean removeCreditCard(CustomerData aCustomer, Credit aCard) {
+        for (Iterator<CustomerData> iterator = customerList.iterator(); iterator.hasNext();) {
             CustomerData temp = iterator.next();
             if (temp.getId().equals(aCustomer.getId())) {
                 if (temp.getCards().size() > 1) {
@@ -132,8 +132,8 @@ public class Customer implements Serializable {
      * a method to print all customers
      * @author Min Htut
      */
-    protected void listAllCustomers() {
-        for (ListIterator<CustomerData> iterator = this.customerList.listIterator(); iterator.hasNext();) {
+    public void listAllCustomers() {
+        for (ListIterator<CustomerData> iterator = customerList.listIterator(); iterator.hasNext();) {
             CustomerData aCustomer = iterator.next();
             aCustomer.printCustomer();
         }

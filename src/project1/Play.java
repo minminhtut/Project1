@@ -19,11 +19,9 @@ public class Play implements Serializable {
     private String name;
     private Calendar start;
     private Calendar end;
-
-    /**
-     * a constructor without parameters
-     */
-    protected Play() {
+    
+    public Play() {
+    	
     }
 
     /**
@@ -33,10 +31,10 @@ public class Play implements Serializable {
      * @param newStart
      * @param newEnd
      */
-    protected Play(String newName, Calendar newStart, Calendar newEnd) {
-        this.name = new String(newName);
-        this.start = newStart;
-        this.end = newEnd;
+    public Play(String newName, Calendar newStart, Calendar newEnd) {
+        name = new String(newName);
+        start = newStart;
+        end = newEnd;
     }
 
     /**
@@ -44,8 +42,8 @@ public class Play implements Serializable {
      *
      * @return
      */
-    protected String getName() {
-        return this.name;
+    public String getName() {
+        return name;
     }
 
     /**
@@ -53,8 +51,8 @@ public class Play implements Serializable {
      *
      * @param newName
      */
-    protected void setName(String newName) {
-        this.name = newName;
+    public void setName(String newName) {
+        name = newName;
     }
 
     /**
@@ -62,8 +60,8 @@ public class Play implements Serializable {
      *
      * @return start
      */
-    protected Calendar getStart() {
-        return this.start;
+    public Calendar getStart() {
+        return start;
     }
 
     /**
@@ -71,8 +69,8 @@ public class Play implements Serializable {
      *
      * @param start
      */
-    protected void setStart(Calendar newStart) {
-        this.start = newStart;
+    public void setStart(Calendar newStart) {
+        start = newStart;
     }
 
     /**
@@ -80,8 +78,8 @@ public class Play implements Serializable {
      *
      * @return end
      */
-    protected Calendar getEnd() {
-        return this.end;
+    public Calendar getEnd() {
+        return end;
     }
     
     /**
@@ -89,17 +87,17 @@ public class Play implements Serializable {
      *
      * @param end
      */
-    protected void setEnd(Calendar newEnd) {
-        this.end = newEnd;
+    public void setEnd(Calendar newEnd) {
+        end = newEnd;
     }
     /**
      * a getter method to get the ending date String
      *
      * @return end
      */
-    protected String getEndString() {
+    public String getEndString() {
         SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
-        return date.format(this.end.getTime());
+        return date.format(end.getTime());
     }
     
     /**
@@ -107,14 +105,27 @@ public class Play implements Serializable {
      *
      * @return end
      */
-    protected String getStartString() {
+    public String getStartString() {
         SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
-        return date.format(this.start.getTime());
+        return date.format(start.getTime());
     }
+    
+    /**
+     * check current date against play starting date
+     * @return false if start date is in the future
+     */
+    public boolean checkTime() {
+    	Calendar current = Calendar.getInstance();
+    	if(current.getTimeInMillis() < start.getTimeInMillis())
+    		return false;
+    	else
+    		return true;
+    }
+    
     /**
      * a method to print a play
      */
-    protected void printPlay() {
-        System.out.println("Name: " + this.getName() + " Start: " + this.getStartString() + " End: " + this.getEndString());
+    public void printPlay() {
+        System.out.println("Name: " + getName() + " Start: " + getStartString() + " End: " + getEndString());
     }
 }

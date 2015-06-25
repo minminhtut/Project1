@@ -31,7 +31,7 @@ public class MemberIdServer implements Serializable {
      */
 
     private MemberIdServer() {
-        this.idCounter = 1;
+        idCounter = 1;
     }
 
     /**
@@ -53,7 +53,7 @@ public class MemberIdServer implements Serializable {
      * @return id of the member
      */
     public int getId() {
-        return this.idCounter++;
+        return idCounter++;
     }
 
     /**
@@ -86,7 +86,7 @@ public class MemberIdServer implements Serializable {
      * @param output the stream to be written to
      */
 
-    private void writeObject(java.io.ObjectOutputStream output) throws IOException {
+    public void writeObject(java.io.ObjectOutputStream output) throws IOException {
         try {
             output.defaultWriteObject();
             output.writeObject(server);
@@ -100,7 +100,7 @@ public class MemberIdServer implements Serializable {
      * @param input the stream to be read from
      */
 
-    private void readObject(java.io.ObjectInputStream input) throws IOException, ClassNotFoundException {
+    public void readObject(java.io.ObjectInputStream input) throws IOException, ClassNotFoundException {
         try {
             input.defaultReadObject();
             if (server == null) {

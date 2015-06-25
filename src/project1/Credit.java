@@ -22,7 +22,7 @@ public class Credit implements Serializable {
     /**
      * a constructor without parameters
      */
-    protected Credit() {
+    public Credit() {
     }
 
     /**
@@ -31,9 +31,9 @@ public class Credit implements Serializable {
      * @param newNumber
      * @param newExpiration
      */
-    protected Credit(long newNumber, Calendar newExpiration) {
-        this.number = newNumber;
-        this.expiration = newExpiration;
+    public Credit(long newNumber, Calendar newExpiration) {
+        number = newNumber;
+        expiration = newExpiration;
     }
 
     /**
@@ -41,8 +41,8 @@ public class Credit implements Serializable {
      *
      * @return number
      */
-    protected long getNumber() {
-        return this.number;
+    public long getNumber() {
+        return number;
     }
 
     /**
@@ -50,8 +50,8 @@ public class Credit implements Serializable {
      *
      * @param newNumber
      */
-    protected void setNumber(int newNumber) {
-        this.number = newNumber;
+    public void setNumber(int newNumber) {
+        number = newNumber;
     }
 
     /**
@@ -59,9 +59,9 @@ public class Credit implements Serializable {
      *
      * @return a String object of an expiration date
      */
-    protected String getExpiration() {
+    public String getExpiration() {
         SimpleDateFormat date = new SimpleDateFormat("MM-yyyy");
-        return date.format(this.expiration.getTime());
+        return date.format(expiration.getTime());
     }
 
     /**
@@ -69,15 +69,15 @@ public class Credit implements Serializable {
      *
      * @param newExpiration
      */
-    protected void setExpiration(Calendar newExpiration) {
-        this.expiration = newExpiration;
+    public void setExpiration(Calendar newExpiration) {
+        expiration = newExpiration;
     }
 
     /**
      * a method to print a credit card
      */
-    protected void printCard() {
-        System.out.println("Credit Card Number: " + this.getNumber() + " " + "Credit Card Expiration: " + this.getExpiration());
+    public void printCard() {
+        System.out.println("Credit Card Number: " + getNumber() + " " + "Credit Card Expiration: " + getExpiration());
     }
 
 }

@@ -25,11 +25,8 @@ public class ClientData extends Play implements Serializable {
     private String phone;
     private long balance;
     private List<Play> playList = new LinkedList<Play>();
-
-    /**
-     * a constructor without parameters
-     */
-    protected ClientData() {
+    
+    public ClientData() {
     }
 
     /**
@@ -39,13 +36,13 @@ public class ClientData extends Play implements Serializable {
      * @param address
      * @param phone
      */
-    protected ClientData(String name, String address, String phone) {
-        this.name = new String(name);
-        this.address = new String(address);
-        this.phone = new String(phone);
-        this.balance = 0;
-        this.playList = new LinkedList<Play>();
-        this.id = new String(CLIENT_STRING + (MemberIdServer.instance()).getId());
+    public ClientData(String newName, String newAddress, String newPhone) {
+        name = new String(newName);
+        address = new String(newAddress);
+        phone = new String(newPhone);
+        balance = 0;
+        //playList = new LinkedList<Play>();
+        id = new String(CLIENT_STRING + (MemberIdServer.instance()).getId());
     }
 
     /**
@@ -54,7 +51,7 @@ public class ClientData extends Play implements Serializable {
      * @return id
      */
     protected String getId() {
-        return this.id;
+        return id;
     }
 
     /**
@@ -63,7 +60,7 @@ public class ClientData extends Play implements Serializable {
      * @param id
      */
     protected void setId() {
-        this.id = CLIENT_STRING + (MemberIdServer.instance()).getId();
+        id = CLIENT_STRING + (MemberIdServer.instance()).getId();
     }
 
     /**
@@ -71,8 +68,8 @@ public class ClientData extends Play implements Serializable {
      *
      * @return name
      */
-    protected String getName() {
-        return this.name;
+    public String getName() {
+        return name;
     }
 
     /**
@@ -80,8 +77,8 @@ public class ClientData extends Play implements Serializable {
      *
      * @param name
      */
-    protected void setName(String newName) {
-        this.name = newName;
+    public void setName(String newName) {
+        name = newName;
     }
 
     /**
@@ -89,8 +86,8 @@ public class ClientData extends Play implements Serializable {
      *
      * @return address
      */
-    protected String getAddress() {
-        return this.address;
+    public String getAddress() {
+        return address;
     }
 
     /**
@@ -98,8 +95,8 @@ public class ClientData extends Play implements Serializable {
      *
      * @param address
      */
-    protected void setAddress(String newAddress) {
-        this.address = newAddress;
+    public void setAddress(String newAddress) {
+        address = newAddress;
     }
 
     /**
@@ -107,8 +104,8 @@ public class ClientData extends Play implements Serializable {
      *
      * @return phone
      */
-    protected String getPhone() {
-        return this.phone;
+    public String getPhone() {
+        return phone;
     }
 
     /**
@@ -116,8 +113,8 @@ public class ClientData extends Play implements Serializable {
      *
      * @param phone
      */
-    protected void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhone(String newPhone) {
+        phone = new String(newPhone);
     }
 
     /**
@@ -125,7 +122,7 @@ public class ClientData extends Play implements Serializable {
      *
      * @return balance
      */
-    protected long getBalance() {
+    public long getBalance() {
         return balance;
     }
 
@@ -134,8 +131,8 @@ public class ClientData extends Play implements Serializable {
      *
      * @param balance
      */
-    protected void setBalance(long balance) {
-        this.balance = balance;
+    public void setBalance(long newBalance) {
+        balance = newBalance;
     }
 
     /**
@@ -143,8 +140,8 @@ public class ClientData extends Play implements Serializable {
      *
      * @return playList
      */
-    protected List<Play> getPlays() {
-        return this.playList;
+    public List<Play> getPlays() {
+        return playList;
     }
 
     /**
@@ -152,8 +149,8 @@ public class ClientData extends Play implements Serializable {
      *
      * @param playlist
      */
-    protected void setPlays(List<Play> newPlaylist) {
-        this.playList = newPlaylist;
+    public void setPlays(List<Play> newPlaylist) {
+        playList = newPlaylist;
     }
 
     /**
@@ -162,8 +159,8 @@ public class ClientData extends Play implements Serializable {
      * @param name
      * @return the card if exist
      */
-    protected Play searchPlaytName(String name) {
-        for (Iterator<Play> iterator = this.playList.iterator(); iterator.hasNext();) {
+    public Play searchPlaytName(String name) {
+        for (Iterator<Play> iterator = playList.iterator(); iterator.hasNext();) {
             Play aPlay = iterator.next();
             if (aPlay.getName().equals(name)) {
                 return aPlay;
@@ -178,8 +175,8 @@ public class ClientData extends Play implements Serializable {
      * @param play, Play Object of a play
      * @return true if the play exist.
      */
-    protected boolean addPlay(Play play) {
-        if (this.searchPlaytName(play.getName()) == null) {
+    public boolean addPlay(Play play) {
+        if (searchPlaytName(play.getName()) == null) {
             playList.add(play);
             return true;
         }
@@ -194,8 +191,8 @@ public class ClientData extends Play implements Serializable {
      * @param name
      * @return true if the play was removed
      */
-    protected boolean removePlay(String name) {
-        for (ListIterator<Play> iterator = this.playList.listIterator(); iterator.hasNext();) {
+    public boolean removePlay(String name) {
+        for (ListIterator<Play> iterator = playList.listIterator(); iterator.hasNext();) {
             Play aPlay = iterator.next();
             if (aPlay.getName().equals(name)) {
                 iterator.remove();
@@ -208,9 +205,9 @@ public class ClientData extends Play implements Serializable {
     /**
      * print a client
      */
-    protected void printClient() {
-        System.out.println("Id: " + this.getId() + " Name: " + this.getName() + " Address: " + this.getAddress() + " Phone: " + this.getPhone());
-        for (ListIterator<Play> iterator = this.playList.listIterator(); iterator.hasNext();) {
+    public void printClient() {
+        System.out.println("Id: " + getId() + " Name: " + getName() + " Address: " + getAddress() + " Phone: " + getPhone());
+        for (ListIterator<Play> iterator = playList.listIterator(); iterator.hasNext();) {
             Play aPlay = iterator.next();
             aPlay.printPlay();
         }
@@ -219,10 +216,24 @@ public class ClientData extends Play implements Serializable {
     /**
      * print a client
      */
-    protected void ListAllPlays() {
-        for (ListIterator<Play> iterator = this.playList.listIterator(); iterator.hasNext();) {
+    public void ListAllPlays() {
+        for (ListIterator<Play> iterator = playList.listIterator(); iterator.hasNext();) {
             Play aPlay = iterator.next();
             aPlay.printPlay();
         }
+    }
+    
+    /**
+     * check client's show date
+     * @return false if the show is in the future
+     */
+    public boolean checkAllPlay() {
+    	boolean flag = true;
+    	for (ListIterator<Play> iterator = playList.listIterator(); iterator.hasNext();) {
+            Play aPlay = iterator.next();
+            if(aPlay.checkTime() ==  false)
+            	flag = false;
+        }
+    	return flag;
     }
 }

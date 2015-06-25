@@ -14,13 +14,13 @@ import java.util.List;
  * the class Client
  *
  */
-public class Client implements Serializable {
+public class Client extends ClientData implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private static Client client;
     private List<ClientData> clientList = new LinkedList<ClientData>();
 
-    private Client() {
+    public Client() {
     }
 
     /**
@@ -28,7 +28,7 @@ public class Client implements Serializable {
      *
      * @return the singleton object
      */
-    protected static Client instance() {
+    public static Client instance() {
         if (client == null) {
             return (client = new Client());
         }
@@ -43,8 +43,8 @@ public class Client implements Serializable {
      * @param id
      * @return the customer if exist
      */
-    protected ClientData searchClientID(String id) {
-        for (Iterator<ClientData> iterator = this.clientList.iterator(); iterator.hasNext();) {
+    public ClientData searchClientID(String id) {
+        for (Iterator<ClientData> iterator = clientList.iterator(); iterator.hasNext();) {
             ClientData aClient = iterator.next();
             if (aClient.getId().equals(id)) {
                 return aClient;
@@ -59,9 +59,9 @@ public class Client implements Serializable {
      * @param newClient
      * @return false if customer dosen't exist
      */
-    protected boolean addClient(ClientData newClient) {
+    public boolean addClient(ClientData newClient) {
         if (searchClientID(newClient.getId()) == null) {
-            this.clientList.add(newClient);
+            clientList.add(newClient);
             return true;
         }
         else {
@@ -75,10 +75,15 @@ public class Client implements Serializable {
      * @param id, ClientData Object which contains the client to be removed.
      * @return true if the client was removed
      */
-    protected boolean removeClient(ClientData removeClient) {
+    public boolean removeClient(ClientData removeClient) {
         if (removeClient != null) {
-            this.clientList.remove(removeClient);
-            return true;
+        	if(removeClient.checkAllPlay() == true) {
+        		clientList.remove(removeClient);
+        		return true;
+        	}
+        	else {
+        		return false;
+        	}
         }
         else {
             return false;
@@ -92,9 +97,8 @@ public class Client implements Serializable {
      * @param play, Play Object which contains a play to be added to the client.
      * @return true if the play is added
      */
-    //protected boolean addPlay(String id, String name, Date start, Date end) {
-    protected boolean addPlay(ClientData client, Play play) {
-        for (Iterator<ClientData> iterator = this.clientList.iterator(); iterator.hasNext();) {
+    public boolean addPlay(ClientData client, Play play) {
+        for (Iterator<ClientData> iterator = clientList.iterator(); iterator.hasNext();) {
             ClientData aClient = iterator.next();
             if (aClient.getId().equals(client.getId())) {
                 Play result = aClient.searchPlaytName(play.getName());
@@ -110,8 +114,8 @@ public class Client implements Serializable {
     /**
      * A method to list all clients
      */
-    protected void listAllClients() {
-        for (Iterator<ClientData> iterator = this.clientList.iterator(); iterator.hasNext();) {
+    public void listAllClients() {
+        for (Iterator<ClientData> iterator = clientList.iterator(); iterator.hasNext();) {
             ClientData aClient = iterator.next();
             aClient.printClient();
         }
@@ -121,8 +125,8 @@ public class Client implements Serializable {
     /**
      * a method to list all shows
      */
-    protected void ListAllPlays() {
-        for (Iterator<ClientData> iterator = this.clientList.iterator(); iterator.hasNext();) {
+    public void ListAllPlays() {
+        for (Iterator<ClientData> iterator = clientList.iterator(); iterator.hasNext();) {
             ClientData cliendata = iterator.next();
             cliendata.ListAllPlays();
         }
@@ -133,7 +137,7 @@ public class Client implements Serializable {
      * a method to check is client list is empty
      */
     public boolean noClients() {
-        return this.clientList.isEmpty();
+        return clientList.isEmpty();
     }
 
 

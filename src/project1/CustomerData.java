@@ -29,125 +29,113 @@ public class CustomerData extends Credit implements Serializable {
     /**
      * a constructor without parameters
      */
-    protected CustomerData() {
+    public CustomerData() {
     }
 
     /**
      * create a customer with a given id, name, address and phone number
-     *
      * @param newName
      * @param newAddress
      * @param newPhone
      * @param newNumber
      * @param expiration
      */
-    protected CustomerData(String newName, String newAddress, String newPhone, long newNumber, Calendar expiration) {
-        this.name = new String(newName);
-        this.address = new String(address);
-        this.phone = new String(phone);
-        this.id = new String(CUSTOMER_STRING + (MemberIdServer.instance()).getId());
+    public CustomerData(String newName, String newAddress, String newPhone, long newNumber, Calendar expiration) {
+        name = new String(newName);
+        address = new String(address);
+        phone = new String(phone);
+        id = new String(CUSTOMER_STRING + (MemberIdServer.instance()).getId());
         Credit aCard = new Credit(newNumber, expiration);
-        this.cards.add(aCard);
+        cards.add(aCard);
     }
 
     /**
      * getter method to get id
-     *
      * @return id
      */
-    protected String getId() {
-        return this.id;
+    public String getId() {
+        return id;
     }
 
     /**
      * a setter method to set id
-     *
      * @param id
      */
-    protected void setId() {
-        this.id = CUSTOMER_STRING + (MemberIdServer.instance()).getId();
+    public void setId() {
+        id = CUSTOMER_STRING + (MemberIdServer.instance()).getId();
     }
 
     /**
      * a getter method to get the name
-     *
      * @return name
      */
-    protected String getName() {
-        return this.name;
+    public String getName() {
+        return name;
     }
 
     /**
      * a setter method to set the name
-     *
      * @param newName
      */
-    protected void setName(String newName) {
-        this.name = new String(newName);
+    public void setName(String newName) {
+        name = new String(newName);
     }
 
     /**
      * a getter method to get an address
-     *
      * @return newAddress
      */
-    protected String getAddress() {
-        return this.address;
+    public String getAddress() {
+        return address;
     }
 
     /**
      * a setter method to set an address
-     *
      * @param address
      */
-    protected void setAddress(String newAddress) {
-        this.address = newAddress;
+    public void setAddress(String newAddress) {
+        address = newAddress;
     }
 
     /**
      * a getter method to get a phone number
-     *
      * @return
      */
-    protected String getPhone() {
-        return this.phone;
+    public String getPhone() {
+        return phone;
     }
 
     /**
      * a setter method to get a phone number
-     *
      * @param phone
      */
-    protected void setPhone(String newPhone) {
-        this.phone = newPhone;
+    public void setPhone(String newPhone) {
+        phone = newPhone;
     }
 
     /**
      * a getter method to get the list of credit cards
-     *
      * @return
      */
-    protected List<Credit> getCards() {
-        return this.cards;
+    public List<Credit> getCards() {
+        return cards;
     }
 
     /**
      * a setter method to set the list of credit cards
-     *
      * @param cards
      */
-    protected void setCards(List<Credit> newCards) {
-        this.cards = newCards;
+    public void setCards(List<Credit> newCards) {
+        cards = newCards;
     }
 
     /**
      * Checks whether a card with a given number exists.
-     *
      * @param number
      * @return the card if exist
      */
-    protected Credit searchCredit(long number) {
-        for (Iterator<Credit> iterator = this.cards.iterator(); iterator.hasNext();) {
+    public Credit searchCredit(long number) {
+        for (Iterator<Credit> iterator = cards.iterator(); iterator.hasNext();) {
             Credit aCard = iterator.next();
             if (aCard.getNumber() == number) {
                 return aCard;
@@ -158,13 +146,12 @@ public class CustomerData extends Credit implements Serializable {
 
     /**
      * a method to add a credit card
-     *
      * @param card, Credit Object of a credit card to be added
      * @return true, the card was added
      */
-    protected boolean addCreditCard(Credit card) {
-        if (this.searchCredit(card.getNumber()) == null) {
-            this.cards.add(card);
+    public boolean addCreditCard(Credit card) {
+        if (searchCredit(card.getNumber()) == null) {
+            cards.add(card);
             return true;
         }
         else {
@@ -174,12 +161,11 @@ public class CustomerData extends Credit implements Serializable {
 
     /**
      * a method to remove a credit card
-     *
      * @param card, Credit Object of a credit card to be added
      * @return true if the card was removed
      */
-    protected boolean removeCreditCard(Credit card) {
-        for (ListIterator<Credit> iterator = this.cards.listIterator(); iterator.hasNext();) {
+    public boolean removeCreditCard(Credit card) {
+        for (ListIterator<Credit> iterator = cards.listIterator(); iterator.hasNext();) {
             Credit aCard = iterator.next();
             if (aCard.getNumber() == card.getNumber()) {
                 iterator.remove();
@@ -192,9 +178,9 @@ public class CustomerData extends Credit implements Serializable {
     /**
      * print a customer
      */
-    protected void printCustomer() {
-        System.out.println("Id: " + this.getId() + " Name: " + this.getName() + " Address: " + this.getAddress() + " Phone: " + this.getPhone());
-        for (ListIterator<Credit> iterator = this.cards.listIterator(); iterator.hasNext();) {
+    public void printCustomer() {
+        System.out.println("Id: " + getId() + " Name: " + getName() + " Address: " + getAddress() + " Phone: " + getPhone());
+        for (ListIterator<Credit> iterator = cards.listIterator(); iterator.hasNext();) {
             Credit aCard = iterator.next();
             aCard.printCard();
         }
