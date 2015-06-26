@@ -1,14 +1,5 @@
 package project1;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.StringTokenizer;
-
 /**
  * 
  * @author Brahma Dathan and Sarnath Ramnath
@@ -27,6 +18,19 @@ import java.util.StringTokenizer;
  *
  * The authors do not make any claims regarding the correctness of the code in this module
  * and are not responsible for any loss or damage resulting from its use.  
+ */
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.StringTokenizer;
+
+/**
+ * the Class UserInterface
  */
 public class UserInterface {
 	private static UserInterface userInterface;
@@ -55,11 +59,22 @@ public class UserInterface {
 			theater = Theater.instance();
 		}
 	}
-
-
+	
+	/**
+	 * Supports the singleton pattern
+	 * @return the singleton object
+	 */
+	private static UserInterface instance() {
+		if (userInterface == null) {
+			return userInterface = new UserInterface();
+		}
+		else {
+			return userInterface;
+		}
+	}
+	
 	/**
 	 * Prompts for a command from the keyboard
-	 * 
 	 * @return a valid command
 	 */
 	public int getCommand() {
@@ -78,7 +93,6 @@ public class UserInterface {
 
 	/**
 	 * Displays the help screen
-	 * 
 	 */
 	public void help() {
 		System.out.println("Enter a number between 0 and 13 as explained below:");
@@ -98,23 +112,10 @@ public class UserInterface {
 		System.out.println(HELP + " for help");
 	}
 
-	/**
-	 * Supports the singleton pattern
-	 * 
-	 * @return the singleton object
-	 */
-	public static UserInterface instance() {
-		if (userInterface == null) {
-			return userInterface = new UserInterface();
-		}
-		else {
-			return userInterface;
-		}
-	}
+
 
 	/**
 	 * Gets a token after prompting
-	 * 
 	 * @param prompt - whatever the user wants as prompt
 	 * @return - the token from the keyboard
 	 * 
@@ -128,7 +129,8 @@ public class UserInterface {
 				if (tokenizer.hasMoreTokens()) {
 					return tokenizer.nextToken();
 				}
-			} catch (IOException ioe) {
+			}
+			catch (IOException ioe) {
 				System.exit(0);
 			}
 		} while (true);
@@ -146,8 +148,9 @@ public class UserInterface {
 				String item = getToken(prompt);
 				Integer number = Integer.valueOf(item);
 				return number.intValue();
-			} catch (NumberFormatException nfe) {
-				System.out.println("Please input a number ");
+			}
+			catch (NumberFormatException nfe) {
+				System.out.println("Please input a number.");
 			}
 		} while (true);
 	}
@@ -164,8 +167,9 @@ public class UserInterface {
 				String item = getToken(prompt);
 				Long number = Long.valueOf(item);
 				return number.longValue();
-			} catch (NumberFormatException nfe) {
-				System.out.println("Please input a number ");
+			}
+			catch (NumberFormatException nfe) {
+				System.out.println("Please input a number.");
 			}
 		} while (true);
 	}
@@ -183,7 +187,8 @@ public class UserInterface {
 				DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.SHORT);
 				date.setTime(dateFormat.parse(item));
 				return date;
-			} catch (Exception fe) {
+			}
+			catch (Exception fe) {
 				System.out.println("Please input a date as mm/dd/yy");
 			}
 		} while (true);
@@ -191,12 +196,11 @@ public class UserInterface {
 
 	/**
 	 * Queries for a yes or no and returns true for yes and false for no
-	 * 
 	 * @param prompt The string to be prepended to the yes/no prompt
 	 * @return true for yes and false for no
 	 * 
 	 */
-	private boolean yesOrNo(String prompt) {
+	public boolean yesOrNo(String prompt) {
 		String more = getToken(prompt + " (Y|y)[es] or anything else for no");
 		if (more.charAt(0) != 'y' && more.charAt(0) != 'Y') {
 			return false;
@@ -207,22 +211,22 @@ public class UserInterface {
 	/**
 	 * Method to be called for retrieving saved data.
 	 * Uses the appropriate Library method for retrieval.
-	 *  
 	 */
-	private void retrieve() {
+	public void retrieve() {
+
 		try {
 			Theater tempTheater = Theater.retrieve();
 			if (tempTheater != null) {
-				System.out.println(" The theater has been successfully retrieved from the file TheaterData \n" );
+				System.out.println("The theater has been successfully retrieved from the file TheaterData");
 				theater = tempTheater;
-			}
-			else {
-				System.out.println("File doesnt exist; creating new Theater" );
+			} else {
+				System.out.println("File doesnt exist; creating new Theater");
 				theater = Theater.instance();
 			}
-		} catch(Exception cnfe) {
+		} catch (Exception cnfe) {
 			cnfe.printStackTrace();
 		}
+		
 	}
 
 	/**
@@ -250,11 +254,11 @@ public class UserInterface {
 	 */
 	public void removeClient() {
 		String id = getToken("Enter  ID");
-		ClientData removeClient = theater.removeClient(id);
-		if(removeClient == null)
+		boolean flag = theater.removeClient(id);
+		if(flag == false)
 			System.out.println("Could not remove the client");
 		else
-			System.out.println(removeClient.getName() + " was successfully removed.");
+			System.out.println("The client was successfully removed.");
 
 	}
 
@@ -279,8 +283,7 @@ public class UserInterface {
 			System.out.println("Could not add the customer");
 		}
 		else {
-			System.out.println(newCustomer.getName()
-					+ "Customer was successfully added");
+			System.out.println(newCustomer.getName() + "Customer was successfully added");
 			System.out.println("Name: " + newCustomer.getName());
 			System.out.println("ID: " + newCustomer.getId());
 			System.out.println("Address: " + newCustomer.getAddress());
@@ -317,8 +320,7 @@ public class UserInterface {
 			System.out.println("Credit Card was successfully added");
 			System.out.println("Credit Card Number: "
 					+ newCreditCard.getNumber());
-			System.out.println("Credit Card Expiration: "
-					+ newCreditCard.getExpiration() + "\n");
+			System.out.println("Credit Card Expiration: " + newCreditCard.getExpiration());
 		}		
 	}
 
@@ -353,8 +355,8 @@ public class UserInterface {
 		}
 		String id = getToken("Enter the client ID");
 		String name = getToken("Enter the name of the show");
-		Calendar start = getDate("Enter the starting date");
-		Calendar end = getDate("Enter the endinging date");
+		Calendar start = getDate("Enter the starting date mm/dd/yy");
+		Calendar end = getDate("Enter the endinging date mm/dd/yy");
 		Play newPlay = theater.addPlay(id, name, start, end);
 		if(newPlay == null) {
 			System.out.println("Could not add the play");
@@ -379,28 +381,17 @@ public class UserInterface {
 	}
 
 	/**
-	 * Saves the current theater and exits
-	 * @param none
-	 * @return none
-	 */
-	public void saveAndExit(){
-		storeData();
-		System.exit(0);
-	}
-	
-	/**
 	 * Saves the current theater objects
-	 * @param none
-	 * @return none
 	 */
-	public void storeData(){
+	public void storeData() {
 		boolean successStore = Theater.save();
-                if (successStore) {
-                    System.out.println("Data Saved");
-                } else {
-                    System.out.println("No Data Saved");
-                }
-                
+		if (successStore) {
+			System.out.println("Data Saved.");
+		}
+		else {
+			System.out.println("No Data Saved.");
+		}
+
 	}
 	
 	public void process() {
@@ -409,7 +400,7 @@ public class UserInterface {
 		while ((command = getCommand()) != EXIT) {
 			switch (command) {
 			case EXIT:
-				saveAndExit();
+				System.exit(0);
 				break;
 			case ADD_CLIENT:
 				addClient();
@@ -452,6 +443,7 @@ public class UserInterface {
 				break;
 			}
 		}
+		storeData();
 	}
 
 	public static void main(String[] args) {
