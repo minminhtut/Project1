@@ -131,6 +131,7 @@ public class Client implements Serializable {
     
     /**
      * a method to check is client list is empty
+     *  @return true if no clients
      */
     public boolean noClients() {
         return this.clientList.isEmpty();

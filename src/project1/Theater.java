@@ -196,6 +196,7 @@ public class Theater implements Serializable {
      *
      * @param id
      * @param number
+      * @return crditcard object 
      */
     protected Credit removeCreditCard(String id, long number) {
         CustomerData aCustomer = customer.searchCustomerID(id);
@@ -229,6 +230,7 @@ public class Theater implements Serializable {
      * @param name
      * @param start
      * @param end
+     * @return play object if play added
      */
     protected Play addPlay(String id, String name, Calendar start, Calendar end) {
         ClientData aClient = client.searchClientID(id);

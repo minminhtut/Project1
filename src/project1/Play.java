@@ -105,7 +105,7 @@ public class Play implements Serializable {
     /**
      * a getter method to get the ending date String
      *
-     * @return end
+     * @return start
      */
     protected String getStartString() {
         SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
