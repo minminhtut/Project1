@@ -1,7 +1,7 @@
 package project1;
 
 /**
- * This file contains Client Object for Project 1.
+ * This file contains ClintData Object for Project 1.
  * @author Legionaires
  */
 
@@ -9,59 +9,175 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
- * the class Client
- *
+ * the class ClientData which holds data for a single Client
+ * 
  */
-public class Client extends ClientData implements Serializable {
+public class ClientData extends Play implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private static Client client;
-    private List<ClientData> clientList = new LinkedList<ClientData>();
-
-    public Client() {
+    private static final String CLIENT_STRING = "C";
+    private String id;
+    private String name;
+    private String address;
+    private String phone;
+    private long balance;
+    private List<Play> playList = new LinkedList<Play>();
+    
+    public ClientData() {
     }
 
     /**
-     * Support the singleton pattern
+     * create a client from given id, name, address and phone number
      *
-     * @return the singleton object
+     * @param name
+     * @param address
+     * @param phone
      */
-    public static Client instance() {
-        if (client == null) {
-            return (client = new Client());
-        }
-        else {
-            return client;
-        }
+    public ClientData(String newName, String newAddress, String newPhone) {
+        name = new String(newName);
+        address = new String(newAddress);
+        phone = new String(newPhone);
+        balance = 0;
+        //playList = new LinkedList<Play>();
+        id = new String(CLIENT_STRING + (MemberIdServer.instance()).getId());
     }
 
     /**
-     * Checks whether a client with given id exist or not.
+     * a getter method to get id
+     *
+     * @return id
+     */
+    protected String getId() {
+        return id;
+    }
+
+    /**
+     * a setter method to set id
      *
      * @param id
-     * @return the customer if exist
      */
-    public ClientData searchClientID(String id) {
-        for (Iterator<ClientData> iterator = clientList.iterator(); iterator.hasNext();) {
-            ClientData aClient = iterator.next();
-            if (aClient.getId().equals(id)) {
-                return aClient;
+    protected void setId() {
+        id = CLIENT_STRING + (MemberIdServer.instance()).getId();
+    }
+
+    /**
+     * a getter method to get a name
+     *
+     * @return name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * a setter method to set a name
+     *
+     * @param name
+     */
+    public void setName(String newName) {
+        name = newName;
+    }
+
+    /**
+     * a getter method to get an address
+     *
+     * @return address
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * a setter method to set an address
+     *
+     * @param address
+     */
+    public void setAddress(String newAddress) {
+        address = newAddress;
+    }
+
+    /**
+     * a getter method to get a phone number
+     *
+     * @return phone
+     */
+    public String getPhone() {
+        return phone;
+    }
+
+    /**
+     * a setter method to set a phone number
+     *
+     * @param phone
+     */
+    public void setPhone(String newPhone) {
+        phone = new String(newPhone);
+    }
+
+    /**
+     * a getter method to get a balance
+     *
+     * @return balance
+     */
+    public long getBalance() {
+        return balance;
+    }
+
+    /**
+     * a setter method to set a balance
+     *
+     * @param balance
+     */
+    public void setBalance(long newBalance) {
+        balance = newBalance;
+    }
+
+    /**
+     * a getter method to get the list of play
+     *
+     * @return playList
+     */
+    public List<Play> getPlays() {
+        return playList;
+    }
+
+    /**
+     * a setter method to set the list of play
+     *
+     * @param playlist
+     */
+    public void setPlays(List<Play> newPlaylist) {
+        playList = newPlaylist;
+    }
+
+    /**
+     * Checks whether a play with a given name exists.
+     *
+     * @param name
+     * @return the card if exist
+     */
+    public Play searchPlaytName(String name) {
+        for (Iterator<Play> iterator = playList.iterator(); iterator.hasNext();) {
+            Play aPlay = iterator.next();
+            if (aPlay.getName().equals(name)) {
+                return aPlay;
             }
         }
         return null;
     }
 
     /**
-     * A method to add a client
+     * a method to add a play to the list
      *
-     * @param newClient
-     * @return false if customer dosen't exist
+     * @param play, Play Object of a play
+     * @return true if the play exist.
      */
-    public boolean addClient(ClientData newClient) {
-        if (searchClientID(newClient.getId()) == null) {
-            clientList.add(newClient);
+    public boolean addPlay(Play play) {
+        if (searchPlaytName(play.getName()) == null) {
+            playList.add(play);
             return true;
         }
         else {
@@ -70,76 +186,54 @@ public class Client extends ClientData implements Serializable {
     }
 
     /**
-     * A method to remove a client
+     * a method to remove a play from the list
      *
-     * @param id, ClientData Object which contains the client to be removed.
-     * @return true if the client was removed
+     * @param name
+     * @return true if the play was removed
      */
-    public boolean removeClient(ClientData removeClient) {
-        if (removeClient != null) {
-        	if(removeClient.checkAllPlay() == true) {
-        		clientList.remove(removeClient);
-        		return true;
-        	}
-        	else {
-        		return false;
-        	}
-        }
-        else {
-            return false;
-        }
-    }
-
-    /**
-     * A method to add a play to the client
-     *
-     * @param client, ClientData Object which contains the client.
-     * @param play, Play Object which contains a play to be added to the client.
-     * @return true if the play is added
-     */
-    public boolean addPlay(ClientData client, Play play) {
-        for (Iterator<ClientData> iterator = clientList.iterator(); iterator.hasNext();) {
-            ClientData aClient = iterator.next();
-            if (aClient.getId().equals(client.getId())) {
-                Play result = aClient.searchPlaytName(play.getName());
-                if (result == null) {
-                    aClient.addPlay(play);
-                    return true;
-                }
+    public boolean removePlay(String name) {
+        for (ListIterator<Play> iterator = playList.listIterator(); iterator.hasNext();) {
+            Play aPlay = iterator.next();
+            if (aPlay.getName().equals(name)) {
+                iterator.remove();
+                return true;
             }
         }
         return false;
     }
 
     /**
-     * A method to list all clients
+     * print a client
      */
-    public void listAllClients() {
-        for (Iterator<ClientData> iterator = clientList.iterator(); iterator.hasNext();) {
-            ClientData aClient = iterator.next();
-            aClient.printClient();
+    public void printClient() {
+        System.out.println("Id: " + getId() + " Name: " + getName() + " Address: " + getAddress() + " Phone: " + getPhone());
+        for (ListIterator<Play> iterator = playList.listIterator(); iterator.hasNext();) {
+            Play aPlay = iterator.next();
+            aPlay.printPlay();
         }
 
     }
-
     /**
-     * a method to list all shows
+     * print a client
      */
     public void ListAllPlays() {
-        for (Iterator<ClientData> iterator = clientList.iterator(); iterator.hasNext();) {
-            ClientData cliendata = iterator.next();
-            cliendata.ListAllPlays();
+        for (ListIterator<Play> iterator = playList.listIterator(); iterator.hasNext();) {
+            Play aPlay = iterator.next();
+            aPlay.printPlay();
         }
-
     }
     
     /**
-     * a method to check is client list is empty
-     *  @return true if no clients
+     * check client's show date
+     * @return false if the show is in the future
      */
-    public boolean noClients() {
-        return clientList.isEmpty();
+    public boolean checkAllPlay() {
+    	boolean flag = true;
+    	for (ListIterator<Play> iterator = playList.listIterator(); iterator.hasNext();) {
+            Play aPlay = iterator.next();
+            if(aPlay.checkTime() ==  false)
+            	flag = false;
+        }
+    	return flag;
     }
-
-
 }
