@@ -17,15 +17,15 @@ public class Theater implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private static Theater theater;
-    private Client client;
-    private Customer customer;
+    private ClientList clientList;
+    private CustomerList customerList;
     private String name;	// required by project 1 hand out
     private int seats;		// required by project 1 hand out
     private static ObjectOutputStream output;
 
     private Theater() {
-        client = Client.instance();
-        customer = Customer.instance();
+        clientList = ClientList.instance();
+        customerList = CustomerList.instance();
     }
 
     /**
@@ -120,57 +120,57 @@ public class Theater implements Serializable {
     }
 
     /**
-     * case 1: add a client
+     * case 1: add a clientList
      * @param name
      * @param address
      * @param phone
      */
-    public ClientData addClient(String name, String address, String phone) {
-        ClientData aClient = new ClientData(name, address, phone);
-        client.addClient(aClient);
+    public Client addClient(String name, String address, String phone) {
+        Client aClient = new Client(name, address, phone);
+        clientList.addClient(aClient);
         return aClient;
     }
 
     /**
-     * case 2: remove a client
+     * case 2: remove a clientList
      * @param id
      */
     public boolean removeClient(String clientID) {
     	boolean flag = false;
-        ClientData removeClient = client.searchClientID(clientID);
-        flag = client.removeClient(removeClient);
+        Client removeClient = clientList.searchClientID(clientID);
+        flag = clientList.removeClient(removeClient);
         return flag;
     }
 
     /**
-     * case 3: list all client
+     * case 3: list all clientList
      */
     public void listAllClients() {
-        client.listAllClients();
+        clientList.listAllClients();
     }
 
     /**
-     * case 4: add a customer
+     * case 4: add a customerList
      */
-    public CustomerData addCustomer(String name, String address, String phone, long number, Calendar expiration) {
-        CustomerData newCustomer = new CustomerData(name, address, phone, number, expiration);
-        customer.addCustomer(newCustomer);
+    public Customer addCustomer(String name, String address, String phone) {
+        Customer newCustomer = new Customer(name, address, phone);
+        customerList.addCustomer(newCustomer);
         return newCustomer;
     }
 
     /**
-     * case 5: remove a customer
+     * case 5: remove a customerList
      *
      * @param id
      */
-    public CustomerData removeCustomer(String customerID) {
-        CustomerData removeCustomer = customer.searchCustomerID(customerID);
-        customer.removeCustomer(removeCustomer);
+    public Customer removeCustomer(String customerID) {
+        Customer removeCustomer = customerList.searchCustomerID(customerID);
+        customerList.removeCustomer(removeCustomer);
         return removeCustomer;
     }
 
     /**
-     * case 6: add credit to a customer
+     * case 6: add credit to a customerList
      *
      * @param id
      * @param number
@@ -178,7 +178,7 @@ public class Theater implements Serializable {
      */
     public Credit addCreditCard(String id, long number, Calendar expiration) {
         Credit newCredit = new Credit(number, expiration);
-        boolean flag = customer.addCreditCard(id, newCredit);
+        boolean flag = customerList.addCreditCard(id, newCredit);
         if (flag == true) {
             return newCredit;
         }
@@ -188,20 +188,20 @@ public class Theater implements Serializable {
     }
 
     /**
-     * case 7: remove credit card from a customer
+     * case 7: remove credit card from a customerList
      *
      * @param id
      * @param number
-      * @return crditcard object 
+      * @return creditcard object 
      */
     public Credit removeCreditCard(String id, long number) {
-        CustomerData aCustomer = customer.searchCustomerID(id);
+        Customer aCustomer = customerList.searchCustomerID(id);
         if (aCustomer == null) {
             return null;
         }
         else {
             Credit aCard = aCustomer.searchCredit(number);
-            boolean flag = customer.removeCreditCard(aCustomer, aCard);
+            boolean flag = customerList.removeCreditCard(aCustomer, aCard);
             if (flag == true) {
                 return aCard;
             }
@@ -215,12 +215,12 @@ public class Theater implements Serializable {
      * case 8: list all customers
      */
     public void listAllCustomers() {
-        customer.listAllCustomers();
+        customerList.listAllCustomers();
     }
     
 
     /**
-     * case 9: add a play/show for a client
+     * case 9: add a play/show for a clientList
      *
      * @param id
      * @param name
@@ -229,9 +229,9 @@ public class Theater implements Serializable {
      * @return play object if play added
      */
     public Play addPlay(String id, String name, Calendar start, Calendar end) {
-        ClientData aClient = client.searchClientID(id);
+        Client aClient = clientList.searchClientID(id);
         Play aPlay = new Play(name, start, end);
-        boolean playAdded = client.addPlay(aClient, aPlay);
+        boolean playAdded = clientList.addPlay(aClient, aPlay);
         if (playAdded == true) {
             return aPlay;
         }
@@ -244,13 +244,13 @@ public class Theater implements Serializable {
      * case 10: list all play/show
      */
     public void listAllPlays() {
-        client.ListAllPlays();
+        clientList.ListAllPlays();
     }
     
     /**
      * a method to list all shows
      */
     public boolean noClients() {
-        return client.noClients();
+        return clientList.noClients();
     }
 }

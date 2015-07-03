@@ -236,7 +236,7 @@ public class UserInterface {
 		String name = getToken("Enter the Client name");
 		String address = getToken("Enter the Client address");
 		String phone = getToken("Enter the Client phone number");
-		ClientData newClient = theater.addClient(name, address, phone);
+		Client newClient = theater.addClient(name, address, phone);
 		if (newClient == null) {
 			System.out.println("Could not add the client");
 		}
@@ -276,9 +276,7 @@ public class UserInterface {
 		String name = getToken("Enter the name");
 		String address = getToken("Enter the address");
 		String phone = getToken("Enter the phone number");
-		long number = getLong("Enter the Credit Card Number");
-		Calendar expiration = getDate("Enter the expiration Date");
-		CustomerData newCustomer = theater.addCustomer(name, address, phone, number, expiration);
+		Customer newCustomer = theater.addCustomer(name, address, phone);
 		if (newCustomer == null) {
 			System.out.println("Could not add the customer");
 		}
@@ -297,7 +295,7 @@ public class UserInterface {
 	 */
 	public void removeCustomer() {
 		String id = getToken("Enter the ID number of the Customer");
-		CustomerData removeCustomer = theater.removeCustomer(id);
+		Customer removeCustomer = theater.removeCustomer(id);
 		if(removeCustomer == null)
 			System.out.println("Could not remove the customer");
 		else
