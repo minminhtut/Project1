@@ -12,10 +12,10 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * the class ClientData which holds data for a single Client
+ * the class Client which holds data for a single Client
  * 
  */
-public class ClientData extends Play implements Serializable {
+public class Client implements Serializable, Matchable<String>{
 
     private static final long serialVersionUID = 1L;
     private static final String CLIENT_STRING = "C";
@@ -26,7 +26,7 @@ public class ClientData extends Play implements Serializable {
     private long balance;
     private List<Play> playList = new LinkedList<Play>();
     
-    public ClientData() {
+    public Client() {
     }
 
     /**
@@ -36,13 +36,13 @@ public class ClientData extends Play implements Serializable {
      * @param address
      * @param phone
      */
-    public ClientData(String newName, String newAddress, String newPhone) {
-        name = new String(newName);
-        address = new String(newAddress);
-        phone = new String(newPhone);
-        balance = 0;
+    public Client(String newName, String newAddress, String newPhone) {
+        this.name = newName;
+        this.address = newAddress;
+        this.phone = newPhone;
+        this.balance = 0;
         //playList = new LinkedList<Play>();
-        id = new String(CLIENT_STRING + (MemberIdServer.instance()).getId());
+        this.id = CLIENT_STRING + (MemberIdServer.instance()).getId();
     }
 
     /**
@@ -235,5 +235,9 @@ public class ClientData extends Play implements Serializable {
             	flag = false;
         }
     	return flag;
+    }
+    @Override
+    public boolean matches(String key) {
+        return id.equals(key);
     }
 }
