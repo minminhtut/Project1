@@ -13,10 +13,10 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * the Class CustomerData contains data for a single customer
+ * the Class Customer contains data for a single customer
  *
  */
-public class CustomerData extends Credit implements Serializable {
+public class Customer implements Serializable, Matchable<String> {
 
     private static final long serialVersionUID = 1L;
     private static final String CUSTOMER_STRING = "M";
@@ -29,7 +29,7 @@ public class CustomerData extends Credit implements Serializable {
     /**
      * a constructor without parameters
      */
-    public CustomerData() {
+    public Customer() {
     }
 
     /**
@@ -40,13 +40,12 @@ public class CustomerData extends Credit implements Serializable {
      * @param newNumber
      * @param expiration
      */
-    public CustomerData(String newName, String newAddress, String newPhone, long newNumber, Calendar expiration) {
-        name = new String(newName);
-        address = new String(address);
-        phone = new String(phone);
-        id = new String(CUSTOMER_STRING + (MemberIdServer.instance()).getId());
-        Credit aCard = new Credit(newNumber, expiration);
-        cards.add(aCard);
+    public Customer(String newName, String newAddress, String newPhone) {
+        this.name = newName;
+        this.address = newAddress;
+        this.phone = newPhone;
+        this.id = CUSTOMER_STRING + (MemberIdServer.instance()).getId();
+
     }
 
     /**
@@ -184,6 +183,11 @@ public class CustomerData extends Credit implements Serializable {
             Credit aCard = iterator.next();
             aCard.printCard();
         }
+    }
+
+    @Override
+    public boolean matches(String key) {
+        return id.equals(key);
     }
 
 }

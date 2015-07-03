@@ -11,16 +11,16 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * the class Client
+ * the class ClientList
  *
  */
-public class Client extends ClientData implements Serializable {
+public class ClientList extends ListHelper<Client, String> {
 
     private static final long serialVersionUID = 1L;
-    private static Client client;
-    private List<ClientData> clientList = new LinkedList<ClientData>();
+    private static ClientList client;
+    private List<Client> clientList = new LinkedList<Client>();
 
-    public Client() {
+    public ClientList() {
     }
 
     /**
@@ -28,9 +28,9 @@ public class Client extends ClientData implements Serializable {
      *
      * @return the singleton object
      */
-    public static Client instance() {
+    public static ClientList instance() {
         if (client == null) {
-            return (client = new Client());
+            return (client = new ClientList());
         }
         else {
             return client;
@@ -43,14 +43,8 @@ public class Client extends ClientData implements Serializable {
      * @param id
      * @return the customer if exist
      */
-    public ClientData searchClientID(String id) {
-        for (Iterator<ClientData> iterator = clientList.iterator(); iterator.hasNext();) {
-            ClientData aClient = iterator.next();
-            if (aClient.getId().equals(id)) {
-                return aClient;
-            }
-        }
-        return null;
+    public Client searchClientID(String id) {
+        return super.search(id);
     }
 
     /**
@@ -59,47 +53,30 @@ public class Client extends ClientData implements Serializable {
      * @param newClient
      * @return false if customer dosen't exist
      */
-    public boolean addClient(ClientData newClient) {
-        if (searchClientID(newClient.getId()) == null) {
-            clientList.add(newClient);
-            return true;
-        }
-        else {
-            return false;
-        }
+    public boolean addClient(Client newClient) {
+        return super.add(newClient);
     }
 
     /**
      * A method to remove a client
      *
-     * @param id, ClientData Object which contains the client to be removed.
+     * @param id, Client Object which contains the client to be removed.
      * @return true if the client was removed
      */
-    public boolean removeClient(ClientData removeClient) {
-        if (removeClient != null) {
-        	if(removeClient.checkAllPlay() == true) {
-        		clientList.remove(removeClient);
-        		return true;
-        	}
-        	else {
-        		return false;
-        	}
-        }
-        else {
-            return false;
-        }
+    public boolean removeClient(Client removeClient) {
+        return super.remove(removeClient);
     }
 
     /**
      * A method to add a play to the client
      *
-     * @param client, ClientData Object which contains the client.
+     * @param client, Client Object which contains the client.
      * @param play, Play Object which contains a play to be added to the client.
      * @return true if the play is added
      */
-    public boolean addPlay(ClientData client, Play play) {
-        for (Iterator<ClientData> iterator = clientList.iterator(); iterator.hasNext();) {
-            ClientData aClient = iterator.next();
+    public boolean addPlay(Client client, Play play) {
+        for (Iterator<Client> iterator = super.iterator(); iterator.hasNext();) {
+            Client aClient = iterator.next();
             if (aClient.getId().equals(client.getId())) {
                 Play result = aClient.searchPlaytName(play.getName());
                 if (result == null) {
@@ -115,8 +92,8 @@ public class Client extends ClientData implements Serializable {
      * A method to list all clients
      */
     public void listAllClients() {
-        for (Iterator<ClientData> iterator = clientList.iterator(); iterator.hasNext();) {
-            ClientData aClient = iterator.next();
+        for (Iterator<Client> iterator = super.iterator(); iterator.hasNext();) {
+            Client aClient = iterator.next();
             aClient.printClient();
         }
 
@@ -126,8 +103,8 @@ public class Client extends ClientData implements Serializable {
      * a method to list all shows
      */
     public void ListAllPlays() {
-        for (Iterator<ClientData> iterator = clientList.iterator(); iterator.hasNext();) {
-            ClientData cliendata = iterator.next();
+        for (Iterator<Client> iterator = super.iterator(); iterator.hasNext();) {
+            Client cliendata = iterator.next();
             cliendata.ListAllPlays();
         }
 
@@ -138,7 +115,7 @@ public class Client extends ClientData implements Serializable {
      *  @return true if no clients
      */
     public boolean noClients() {
-        return clientList.isEmpty();
+        return super.isEmptyList();
     }
 
 
