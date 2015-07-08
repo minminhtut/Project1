@@ -47,9 +47,10 @@ public class UserInterface {
 	private static final int LIST_ALL_CUSTOMERS = 8;
 	private static final int ADD_PLAY = 9;
 	private static final int LIST_ALL_PLAY = 10;
-	private static final int STORE_DATA = 11;
-	private static final int RETRIEVE_DATA = 12;
-	private static final int HELP = 13;
+        private static final int GET_TRANSACTION = 11;
+	private static final int STORE_DATA = 13;
+	private static final int RETRIEVE_DATA = 14;
+	private static final int HELP = 15;
 
 	private UserInterface() {
 		if (yesOrNo("Look for saved data and  use it?")) {
@@ -106,9 +107,11 @@ public class UserInterface {
 		System.out.println(REMOVE_CREDIT_CARD + " to Remove Credit Card");
 		System.out.println(LIST_ALL_CUSTOMERS + " to List all Customers");
 		System.out.println(ADD_PLAY + " to Add Play");
-		System.out.println(LIST_ALL_PLAY + " to List all Plays");
+                System.out.println(LIST_ALL_PLAY + " to List all Plays");
+		System.out.println(GET_TRANSACTION + " to start/access a transaction");
 		System.out.println(STORE_DATA + " to Store the Data");
 		System.out.println(RETRIEVE_DATA + " to Retrieve Stored Data");
+                System.out.println(RETRIEVE_DATA + " to Retrieve Stored Data");
 		System.out.println(HELP + " for help");
 	}
 
@@ -276,6 +279,7 @@ public class UserInterface {
 		String name = getToken("Enter the name");
 		String address = getToken("Enter the address");
 		String phone = getToken("Enter the phone number");
+                
 		Customer newCustomer = theater.addCustomer(name, address, phone);
 		if (newCustomer == null) {
 			System.out.println("Could not add the customer");
@@ -287,7 +291,7 @@ public class UserInterface {
 			System.out.println("Address: " + newCustomer.getAddress());
 			System.out.println("Phone: " + newCustomer.getPhone() + "\n");
 		}
-
+                addCreditCard();
 	}
 
 	/**
@@ -368,6 +372,55 @@ public class UserInterface {
 
 
 	}
+        
+
+
+	/**
+	 * Method to be called for issuing tickets. Prompts the user for the
+	 * appropriate values and uses the appropriate Theater method for issuing
+	 * tickets.
+	 * 
+	 */
+        public void handleTransaction() {
+            Ticket result;
+            Customer currentCustomer;
+            String customerID = getToken("Enter customer id");
+            currentCustomer = theater.searchCustomerID(customerID);
+            if (currentCustomer == null) {
+                System.out.println("No such customer");
+                return;
+            }
+            do {
+                int type;
+                do {
+                    type = getNumber("Enter " + Theater.REGULARTICKET + " a regular ticket, "
+                            + Theater.ADVANCETICKET + " for an advance ticket, or "
+                            + Theater.STUDENTADVANCE + " fir student advance");
+                } while (type != Theater.REGULARTICKET && type != Theater.ADVANCETICKET && type != Theater.STUDENTADVANCE);
+                int quanity = Integer.parseInt(getToken("Enter quanity"));
+                Calendar playDate = getDate("Enter the play date mm/dd/yy");
+                
+                for (int i = 0; i < quanity+2; i++) {
+                String studentID = "";
+                if (type == Theater.STUDENTADVANCE) {
+                    studentID = getToken("Enter valid student id");
+                }
+                
+                
+                result = theater.makeTransaction(type, currentCustomer, currentCustomer.getCards(), playDate, studentID);
+                if (result == null) {
+                    System.out.println("Could not add the ticket");
+                } else {
+                    System.out.println("Ticket was successfully added");
+                    System.out.println("Serial Number: " + result.getSerialNumber ()+ "\n");
+                }
+                }
+                if (!yesOrNo("Add more tickets?")) {
+                    break;
+                }
+                
+            } while (true);
+        }
 	
 	/**
 	 * Lists all plays for the current theater
@@ -429,6 +482,9 @@ public class UserInterface {
 				break;
 			case LIST_ALL_PLAY:
 				listAllPlays();
+				break;
+			case GET_TRANSACTION:
+				handleTransaction();
 				break;
 			case STORE_DATA:
 				storeData();

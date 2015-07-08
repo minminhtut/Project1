@@ -6,6 +6,7 @@ package project1;
  */
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -25,7 +26,7 @@ public class Customer implements Serializable, Matchable<String> {
     private String address;
     private String phone;
     private List<Credit> cards = new LinkedList<Credit>();
-
+    private List<Transaction> transactions;
     /**
      * a constructor without parameters
      */
@@ -45,6 +46,8 @@ public class Customer implements Serializable, Matchable<String> {
         this.address = newAddress;
         this.phone = newPhone;
         this.id = CUSTOMER_STRING + (MemberIdServer.instance()).getId();
+        this.transactions = new LinkedList<Transaction>();
+
 
     }
 
@@ -188,6 +191,38 @@ public class Customer implements Serializable, Matchable<String> {
     @Override
     public boolean matches(String key) {
         return id.equals(key);
+    }
+    
+    /**
+     * a method to add Transaction
+     * @param ticket
+     * @return true, the transaction was added
+     */
+    public boolean addTransaction(Ticket ticket) {
+
+        if (searchTransaction(ticket.getSerialNumber()) == null) {
+            transactions.add(new Transaction(ticket));
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    /**
+     * Checks whether a card with a given number exists.
+     * @param serialNumber
+     * @return Transaction if Transaction exists
+     */
+    public Transaction searchTransaction(String serialNumber) {
+        if (transactions == null) {
+            return null;
+        }
+        for (Transaction aTransaction : transactions) {
+            if (aTransaction.getSerialNumber() == serialNumber) {
+                return aTransaction;
+            }
+        }
+        return null;
     }
 
 }

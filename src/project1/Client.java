@@ -236,6 +236,12 @@ public class Client implements Serializable, Matchable<String>{
         }
     	return flag;
     }
+    /**
+     * a method to add a play to the list
+     *
+     * @param play, Play Object of a play
+     * @return true if the play exist.
+     */
     @Override
     public boolean matches(String key) {
         return id.equals(key);

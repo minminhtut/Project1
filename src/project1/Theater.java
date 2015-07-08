@@ -12,6 +12,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.List;
 
 public class Theater implements Serializable {
 
@@ -19,6 +20,11 @@ public class Theater implements Serializable {
     private static Theater theater;
     private ClientList clientList;
     private CustomerList customerList;
+
+    public static final int REGULARTICKET = 1;
+    public static final int ADVANCETICKET = 2;
+    public static final int STUDENTADVANCE = 3;
+    
     private String name;	// required by project 1 hand out
     private int seats;		// required by project 1 hand out
     private static ObjectOutputStream output;
@@ -252,5 +258,20 @@ public class Theater implements Serializable {
      */
     public boolean noClients() {
         return clientList.noClients();
+    }
+    /**
+     * a method to search customer ID
+     */
+    public Customer searchCustomerID(String customerID) {
+        return customerList.searchCustomerID(customerID);
+    }
+    
+    public Ticket makeTransaction(int type, Customer currentCustomer, List<Credit> creditCard, Calendar playDate, String studentID) {
+        Ticket ticket = TicketFactory.instance().CreateTicket(
+                type, currentCustomer.getId(), creditCard, playDate, studentID);
+        if (currentCustomer.addTransaction(ticket)) {
+            return (ticket);
+        }
+        return null;
     }
 }

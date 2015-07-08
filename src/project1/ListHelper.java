@@ -24,7 +24,7 @@ import java.util.List;
 
 /**
  * Maintains a list of items with type T and key of type K. Subclassed by
- * Catalog and MemberList
+ * ClientList, CustomerList, and MemberList
  *
  * @param <T>
  *            type of item

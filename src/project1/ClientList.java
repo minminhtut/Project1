@@ -18,7 +18,6 @@ public class ClientList extends ListHelper<Client, String> {
 
     private static final long serialVersionUID = 1L;
     private static ClientList client;
-    private List<Client> clientList = new LinkedList<Client>();
 
     public ClientList() {
     }

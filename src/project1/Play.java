@@ -32,9 +32,9 @@ public class Play implements Serializable {
      * @param newEnd
      */
     public Play(String newName, Calendar newStart, Calendar newEnd) {
-        name = new String(newName);
-        start = newStart;
-        end = newEnd;
+        this.name = newName;
+        this.start = newStart;
+        this.end = newEnd;
     }
 
     /**
