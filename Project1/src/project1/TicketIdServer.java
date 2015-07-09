@@ -1,36 +1,20 @@
 package project1;
 
-/**
- *
- * @author Brahma Dathan and Sarnath Ramnath
- * @Copyright (c) 2010
- *
- * Redistribution and use with or without modification, are permitted provided
- * that the following conditions are met:
- *
- * - the use is for academic purpose only - Redistributions of source code must
- * retain the above copyright notice, this list of conditions and the following
- * disclaimer. - Neither the name of Brahma Dathan or Sarnath Ramnath may be
- * used to endorse or promote products derived from this software without
- * specific prior written permission.
- *
- * The authors do not make any claims regarding the correctness of the code in
- * this module and are not responsible for any loss or damage resulting from its
- * use.
- */
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 
-public class MemberIdServer implements Serializable {
+public class TicketIdServer implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private int idCounter;
-    private static MemberIdServer server;
+    private static TicketIdServer ticketServer;
     /*
      * Private constructor for singleton pattern
      * 
      */
 
-    private MemberIdServer() {
+    private TicketIdServer() {
         idCounter = 1;
     }
 
@@ -39,11 +23,11 @@ public class MemberIdServer implements Serializable {
      *
      * @return the singleton object
      */
-    public static MemberIdServer instance() {
-        if (server == null) {
-            return (server = new MemberIdServer());
+    public static TicketIdServer instance() {
+        if (ticketServer == null) {
+            return (ticketServer = new TicketIdServer());
         } else {
-            return server;
+            return ticketServer;
         }
     }
 
@@ -62,7 +46,7 @@ public class MemberIdServer implements Serializable {
      */
     @Override
     public String toString() {
-        return ("IdServer" + idCounter);
+        return ("TicketServer" + idCounter);
     }
 
     /**
@@ -72,7 +56,7 @@ public class MemberIdServer implements Serializable {
      */
     public static void retrieve(ObjectInputStream input) {
         try {
-            server = (MemberIdServer) input.readObject();
+        	ticketServer = (TicketIdServer) input.readObject();
         }
         catch (IOException ioe) {
             ioe.printStackTrace();
@@ -89,7 +73,7 @@ public class MemberIdServer implements Serializable {
     public void writeObject(java.io.ObjectOutputStream output) throws IOException {
         try {
             output.defaultWriteObject();
-            output.writeObject(server);
+            output.writeObject(ticketServer);
         }
         catch (IOException ioe) {
             ioe.printStackTrace();
@@ -103,8 +87,8 @@ public class MemberIdServer implements Serializable {
     public void readObject(java.io.ObjectInputStream input) throws IOException, ClassNotFoundException {
         try {
             input.defaultReadObject();
-            if (server == null) {
-                server = (MemberIdServer) input.readObject();
+            if (ticketServer == null) {
+            	ticketServer = (TicketIdServer) input.readObject();
             }
             else {
                 input.readObject();

@@ -1,28 +1,39 @@
 package project1;
 
+/**
+ * This file contains Client Object for Project 1.
+ * @author Legionaires
+ */
+
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Client implements Serializable {
+/**
+ * the class Client
+ *
+ */
+public class Client extends ClientData implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private static Client client;
     private List<ClientData> clientList = new LinkedList<ClientData>();
 
-    private Client() {
+    public Client() {
     }
 
     /**
-     * support the singleton pattern
+     * Support the singleton pattern
      *
      * @return the singleton object
      */
-    protected static Client instance() {
+    public static Client instance() {
         if (client == null) {
             return (client = new Client());
-        } else {
+        }
+        else {
             return client;
         }
     }
@@ -33,60 +44,65 @@ public class Client implements Serializable {
      * @param id
      * @return the customer if exist
      */
-    protected ClientData searchClientID(String id) {
-        for (Iterator<ClientData> iterator = this.clientList.iterator(); iterator.hasNext();) {
+    public ClientData searchClientID(String id) {
+        for (Iterator<ClientData> iterator = clientList.iterator(); iterator.hasNext();) {
             ClientData aClient = iterator.next();
-            if (aClient.getId().equals(id)) {
+            if (aClient.getId().matches(id)) {
                 return aClient;
             }
         }
         return null;
     }
-
+    
+   
     /**
-     * a method to add a client
+     * A method to add a client
      *
      * @param newClient
      * @return false if customer dosen't exist
      */
-    protected boolean addClient(ClientData newClient) {
-        if (this.searchClientID(newClient.getId()) == null) {
+    public boolean addClient(ClientData newClient) {
+        if (searchClientID(newClient.getId()) == null) {
             clientList.add(newClient);
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
 
     /**
-     * a method to remove a client
+     * A method to remove a client
      *
-     * @param id
+     * @param id, ClientData Object which contains the client to be removed.
      * @return true if the client was removed
      */
-    protected boolean removeClient(ClientData removeClient) {
+    public boolean removeClient(ClientData removeClient) {
         if (removeClient != null) {
-            clientList.remove(removeClient);
-            return true;
-        } else {
+        	if(removeClient.checkAllPlay() == true) {
+        		clientList.remove(removeClient);
+        		return true;
+        	}
+        	else {
+        		return false;
+        	}
+        }
+        else {
             return false;
         }
     }
 
     /**
-     * a method to add a play to the client
+     * A method to add a play to the client
      *
-     * @param id
-     * @param name
-     * @param start
-     * @param end
+     * @param client, ClientData Object which contains the client.
+     * @param play, Play Object which contains a play to be added to the client.
      * @return true if the play is added
      */
-    //protected boolean addPlay(String id, String name, Date start, Date end) {
-    protected boolean addPlay(ClientData client, Play play) {
-        for (Iterator<ClientData> iterator = this.clientList.iterator(); iterator.hasNext();) {
+    public boolean addPlay(ClientData client, Play play) {
+        for (Iterator<ClientData> iterator = clientList.iterator(); iterator.hasNext();) {
             ClientData aClient = iterator.next();
-            if (aClient.getId().equals(client.getId())) {
+            if ((aClient.getId().compareTo(client.getId())) == 0) {
                 Play result = aClient.searchPlaytName(play.getName());
                 if (result == null) {
                     aClient.addPlay(play);
@@ -96,12 +112,102 @@ public class Client implements Serializable {
         }
         return false;
     }
+    
+    /**
+     * a method to search a play of clients
+     * 
+     * @param date
+     * @return
+     */
+    public ClientData searchClientPlay(Calendar date) {
+        for (Iterator<ClientData> iterator = clientList.iterator(); iterator.hasNext();) {
+            ClientData aClient = iterator.next();
+            if(aClient.searchPlayDate(date) != null) {
+                return aClient;
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * a method to search a play of clients by date
+     * 
+     * @param date
+     * @return aPlay
+     */
+    public Play searchPlay(Calendar date) {
+        for (Iterator<ClientData> iterator = clientList.iterator(); iterator.hasNext();) {
+            ClientData aClient = iterator.next();
+            Play aPlay = aClient.searchPlayDate(date);
+            return aPlay;
+        }
+        return null;
+    }
 
     /**
-     * a method to list all clients
+     * a method to add ticket to a play
+     * 
+     * @param ticket
+     * @param aClient
+     * @param aTicket
      */
-    protected void listAllClients() {
-        for (Iterator<ClientData> iterator = this.clientList.iterator(); iterator.hasNext();) {
+    public boolean addClientTicket(ClientData aClient, Play aPlay, Ticket aTicket) {
+    	int index = 0;
+    	boolean flag = false;
+    	for(int i = 0; i < clientList.size(); i++) {
+    		if(clientList.get(i).getId().matches(aClient.getId())) {
+    			index = i;
+    		}
+    	}
+    	
+    	flag = clientList.get(index).addClientTicket(aPlay, aTicket);
+    	
+    	return flag;
+    }
+    
+    /**
+     * A method to get numbers of sold tickets
+     * 
+     * @param play
+     * @param aTicket
+     */
+    public int numberOfTickets(Play aPlay) {
+    	int sold = 0;
+        for (Iterator<ClientData> iterator = clientList.iterator(); iterator.hasNext();) {
+            ClientData aClient = iterator.next();
+            List<Play> plays = aClient.getPlays();
+            for(Play p : plays) {
+            	System.out.println(p.getName());
+            	System.out.println(aPlay.getName());
+            }
+        }
+        return sold;
+    }
+    
+    /**
+     * A method to add a ticket to the play
+     * 
+     * @param play
+     * @param aTicket
+     */
+    public void addTicket(Play play, Ticket aTicket) {
+        for (Iterator<ClientData> iterator = clientList.iterator(); iterator.hasNext();) {
+            ClientData aClient = iterator.next();
+            List<Play> plays = aClient.getPlays();
+            for(Play p : plays) {
+            	if(p.getName().matches(play.getName())) {
+            		p.setTickets(aTicket);
+            	}
+            }
+        }
+
+    }
+
+    /**
+     * A method to list all clients
+     */
+    public void listAllClients() {
+        for (Iterator<ClientData> iterator = clientList.iterator(); iterator.hasNext();) {
             ClientData aClient = iterator.next();
             aClient.printClient();
         }
@@ -111,12 +217,19 @@ public class Client implements Serializable {
     /**
      * a method to list all shows
      */
-    protected void ListAllPlays() {
-        for (Iterator<ClientData> iterator = this.clientList.iterator(); iterator.hasNext();) {
-            ClientData aClient = iterator.next();
-            aClient.printPlay();
+    public void ListAllPlays() {
+        for (Iterator<ClientData> iterator = clientList.iterator(); iterator.hasNext();) {
+            ClientData cliendata = iterator.next();
+            cliendata.ListAllPlays();
         }
 
     }
-
+    
+    /**
+     * a method to check is client list is empty
+     *  @return true if no clients
+     */
+    public boolean noClients() {
+        return clientList.isEmpty();
+    }
 }

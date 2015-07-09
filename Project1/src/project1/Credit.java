@@ -1,14 +1,17 @@
 package project1;
 
+/**
+ * This file contains Credit Object for Project 1.
+ * @author Legionaires
+ */
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
- * This class contains variables for a credit card object.
- *
- * @author Legionaires
- *
+ * the class Credit which holds data for a credit card
+ * 
  */
 public class Credit implements Serializable {
 
@@ -19,18 +22,18 @@ public class Credit implements Serializable {
     /**
      * a constructor without parameters
      */
-    protected Credit() {
+    public Credit() {
     }
 
     /**
      * create a credit card with a given number and an expiration date
      *
-     * @param n, the number of a credit card
-     * @param e, an expiration date
+     * @param newNumber
+     * @param newExpiration
      */
-    protected Credit(long n, Calendar e) {
-        this.number = n;
-        this.expiration = e;
+    public Credit(long newNumber, Calendar newExpiration) {
+        number = newNumber;
+        expiration = newExpiration;
     }
 
     /**
@@ -38,25 +41,25 @@ public class Credit implements Serializable {
      *
      * @return number
      */
-    protected long getNumber() {
+    public long getNumber() {
         return number;
     }
 
     /**
      * a setter method for the number of a credit card
      *
-     * @param n, the number of a credit card
+     * @param newNumber
      */
-    protected void setNumber(int number) {
-        this.number = number;
+    public void setNumber(int newNumber) {
+        number = newNumber;
     }
 
     /**
      * a getter method for the expiration date of a credit card
      *
-     * @return expiration
+     * @return a String object of an expiration date
      */
-    protected String getExpiration() {
+    public String getExpiration() {
         SimpleDateFormat date = new SimpleDateFormat("MM-yyyy");
         return date.format(expiration.getTime());
     }
@@ -64,17 +67,17 @@ public class Credit implements Serializable {
     /**
      * a setter method for the expiration date of a credit card
      *
-     * @param e, an expiration date
+     * @param newExpiration
      */
-    protected void setExpiration(Calendar expiration) {
-        this.expiration = expiration;
+    public void setExpiration(Calendar newExpiration) {
+        expiration = newExpiration;
     }
 
     /**
      * a method to print a credit card
      */
-    protected void printCard() {
-        System.out.println("Credit Card Number: " + this.getNumber() + " " + "Credit Card Expiration: " + this.getExpiration());
+    public void printCard() {
+        System.out.println("Credit Card Number: " + getNumber() + " " + "Credit Card Expiration: " + getExpiration());
     }
 
 }

@@ -1,16 +1,20 @@
 package project1;
 
+/**
+ * This file contains ClintData Object for Project 1.
+ * @author Legionaires
+ */
+
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
 /**
- * This class contains variables for a client object.
- *
- * @author Legionaires
- *
+ * the class ClientData which holds data for a single Client
+ * 
  */
 public class ClientData extends Play implements Serializable {
 
@@ -20,30 +24,25 @@ public class ClientData extends Play implements Serializable {
     private String name;
     private String address;
     private String phone;
-    private long balance;
+    private long totalSale;
     private List<Play> playList = new LinkedList<Play>();
-
-    /**
-     * a constructor without parameters
-     */
-    protected ClientData() {
+    
+    public ClientData() {
     }
 
     /**
      * create a client from given id, name, address and phone number
      *
-     * @param id
      * @param name
      * @param address
      * @param phone
      */
-    protected ClientData(String name, String address, String phone) {
-        this.name = new String(name);
-        this.address = new String(address);
-        this.phone = new String(phone);
-        this.balance = 0;
-        playList = new LinkedList<Play>();
-        this.id = new String(CLIENT_STRING + (MemberIdServer.instance()).getId());
+    public ClientData(String newName, String newAddress, String newPhone) {
+        name = new String(newName);
+        address = new String(newAddress);
+        phone = new String(newPhone);
+        totalSale = 0;
+        id = new String(CLIENT_STRING + (MemberIdServer.instance()).getId());
     }
 
     /**
@@ -60,8 +59,8 @@ public class ClientData extends Play implements Serializable {
      *
      * @param id
      */
-    protected void setId(String id) {
-        this.id = CLIENT_STRING + (MemberIdServer.instance()).getId();
+    protected void setId() {
+        id = CLIENT_STRING + (MemberIdServer.instance()).getId();
     }
 
     /**
@@ -69,7 +68,7 @@ public class ClientData extends Play implements Serializable {
      *
      * @return name
      */
-    protected String getName() {
+    public String getName() {
         return name;
     }
 
@@ -78,16 +77,16 @@ public class ClientData extends Play implements Serializable {
      *
      * @param name
      */
-    protected void setName(String name) {
-        this.name = name;
+    public void setName(String newName) {
+        name = newName;
     }
 
     /**
      * a getter method to get an address
      *
-     * @return
+     * @return address
      */
-    protected String getAddress() {
+    public String getAddress() {
         return address;
     }
 
@@ -96,16 +95,16 @@ public class ClientData extends Play implements Serializable {
      *
      * @param address
      */
-    protected void setAddress(String address) {
-        this.address = address;
+    public void setAddress(String newAddress) {
+        address = newAddress;
     }
 
     /**
      * a getter method to get a phone number
      *
-     * @return
+     * @return phone
      */
-    protected String getPhone() {
+    public String getPhone() {
         return phone;
     }
 
@@ -114,8 +113,8 @@ public class ClientData extends Play implements Serializable {
      *
      * @param phone
      */
-    protected void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhone(String newPhone) {
+        phone = new String(newPhone);
     }
 
     /**
@@ -123,17 +122,8 @@ public class ClientData extends Play implements Serializable {
      *
      * @return balance
      */
-    protected long getBalance() {
-        return balance;
-    }
-
-    /**
-     * a setter method to set a balance
-     *
-     * @param balance
-     */
-    protected void setBalance(long balance) {
-        this.balance = balance;
+    public long getTotalSale() {
+        return totalSale;
     }
 
     /**
@@ -141,7 +131,7 @@ public class ClientData extends Play implements Serializable {
      *
      * @return playList
      */
-    protected List<Play> getPlays() {
+    public List<Play> getPlays() {
         return playList;
     }
 
@@ -150,20 +140,36 @@ public class ClientData extends Play implements Serializable {
      *
      * @param playlist
      */
-    protected void setPlays(List<Play> playlist) {
-        this.playList = playlist;
+    public void setPlays(List<Play> newPlaylist) {
+        playList = newPlaylist;
     }
 
     /**
      * Checks whether a play with a given name exists.
      *
-     * @param number
-     * @return the card if exist
+     * @param name
+     * @return the play if exist
      */
-    protected Play searchPlaytName(String name) {
-        for (Iterator<Play> iterator = this.playList.iterator(); iterator.hasNext();) {
+    public Play searchPlaytName(String name) {
+        for (Iterator<Play> iterator = playList.iterator(); iterator.hasNext();) {
             Play aPlay = iterator.next();
             if (aPlay.getName().equals(name)) {
+                return aPlay;
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * Checks whether a play with a given date exists.
+     *
+     * @param date
+     * @return the play if exist
+     */
+    public Play searchPlayDate(Calendar date) {
+        for (Iterator<Play> iterator = playList.iterator(); iterator.hasNext();) {
+            Play aPlay = iterator.next();
+            if (aPlay.getStart().getTimeInMillis() == date.getTimeInMillis()) {
                 return aPlay;
             }
         }
@@ -173,16 +179,15 @@ public class ClientData extends Play implements Serializable {
     /**
      * a method to add a play to the list
      *
-     * @param name
-     * @param start
-     * @param end
-     * @return
+     * @param play, Play Object of a play
+     * @return true if the play exist.
      */
-    protected boolean addPlay(Play play) {
-        if (this.searchPlaytName(play.getName()) == null) {
+    public boolean addPlay(Play play) {
+        if (searchPlaytName(play.getName()) == null) {
             playList.add(play);
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -193,8 +198,8 @@ public class ClientData extends Play implements Serializable {
      * @param name
      * @return true if the play was removed
      */
-    protected boolean removePlay(String name) {
-        for (ListIterator<Play> iterator = this.playList.listIterator(); iterator.hasNext();) {
+    public boolean removePlay(String name) {
+        for (ListIterator<Play> iterator = playList.listIterator(); iterator.hasNext();) {
             Play aPlay = iterator.next();
             if (aPlay.getName().equals(name)) {
                 iterator.remove();
@@ -203,16 +208,55 @@ public class ClientData extends Play implements Serializable {
         }
         return false;
     }
+    
+    public boolean addClientTicket(Play aPlay, Ticket aTicket) {
+    	int index = 0;
+    	for(int i = 0; i < playList.size(); i++) {
+    		if(playList.get(i).getStart().getTimeInMillis() == aPlay.getStart().getTimeInMillis()) {
+    			index = i;
+    		}
+    	}
+    	if(index > 0 | index < playList.size()) {
+    		playList.get(index).setTickets(aTicket);
+    		return true;
+    	}
+    	else
+    		return false;
+    }
 
     /**
      * print a client
      */
-    protected void printClient() {
-        System.out.println("Id: " + this.getId() + " Name: " + this.getName() + " Address: " + this.getAddress() + " Phone: " + this.getPhone());
-        for (ListIterator<Play> iterator = this.playList.listIterator(); iterator.hasNext();) {
+    public void printClient() {
+        System.out.println("Id: " + getId() + " Name: " + getName() + " Address: " + getAddress() +
+        				   " Phone: " + getPhone() + " Current Balance: " + totalSale);
+        for (ListIterator<Play> iterator = playList.listIterator(); iterator.hasNext();) {
             Play aPlay = iterator.next();
             aPlay.printPlay();
         }
 
+    }
+    /**
+     * print a client
+     */
+    public void ListAllPlays() {
+        for (ListIterator<Play> iterator = playList.listIterator(); iterator.hasNext();) {
+            Play aPlay = iterator.next();
+            aPlay.printPlay();
+        }
+    }
+    
+    /**
+     * check client's show date
+     * @return false if the show is in the future
+     */
+    public boolean checkAllPlay() {
+    	boolean flag = true;
+    	for (ListIterator<Play> iterator = playList.listIterator(); iterator.hasNext();) {
+            Play aPlay = iterator.next();
+            if(aPlay.checkTime() ==  false)
+            	flag = false;
+        }
+    	return flag;
     }
 }

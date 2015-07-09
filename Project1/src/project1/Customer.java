@@ -1,5 +1,10 @@
 package project1;
 
+/**
+ * This file contains Customer Object for Project 1.
+ * @author Legionaires
+ */
+
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -7,18 +12,16 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * This class contains variables for a customer object.
- *
- * @author Legionaires
- *
+ * the class Customer holds data regarding the customers
+ * 
  */
-public class Customer implements Serializable {
+public class Customer extends CustomerData implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private static Customer customer;
     private List<CustomerData> customerList = new LinkedList<CustomerData>();
 
-    private Customer() {
+    public Customer() {
     }
 
     /**
@@ -26,10 +29,11 @@ public class Customer implements Serializable {
      *
      * @return the singleton object
      */
-    protected static Customer instance() {
+    public static Customer instance() {
         if (customer == null) {
             return (customer = new Customer());
-        } else {
+        }
+        else {
             return customer;
         }
     }
@@ -37,13 +41,13 @@ public class Customer implements Serializable {
     /**
      * Checks whether a customer with given id exist or not.
      *
-     * @param id
+     * @param customerID
      * @return the customer if exist
      */
-    protected CustomerData searchCustomerID(String customerID) {
-        for (Iterator<CustomerData> iterator = this.customerList.iterator(); iterator.hasNext();) {
+    public CustomerData searchCustomerID(String customerID) {
+        for (Iterator<CustomerData> iterator = customerList.iterator(); iterator.hasNext();) {
             CustomerData aCustomer = iterator.next();
-            if (aCustomer.getId().equals(customerID)) {
+            if (aCustomer.getId().matches(customerID)) {
                 return aCustomer;
             }
         }
@@ -54,27 +58,29 @@ public class Customer implements Serializable {
      * a method to add a customer
      *
      * @param newCustomer
-     * @return null if the customer dosent exist
+     * @return null if the customer dosen't exist
      */
-    protected boolean addCustomer(CustomerData newCustomer) {
-        if (this.searchCustomerID(newCustomer.getId()) == null) {
+    public boolean addCustomer(CustomerData newCustomer) {
+        if (searchCustomerID(newCustomer.getId()) == null) {
             customerList.add(newCustomer);
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
 
     /**
      * a method to remove a customer
+     * @author Min Htut
      *
-     * @param id
+     * @param removeCustomer, CustomerData Object of a customer to be removed.
      * @return true if the customer is removed
      */
-    protected boolean removeCustomer(CustomerData removeCustomer) {
-        for (ListIterator<CustomerData> iterator = this.customerList.listIterator(); iterator.hasNext();) {
+    public boolean removeCustomer(CustomerData removeCustomer) {
+        for (ListIterator<CustomerData> iterator = customerList.listIterator(); iterator.hasNext();) {
             CustomerData aCustomer = iterator.next();
-            if (aCustomer.getId().equals(removeCustomer.getId())) {
+            if (aCustomer.getId().matches(removeCustomer.getId())) {
                 iterator.remove();
                 return true;
             }
@@ -84,16 +90,16 @@ public class Customer implements Serializable {
 
     /**
      * a method to add a credit card to a customer
+     * @author Min Htut
      *
      * @param id
-     * @param number
-     * @param expiration
+     * @param card, Credit Object of a credit card to be added to the customer
      * @return true if the card was added
      */
-    protected boolean addCreditCard(String id, Credit card) {
-        for (Iterator<CustomerData> iterator = this.customerList.iterator(); iterator.hasNext();) {
+    public boolean addCreditCard(String id, Credit card) {
+        for (Iterator<CustomerData> iterator = customerList.iterator(); iterator.hasNext();) {
             CustomerData aCustomer = iterator.next();
-            if (aCustomer.getId().equals(id)) {
+            if (aCustomer.getId().matches(id)) {
                 aCustomer.addCreditCard(card);
                 return true;
             }
@@ -103,15 +109,16 @@ public class Customer implements Serializable {
 
     /**
      * a method to remove a credit card from a customer
+     * @author Min Htut
      *
-     * @param id
-     * @param number
+     * @param aCustomer, CustomerData Object of a customer
+     * @param aCard, Credit Object of a credit card to be removed from the customer
      * @return
      */
-    protected boolean removeCreditCard(CustomerData aCustomer, Credit aCard) {
-        for (Iterator<CustomerData> iterator = this.customerList.iterator(); iterator.hasNext();) {
+    public boolean removeCreditCard(CustomerData aCustomer, Credit aCard) {
+        for (Iterator<CustomerData> iterator = customerList.iterator(); iterator.hasNext();) {
             CustomerData temp = iterator.next();
-            if (temp.getId().equals(aCustomer.getId())) {
+            if (temp.getId().matches(aCustomer.getId())) {
                 if (temp.getCards().size() > 1) {
                     temp.removeCreditCard(aCard);
                     return true;
@@ -120,12 +127,57 @@ public class Customer implements Serializable {
         }
         return false;
     }
+    
+    /**
+     * a method to search a credit card by number
+     * 
+     * @param aCustomer
+     * @param cardNumber
+     * @return
+     */
+    public boolean searchCreditNumber(CustomerData aCustomer, long cardNumber) {
+    	if(aCustomer != null) {
+    		for (Iterator<CustomerData> iterator = customerList.iterator(); iterator.hasNext();) {
+                CustomerData temp = iterator.next();
+                if(temp.getId().matches(aCustomer.getId())) {
+                	if(temp.searchCredit(cardNumber) != null)
+                		return true;
+                	else
+                		return false;
+                }
+        	}
+            return false;
+    	}
+    	else
+    		return false;
+    }
+    
+    /**
+     * a method to add a ticket to the customer
+     * 
+     * @param ticket
+     * @param aCustomer
+     * @param aTicket
+     */
+    public void addCustomerTicket(CustomerData aCustomer, Ticket aTicket) {
+    	int index = 0;
+    	for(int i = 0; i < customerList.size(); i++) {
+    		if(customerList.get(i).getId().matches(aCustomer.getId())) {
+    			index = i;
+    		}
+    	}
+    	
+    	if(index > 0 | index < customerList.size()) {
+    		customerList.get(index).addCustomerTicket(aTicket);
+    	}
+    }
 
     /**
      * a method to print all customers
+     * @author Min Htut
      */
-    protected void listAllCustomers() {
-        for (ListIterator<CustomerData> iterator = this.customerList.listIterator(); iterator.hasNext();) {
+    public void listAllCustomers() {
+        for (ListIterator<CustomerData> iterator = customerList.listIterator(); iterator.hasNext();) {
             CustomerData aCustomer = iterator.next();
             aCustomer.printCustomer();
         }
