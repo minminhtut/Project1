@@ -354,7 +354,7 @@ public class Theater implements Serializable {
     	   (aPlay.getTickets().size() < seats) & (aPlay != null)) {
     		
     		while(ticket > 0) {
-    			aTicket = new Ticket(ADVANCE_TICKET, date, number);
+    			aTicket = new Ticket(ADVANCE_STUDENT, date, number);
     			customer.addCustomerTicket(aCustomer, aTicket);
     			client.addClientTicket(aClient, aPlay, aTicket);
     			ticket--;
