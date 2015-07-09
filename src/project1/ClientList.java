@@ -74,16 +74,29 @@ public class ClientList extends ListHelper<Client, String> {
      * @return true if the play is added
      */
     public boolean addPlay(Client client, Play play) {
-        for (Iterator<Client> iterator = super.iterator(); iterator.hasNext();) {
+        boolean goodDate = true;
+        for (Iterator<Client> iterator = super.iterator(); iterator.hasNext() && goodDate;) {
             Client aClient = iterator.next();
-            if (aClient.getId().equals(client.getId())) {
-                Play result = aClient.searchPlaytName(play.getName());
-                if (result == null) {
-                    aClient.addPlay(play);
-                    return true;
+            goodDate = aClient.searchPlayDate(play.getStartDate(), play.getEndDate());
+
+        }
+        if (goodDate) {
+            for (Iterator<Client> iterator = super.iterator(); iterator.hasNext();) {
+                Client aClient = iterator.next();
+                if (aClient.getId().equals(client.getId())) {
+                    Play result = aClient.searchPlaytName((play.getName()));
+                    if (result == null) {
+                        aClient.addPlay(play);
+                        return true;
+                    } else {
+                       System.out.println("Play name already exists for this client."); 
+                    }
                 }
             }
+        } else {
+            System.out.println("Date range conficts with other plays.");
         }
+
         return false;
     }
 

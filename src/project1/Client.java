@@ -168,6 +168,25 @@ public class Client implements Serializable, Matchable<String>{
         }
         return null;
     }
+    
+    /**
+     * Checks whether a play with a given name exists.
+     *
+     * @param name
+     * @return the card if exist
+     */
+    public boolean searchPlayDate(int startD, int endD) {
+        for (Iterator<Play> iterator = playList.iterator(); iterator.hasNext();) {
+            Play aPlay = iterator.next();
+            
+            if ((startD >= aPlay.getStartDate() && startD <= aPlay.getEndDate()) 
+                    || (endD >= aPlay.getStartDate() && endD <= aPlay.getEndDate())
+                    || (startD <= aPlay.getStartDate() && endD >= aPlay.getEndDate())) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     /**
      * a method to add a play to the list

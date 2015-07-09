@@ -111,7 +111,6 @@ public class UserInterface {
 		System.out.println(GET_TRANSACTION + " to start/access a transaction");
 		System.out.println(STORE_DATA + " to Store the Data");
 		System.out.println(RETRIEVE_DATA + " to Retrieve Stored Data");
-                System.out.println(RETRIEVE_DATA + " to Retrieve Stored Data");
 		System.out.println(HELP + " for help");
 	}
 
@@ -359,15 +358,17 @@ public class UserInterface {
 		String name = getToken("Enter the name of the show");
 		Calendar start = getDate("Enter the starting date mm/dd/yy");
 		Calendar end = getDate("Enter the endinging date mm/dd/yy");
-		Play newPlay = theater.addPlay(id, name, start, end);
+                int price = getNumber("ENter the cost of the ticket price");
+		Play newPlay = theater.addPlay(id, name, start, end, price);
 		if(newPlay == null) {
 			System.out.println("Could not add the play");
 		}
 		else {
 			System.out.println("Play was successfully added:");
 			System.out.println("Play Name: " + newPlay.getName());
-			System.out.println("Start Date: " + newPlay.getStartString());
-			System.out.println("End Date: " + newPlay.getEndString());
+			System.out.println("Start Date: " + newPlay.getStartDate());
+			System.out.println("End Date: " + newPlay.getEndDate());
+                        System.out.println("Play Cost:" + newPlay.getTicketPrice());
 		}
 
 
