@@ -160,24 +160,24 @@ public class UserInterface {
 		} while (true);
 	}
         
-	/**
-	 * Converts the string to a number
-	 * @param prompt the string for prompting
-	 * @return the integer corresponding to the string
-	 * 
-	 */
-	public int getMoney(String prompt) {
-		do {
-			try {
-				String item = getToken(prompt);
-				BigDecimal number = Integer.valueOf(item);
-				return number.intValue();
-			}
-			catch (NumberFormatException nfe) {
-				System.out.println("Please input a number.");
-			}
-		} while (true);
-	}
+//	/**
+//	 * Converts the string to a number
+//	 * @param prompt the string for prompting
+//	 * @return the integer corresponding to the string
+//	 * 
+//	 */
+//	public int getMoney(String prompt) {
+//		do {
+//			try {
+//				String item = getToken(prompt);
+//				//BigDecimal number = Integer.valueOf(item);
+//				return number.intValue();
+//			}
+//			catch (NumberFormatException nfe) {
+//				System.out.println("Please input a number.");
+//			}
+//		} while (true);
+//	}
 
 	/**
 	 * Converts the string to a number
