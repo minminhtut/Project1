@@ -23,6 +23,7 @@ package project1;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -137,6 +138,8 @@ public class UserInterface {
 			}
 		} while (true);
 	}
+        
+
 
 	/**
 	 * Converts the string to a number
@@ -149,6 +152,25 @@ public class UserInterface {
 			try {
 				String item = getToken(prompt);
 				Integer number = Integer.valueOf(item);
+				return number.intValue();
+			}
+			catch (NumberFormatException nfe) {
+				System.out.println("Please input a number.");
+			}
+		} while (true);
+	}
+        
+	/**
+	 * Converts the string to a number
+	 * @param prompt the string for prompting
+	 * @return the integer corresponding to the string
+	 * 
+	 */
+	public int getMoney(String prompt) {
+		do {
+			try {
+				String item = getToken(prompt);
+				BigDecimal number = Integer.valueOf(item);
 				return number.intValue();
 			}
 			catch (NumberFormatException nfe) {
@@ -443,6 +465,10 @@ public class UserInterface {
 		}
 
 	}
+        
+        public void testData () {
+        
+        }
 	
 	public void process() {
 		int command;
