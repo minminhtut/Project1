@@ -40,7 +40,7 @@ public class ListHelper<T extends Matchable<K>, K> implements Serializable {
 	 * 
 	 * @param key
 	 *            the id of the item
-	 * @return the item iff the item exists
+	 * @return the item if the item exists
 	 * 
 	 */
 	public T search(K key) {
@@ -57,7 +57,7 @@ public class ListHelper<T extends Matchable<K>, K> implements Serializable {
 	 * 
 	 * @param item
 	 *            the item to be added
-	 * @return true iff the item could be added
+	 * @return true if the item could be added
 	 */
 	public boolean add(T item) {
 		return list.add(item);
@@ -68,7 +68,7 @@ public class ListHelper<T extends Matchable<K>, K> implements Serializable {
 	 * 
 	 * @param item
 	 *            the item to be removed
-	 * @return true iff the item could be removed
+	 * @return true if the item could be removed
 	 */
 	public boolean remove(T item) {
 		return list.remove(item);
@@ -83,6 +83,10 @@ public class ListHelper<T extends Matchable<K>, K> implements Serializable {
 		return list.iterator();
 	}
         
+        /**
+         * 
+         * @return false if searching empty list
+         */
         public boolean isEmptyList() {
             return list.isEmpty();
         }

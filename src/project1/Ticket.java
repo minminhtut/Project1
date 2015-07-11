@@ -31,26 +31,52 @@ public class Ticket implements Matchable<String>, Serializable {
         this.ticketPlay = aPlay;
         this.ticketPrice = setTicketPrice(this.ticketType, this.ticketPlay);
     }
-    
+    /**
+     * 
+     * @param key
+     * @return true if Key matches serial number
+     */
     @Override
     public boolean matches(String key) {
         return serialNumber.equals(key);
     }
-    
+    /**
+     * 
+     * @return serial number for this ticket
+     */
     public String getSerialNumber () {
         return serialNumber;
     }
+    /**
+     * 
+     * @return price of this ticket
+     */
     public int getPrice () {
         return ticketPrice;
     }
     
+    /**
+     * 
+     * @param type 
+     */
     public void setType (int type) {
         ticketType = type;
     }
     
+    /**
+     * 
+     * @return ticket type
+     */
     public int getType () {
         return ticketType;
     }
+    
+    /**
+     * 
+     * @param type
+     * @param aPlay
+     * @return the ticket price depending on ticket type
+     */
     private  int setTicketPrice (int type, Play aPlay) {
             switch (type) {
                 case Theater.REGULARTICKET:

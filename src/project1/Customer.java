@@ -34,12 +34,10 @@ public class Customer implements Serializable, Matchable<String> {
     }
 
     /**
-     * create a customer with a given id, name, address and phone number
+     * 
      * @param newName
      * @param newAddress
-     * @param newPhone
-     * @param newNumber
-     * @param expiration
+     * @param newPhone 
      */
     public Customer(String newName, String newAddress, String newPhone) {
         this.name = newName;
@@ -187,16 +185,20 @@ public class Customer implements Serializable, Matchable<String> {
             aCard.printCard();
         }
     }
-
+    /**
+     * 
+     * @param key
+     * @return true if Key matches id
+     */
     @Override
     public boolean matches(String key) {
         return id.equals(key);
     }
     
     /**
-     * a method to add Transaction
+     * 
      * @param ticket
-     * @return true, the transaction was added
+     * @return return true if transaction was added
      */
     public boolean addTransaction(Ticket ticket) {
 
@@ -209,9 +211,9 @@ public class Customer implements Serializable, Matchable<String> {
     }
     
     /**
-     * Checks whether a card with a given number exists.
+     * 
      * @param serialNumber
-     * @return Transaction if Transaction exists
+     * @return Transaction object if serialNumber matches matches objects serialNumber
      */
     public Transaction searchTransaction(String serialNumber) {
         if (transactions == null) {

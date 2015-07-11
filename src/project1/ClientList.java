@@ -131,10 +131,9 @@ public class ClientList extends ListHelper<Client, String> {
     }
     
     /**
-     * A method to add a play to the client
-     *
+     * 
      * @param ticketDate
-     * @return true if the play is added
+     * @return Play object if ticketDate falls within its date range
      */
     public Play searchTicketDate(int ticketDate) {
         for (Iterator<Client> iterator = super.iterator(); iterator.hasNext();) {

@@ -34,7 +34,7 @@ public interface Matchable<K> {
 	 * 
 	 * @param key
 	 *            the key value
-	 * @return true iff the item's key matches the given key
+	 * @return true if the item's key matches the given key
 	 */
 	public boolean matches(K key);
 }

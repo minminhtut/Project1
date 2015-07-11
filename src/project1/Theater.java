@@ -226,13 +226,13 @@ public class Theater implements Serializable {
     
 
     /**
-     * case 9: add a play/show for a clientList
-     *
+     * 
      * @param id
      * @param name
      * @param start
      * @param end
-     * @return play object if play added
+     * @param price
+     * @return Play object if it was successfully added to clientList
      */
     public Play addPlay(String id, String name, Calendar start, Calendar end, int price) {
         Client aClient = clientList.searchClientID(id);
@@ -265,14 +265,27 @@ public class Theater implements Serializable {
     public Customer searchCustomerID(String customerID) {
         return customerList.searchCustomerID(customerID);
     }
-    
+    /**
+     * 
+     * @param startd
+     * @return int value for ticket date
+     */
     public int ticketDateInt (Calendar startd) {
         int year = startd.get(Calendar.YEAR);
         int month = startd.get(Calendar.MONTH);
         int day = startd.get(Calendar.DATE);
         return (year*10000) + ((month+1)*100) + day;  
     
-    }    
+    }
+    /**
+     * 
+     * @param type
+     * @param currentCustomer
+     * @param creditCard
+     * @param ticketDate
+     * @param studentID
+     * @return ticket object if ticket successfully created
+     */
     public Ticket makeTransaction(int type, Customer currentCustomer, List<Credit> creditCard, Calendar ticketDate, String studentID) {
         
         Play aPlay = clientList.searchTicketDate(ticketDateInt(ticketDate));

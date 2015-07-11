@@ -152,15 +152,19 @@ public class Play implements Serializable {
     	else
     		return true;
     }
-    
-    public void setDateRange (Calendar startd, Calendar endd) {
-        int year = startd.get(Calendar.YEAR);
-        int month = startd.get(Calendar.MONTH);
-        int day = startd.get(Calendar.DATE);
+    /**
+     * 
+     * @param startdate
+     * @param endDate 
+     */
+    public void setDateRange (Calendar startdate, Calendar endDate) {
+        int year = startdate.get(Calendar.YEAR);
+        int month = startdate.get(Calendar.MONTH);
+        int day = startdate.get(Calendar.DATE);
         this.startDate= (year*10000) + ((month+1)*100) + day;  
-        year = endd.get(Calendar.YEAR);
-        month = endd.get(Calendar.MONTH);
-        day = endd.get(Calendar.DATE);
+        year = endDate.get(Calendar.YEAR);
+        month = endDate.get(Calendar.MONTH);
+        day = endDate.get(Calendar.DATE);
         this.endDate = (year*10000) + ((month+1)*100) + day;       
     }
     

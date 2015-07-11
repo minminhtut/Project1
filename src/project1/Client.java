@@ -170,18 +170,18 @@ public class Client implements Serializable, Matchable<String>{
     }
     
     /**
-     * Checks whether a play with a given date range exists
-     *
-     * @param name
-     * @return the card if exist
+     * 
+     * @param startDate
+     * @param endDate
+     * @return false if startDate & endDate conflict with existing play date range
      */
-    public boolean searchPlayDate(int startD, int endD) {
+    public boolean searchPlayDate(int startDate, int endDate) {
         for (Iterator<Play> iterator = playList.iterator(); iterator.hasNext();) {
             Play aPlay = iterator.next();
             
-            if ((startD >= aPlay.getStartDate() && startD <= aPlay.getEndDate()) 
-                    || (endD >= aPlay.getStartDate() && endD <= aPlay.getEndDate())
-                    || (startD <= aPlay.getStartDate() && endD >= aPlay.getEndDate())) {
+            if ((startDate >= aPlay.getStartDate() && startDate <= aPlay.getEndDate()) 
+                    || (endDate >= aPlay.getStartDate() && endDate <= aPlay.getEndDate())
+                    || (startDate <= aPlay.getStartDate() && endDate >= aPlay.getEndDate())) {
                 return false;
             }
         }
@@ -222,7 +222,7 @@ public class Client implements Serializable, Matchable<String>{
     }
 
     /**
-     * print a client
+     * print all clients
      */
     public void printClient() {
         System.out.println("Id: " + getId() + " Name: " + getName() + " Address: " + getAddress() + " Phone: " + getPhone());
@@ -233,7 +233,7 @@ public class Client implements Serializable, Matchable<String>{
 
     }
     /**
-     * print a client
+     * list all plays
      */
     public void ListAllPlays() {
         for (ListIterator<Play> iterator = playList.listIterator(); iterator.hasNext();) {
@@ -255,11 +255,11 @@ public class Client implements Serializable, Matchable<String>{
         }
     	return flag;
     }
+
     /**
-     * a method to add a play to the list
-     *
-     * @param play, Play Object of a play
-     * @return true if the play exist.
+     * 
+     * @param key
+     * @return true if key matches id
      */
     @Override
     public boolean matches(String key) {

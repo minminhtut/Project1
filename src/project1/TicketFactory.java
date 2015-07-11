@@ -53,19 +53,16 @@ public class TicketFactory {
 		return factory;
 	}
 
-	/**
-	 * Creates a LoanableItem object and returns it.
-	 * 
-	 * @param type
-	 *            the type of the item
-	 * @param title
-	 *            the title of the item
-	 * @param author
-	 *            the author of the item (if it is a book)
-	 * @param id
-	 *            the id of the item
-	 * @return the item that was created
-	 */
+    /**
+     * 
+     * @param type
+     * @param customerID
+     * @param creditCard
+     * @param playDate
+     * @param studentID
+     * @param aPlay
+     * @return Ticket object depending on type
+     */    
     public Ticket CreateTicket(int type, String customerID, List<Credit> creditCard, Calendar playDate, String studentID, Play aPlay) {
 
 
