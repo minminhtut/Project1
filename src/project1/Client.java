@@ -170,7 +170,7 @@ public class Client implements Serializable, Matchable<String>{
     }
     
     /**
-     * Checks whether a play with a given name exists.
+     * Checks whether a play with a given date range exists
      *
      * @param name
      * @return the card if exist
@@ -264,5 +264,21 @@ public class Client implements Serializable, Matchable<String>{
     @Override
     public boolean matches(String key) {
         return id.equals(key);
+    }
+    
+    /**
+     * Checks whether a play with a given date range exists
+     *
+     * @param ticketDate
+     * @return Play if the ticket date falls within the Play date range
+     */
+    public Play searchPlayTicket(int ticketDate) {
+        for (Iterator<Play> iterator = playList.iterator(); iterator.hasNext();) {
+            Play aPlay = iterator.next();
+            if (aPlay.getStartDate() <= ticketDate && aPlay.getEndDate() >= ticketDate) {
+                return aPlay;
+            }
+        }
+        return null;
     }
 }

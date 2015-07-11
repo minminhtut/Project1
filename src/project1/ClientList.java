@@ -129,6 +129,25 @@ public class ClientList extends ListHelper<Client, String> {
     public boolean noClients() {
         return super.isEmptyList();
     }
+    
+    /**
+     * A method to add a play to the client
+     *
+     * @param ticketDate
+     * @return true if the play is added
+     */
+    public Play searchTicketDate(int ticketDate) {
+        for (Iterator<Client> iterator = super.iterator(); iterator.hasNext();) {
+            Client aClient = iterator.next();
+            Play result = aClient.searchPlayTicket(ticketDate);
+            if (result != null) {
+                return result;
+            }
+
+        }
+        System.out.println("No Play found for given date."); 
+        return null;
+    }
 
 
 }

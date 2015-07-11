@@ -66,16 +66,16 @@ public class TicketFactory {
 	 *            the id of the item
 	 * @return the item that was created
 	 */
-    public Ticket CreateTicket(int type, String customerID, List<Credit> creditCard, Calendar playDate, String studentID) {
+    public Ticket CreateTicket(int type, String customerID, List<Credit> creditCard, Calendar playDate, String studentID, Play aPlay) {
 
 
             switch (type) {
                 case Theater.REGULARTICKET:
-                    return new RegularTicket(type, customerID, creditCard, playDate);
+                    return new RegularTicket(type, customerID, creditCard, playDate, aPlay);
                 case Theater.ADVANCETICKET:
-                    return new AdvanceTicket(type, customerID, creditCard, playDate);
+                    return new AdvanceTicket(type, customerID, creditCard, playDate, aPlay);
                 case Theater.STUDENTADVANCE:
-                    return new StudentAdvance(type, customerID, creditCard, playDate, studentID);
+                    return new StudentAdvance(type, customerID, creditCard, playDate, aPlay, studentID);
                 default:
                     return null;
             }

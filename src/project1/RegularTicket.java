@@ -17,9 +17,11 @@ public class RegularTicket extends Ticket implements Serializable,
 		Matchable<String> {
     private static final String MEMBER_STRING = "R";
 
-    RegularTicket(int type, String customerID, List<Credit> creditCard, Calendar playDate) {
-        super(type, MEMBER_STRING, customerID, creditCard, playDate);
+    RegularTicket(int type, String customerID, List<Credit> creditCard, Calendar playDate, Play aPlay) {
+        super(type, MEMBER_STRING, customerID, creditCard, playDate, aPlay);
     }
     
-    
+    public static int ticketPrice (Play aPlay) {
+        return aPlay.getTicketPrice();
+    }
 }

@@ -370,8 +370,6 @@ public class UserInterface {
 			System.out.println("End Date: " + newPlay.getEndDate());
                         System.out.println("Play Cost:" + newPlay.getTicketPrice());
 		}
-
-
 	}
         
 
@@ -401,12 +399,11 @@ public class UserInterface {
                 int quanity = Integer.parseInt(getToken("Enter quanity"));
                 Calendar playDate = getDate("Enter the play date mm/dd/yy");
                 
-                for (int i = 0; i < quanity+2; i++) {
+                for (int i = 0; i < quanity; i++) {
                 String studentID = "";
                 if (type == Theater.STUDENTADVANCE) {
                     studentID = getToken("Enter valid student id");
                 }
-                
                 
                 result = theater.makeTransaction(type, currentCustomer, currentCustomer.getCards(), playDate, studentID);
                 if (result == null) {
@@ -414,6 +411,7 @@ public class UserInterface {
                 } else {
                     System.out.println("Ticket was successfully added");
                     System.out.println("Serial Number: " + result.getSerialNumber ()+ "\n");
+                    System.out.println("Ticket Price: $" + result.getPrice ()+ "\n");
                 }
                 }
                 if (!yesOrNo("Add more tickets?")) {

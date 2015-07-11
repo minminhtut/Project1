@@ -266,9 +266,22 @@ public class Theater implements Serializable {
         return customerList.searchCustomerID(customerID);
     }
     
-    public Ticket makeTransaction(int type, Customer currentCustomer, List<Credit> creditCard, Calendar playDate, String studentID) {
+    public int ticketDateInt (Calendar startd) {
+        int year = startd.get(Calendar.YEAR);
+        int month = startd.get(Calendar.MONTH);
+        int day = startd.get(Calendar.DATE);
+        return (year*10000) + ((month+1)*100) + day;  
+    
+    }    
+    public Ticket makeTransaction(int type, Customer currentCustomer, List<Credit> creditCard, Calendar ticketDate, String studentID) {
+        
+        Play aPlay = clientList.searchTicketDate(ticketDateInt(ticketDate));
+        
+        if (aPlay == null) {
+            return null;
+        }
         Ticket ticket = TicketFactory.instance().CreateTicket(
-                type, currentCustomer.getId(), creditCard, playDate, studentID);
+                type, currentCustomer.getId(), creditCard, ticketDate, studentID, aPlay);
         if (currentCustomer.addTransaction(ticket)) {
             return (ticket);
         }
