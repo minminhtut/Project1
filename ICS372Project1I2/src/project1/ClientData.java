@@ -242,10 +242,12 @@ public class ClientData extends Play implements Serializable {
      * @param pay
      */
     public void updateBalance(double pay) {
+    	totalSale = pay + totalSale;
     	double updatePay = pay;
+    	
     	for(Play p : playList) {
  
-    		
+    		updatePay = p.updatePlayBalance(updatePay);
     	}
     }
     

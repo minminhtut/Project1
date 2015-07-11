@@ -178,6 +178,17 @@ public class Play implements Serializable {
 		totalSale = clientIncome + totalSale;
 		tickets.add(ticket);
 	}
+	
+	public double updatePlayBalance(double payment) {
+		if(payment >= totalSale) {
+			totalSale = 0.0;
+			return payment - totalSale;
+		}
+		else {
+			totalSale = totalSale - payment;
+			return 0.0;
+		}
+	}
 
 	/**
      * a method to print a play
