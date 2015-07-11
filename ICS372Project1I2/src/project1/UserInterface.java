@@ -497,7 +497,7 @@ public class UserInterface {
 				System.out.println("Amount due is: " + amountDue);
 			}
 			else {
-				System.out.println("A payment of " + pay + "is processed.");
+				System.out.println("A payment of " + pay + " is processed.");
 				boolean flag = theater.updateBalance(id, pay);
 				
 				if(flag != false) {

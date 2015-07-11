@@ -229,7 +229,7 @@ public class ClientData extends Play implements Serializable {
      */
     public void printClient() {
         System.out.println("Id: " + getId() + " Name: " + getName() + " Address: " + getAddress() +
-        				   " Phone: " + getPhone() + " Current Balance: " + totalSale);
+        				   " Phone: " + getPhone() + " Paid Balance: " + totalSale);
         for (ListIterator<Play> iterator = playList.listIterator(); iterator.hasNext();) {
             Play aPlay = iterator.next();
             aPlay.printPlay();
@@ -241,13 +241,19 @@ public class ClientData extends Play implements Serializable {
      * a method to update client's balance
      * @param pay
      */
-    public void updateBalance(double pay) {
-    	totalSale = pay + totalSale;
-    	double updatePay = pay;
-    	
+    public void updateBalance(double payment) {
+    	totalSale = payment + totalSale;
+    	double change = payment;
     	for(Play p : playList) {
- 
-    		updatePay = p.updatePlayBalance(updatePay);
+    		if(p.getTotalSale() != 0) {
+    			if(payment >= p.getTotalSale()) {
+    				change = payment - p.getTotalSale();
+    				p.setTotalSale(0.0);
+    			}
+    			else {
+    				p.setTotalSale(p.getTotalSale() - change);
+    			}
+    		}
     	}
     }
     
