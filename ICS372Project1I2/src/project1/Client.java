@@ -226,6 +226,31 @@ public class Client extends ClientData implements Serializable {
     }
     
     /**
+     * a method to list all shows for the specific day
+     */
+    public void ListPlaysForDay(Calendar date) {
+        for (Iterator<ClientData> iterator = clientList.iterator(); iterator.hasNext();) {
+            ClientData cliendata = iterator.next();
+            cliendata.ListPlayForDay(date);
+        }
+
+    }
+    
+    /**
+     * a method to update client's balance
+     * @param theClient
+     * @param pay
+     */
+    public void updateBalance(ClientData theClient, double pay) {
+    	for (Iterator<ClientData> iterator = clientList.iterator(); iterator.hasNext();) {
+            ClientData aClient = iterator.next();
+            if (aClient.getId().matches(theClient.getId())) {
+            	aClient.updateBalance(pay);
+            }
+    	}
+    }
+    
+    /**
      * a method to check is client list is empty
      *  @return true if no clients
      */

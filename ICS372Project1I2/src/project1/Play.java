@@ -151,13 +151,31 @@ public class Play implements Serializable {
     public void setPrice(double newPrice) {
     	price = newPrice;
     }
-
+    
+    /**
+     * a method to get a totalsale
+     * @param newPrice
+     */
+    public double getTotalSale() {
+    	return totalSale;
+    }
+    
+    /**
+     * a method to set a totalsale
+     * @param pay
+     */
+    public void setTotalSale(double pay) {
+    	totalSale = pay;
+    }
+    
     /**
      * a setter method for a single ticket
      * @param tickets
      */
 	public void setTickets(Ticket ticket) {
-		totalSale = ticket.getPrice() + totalSale;
+		
+		double clientIncome = ticket.getPrice() / 2;
+		totalSale = clientIncome + totalSale;
 		tickets.add(ticket);
 	}
 

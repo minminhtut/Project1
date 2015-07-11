@@ -72,7 +72,7 @@ public class Ticket implements Serializable {
 	 * a method to print the ticket
 	 */
 	public void printTicket() {
-		System.out.println("ID: " + id + " Date: " + getDate() + " Credit Card: " + creditCard);
+		System.out.println("ID: " + id + " Date: " + getDate() + " Credit Card: " + creditCard + " Purchased Price: " + getPrice());
 		if(type == ADVANCE_STUDENT)
 			System.out.println(extraMessage);
 	}

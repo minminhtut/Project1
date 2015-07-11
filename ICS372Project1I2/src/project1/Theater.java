@@ -12,6 +12,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.List;
 
 public class Theater implements Serializable {
 
@@ -344,7 +345,7 @@ public class Theater implements Serializable {
     }
     
     /**
-     * a method to sell an advance ticket
+     * a method to sell an advance ticket for students
      */
     public boolean sellStudentAdvance(int ticket, String id, long number, Calendar date) {
     	CustomerData aCustomer = customer.searchCustomerID(id);
@@ -376,5 +377,47 @@ public class Theater implements Serializable {
     		
     		return false;
     	}
+    }
+    
+    /**
+     * a method to print tickets for a certain date
+     * @param date
+     */
+    public void printTicketForDay(Calendar date) {
+    	client.ListPlaysForDay(date);
+    }
+    
+    /**
+     * a method to check the client's balance
+     * @param id
+     */
+    public double getBalanceClient(String id) {
+    	ClientData aClient = client.searchClientID(id);
+    	if(aClient != null) {
+    		double dueBalance = 0.0;
+    		List<Play> playList = aClient.getPlays();
+    		for(Play p : playList) {
+    			dueBalance = p.getTotalSale() + dueBalance;
+    		}
+    		return dueBalance;
+    	}
+    	else {
+    		return -1.0;
+    	}
+    }
+    
+    /**
+     * a method to pay the client
+     * @param aClient
+     * @param pay
+     */
+    public boolean updateBalance(String id, double pay) {
+    	ClientData aClient = client.searchClientID(id);
+    	if(aClient != null) {
+    		client.updateBalance(aClient, pay);
+    		return true;
+    	}
+    	else
+    		return false;
     }
 }

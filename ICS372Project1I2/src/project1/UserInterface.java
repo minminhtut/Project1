@@ -52,8 +52,9 @@ public class UserInterface {
 	private static final int SELL_REGULAR = 13;
 	private static final int SELL_ADVANCE = 14;
 	private static final int STUDENT_ADVANCE = 15;
-	private static final int PAY_CLIENT = 16;
-	private static final int HELP = 17;
+	private static final int PRINT_TICKET = 16;
+	private static final int PAY_CLIENT = 17;
+	private static final int HELP = 18;
 	
 	private UserInterface() {
 		if (yesOrNo("Look for saved data and  use it?")) {
@@ -116,11 +117,10 @@ public class UserInterface {
 		System.out.println(SELL_REGULAR + " to sell Regular tickets");
 		System.out.println(SELL_ADVANCE + " to sell Advance tickets");
 		System.out.println(STUDENT_ADVANCE + " to sell Advance tickets for students");
+		System.out.println(PRINT_TICKET + " to List all ticket for a certain day");
 		System.out.println(PAY_CLIENT + " to pay the Clients");
 		System.out.println(HELP + " for help");
 	}
-
-
 
 	/**
 	 * Gets a token after prompting
@@ -425,6 +425,9 @@ public class UserInterface {
 
 	}
 	
+	/**
+	 * sell regular tickets
+	 */
 	public void sellRegular() {
 		boolean flag = false;
 		int ticket = getNumber("Enter the number of ticket: ");
@@ -438,6 +441,9 @@ public class UserInterface {
 			System.out.println("Purchase unseccessful.");
 	}
 	
+	/**
+	 * sell advance tickets
+	 */
 	public void sellAdvance() {
 		boolean flag = false;
 		int ticket = getNumber("Enter the number of ticket: ");
@@ -451,6 +457,9 @@ public class UserInterface {
 			System.out.println("Purchase unseccessful.");
 	}
 	
+	/**
+	 * sell student tickets
+	 */
 	public void studentAdvance() {
 		boolean flag = false;
 		int ticket = getNumber("Enter the number of ticket: ");
@@ -465,6 +474,45 @@ public class UserInterface {
 		
 	}
 	
+	/**
+	 * print tickets for a certain day
+	 */
+	public void printTicketForDay() {
+		Calendar date = getDate("Enter the starting date mm/dd/yy");
+		theater.printTicketForDay(date);
+	}
+	/**
+	 * pay the client
+	 */
+	public void payClient() {
+		String id = getToken("Enter the ID number of the Client");
+		double amountDue = theater.getBalanceClient(id);
+		if(amountDue < 0) {
+			System.out.println("Invalid Client.");
+		}
+		else {
+			System.out.println("Amount due is: " + amountDue);
+			double pay = getPrice("Enter the amount to be paid.");
+			if(pay > amountDue) {
+				System.out.println("Amount due is: " + amountDue);
+			}
+			else {
+				System.out.println("A payment of " + pay + "is processed.");
+				boolean flag = theater.updateBalance(id, pay);
+				
+				if(flag != false) {
+					System.out.println("Balance is updated.");
+				}
+				else {
+					System.out.println("The process was unsuccessful.");
+				}
+			}
+		}
+	}
+	
+	/**
+	 * a method to handle inputs
+	 */
 	public void process() {
 		int command;
 		help();
@@ -517,6 +565,12 @@ public class UserInterface {
 				break;
 			case STUDENT_ADVANCE:
 				studentAdvance();
+				break;
+			case PRINT_TICKET:
+				printTicketForDay();
+				break;
+			case PAY_CLIENT:
+				payClient();
 				break;
 			case HELP:
 				help();

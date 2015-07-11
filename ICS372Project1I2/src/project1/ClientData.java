@@ -236,6 +236,19 @@ public class ClientData extends Play implements Serializable {
         }
 
     }
+    
+    /**
+     * a method to update client's balance
+     * @param pay
+     */
+    public void updateBalance(double pay) {
+    	double updatePay = pay;
+    	for(Play p : playList) {
+ 
+    		
+    	}
+    }
+    
     /**
      * print a client
      */
@@ -243,6 +256,18 @@ public class ClientData extends Play implements Serializable {
         for (ListIterator<Play> iterator = playList.listIterator(); iterator.hasNext();) {
             Play aPlay = iterator.next();
             aPlay.printPlay();
+        }
+    }
+    
+    /**
+     * print a play for specific day
+     */
+    public void ListPlayForDay(Calendar date) {
+        for (ListIterator<Play> iterator = playList.listIterator(); iterator.hasNext();) {
+            Play aPlay = iterator.next();
+            if (aPlay.getStart().getTimeInMillis() == date.getTimeInMillis()) {
+            	aPlay.printPlay();
+            }
         }
     }
     
