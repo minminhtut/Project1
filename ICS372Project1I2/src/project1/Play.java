@@ -184,7 +184,7 @@ public class Play implements Serializable {
      */
     public void printPlay() {
         System.out.println("Name: " + getName() + " Start: " + getStartString() + " End: " + 
-        					getEndString() + " Price: " + getPrice() + " Current Balance: " + totalSale);
+        					getEndString() + " Price: " + getPrice() + " Total Sales: " + totalSale);
         
         for (ListIterator<Ticket> iterator = tickets.listIterator(); iterator.hasNext();) {
         	Ticket aTicket = iterator.next();
