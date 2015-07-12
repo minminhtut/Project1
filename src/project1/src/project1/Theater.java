@@ -234,7 +234,7 @@ public class Theater implements Serializable {
      * @param price
      * @return Play object if it was successfully added to clientList
      */
-    public Play addPlay(String id, String name, Calendar start, Calendar end, int price) {
+    public Play addPlay(String id, String name, Calendar start, Calendar end, long price) {
         Client aClient = clientList.searchClientID(id);
         Play aPlay = new Play(name, start, end, price);
         boolean playAdded = clientList.addPlay(aClient, aPlay);

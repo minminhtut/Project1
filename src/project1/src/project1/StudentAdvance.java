@@ -36,7 +36,7 @@ public class StudentAdvance extends Ticket implements Serializable,
      * @return ticket price for Student Advance ticket
      */
     public static int ticketPrice (Play aPlay) {
-        return (int) (aPlay.getTicketPrice() * 0.7);
+        return (int) (aPlay.getTicketPrice() * 0.5);
     }
     
     

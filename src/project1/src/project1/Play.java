@@ -21,7 +21,7 @@ public class Play implements Serializable {
     private Calendar end;
     private int startDate;
     private int endDate;
-    private int ticketPrice;
+    private long ticketPrice;
     
     public Play() {
     	
@@ -34,7 +34,7 @@ public class Play implements Serializable {
      * @param newStart
      * @param newEnd
      */
-    public Play(String newName, Calendar newStart, Calendar newEnd, int price) {
+    public Play(String newName, Calendar newStart, Calendar newEnd, long price) {
         this.name = newName;
         this.start = newStart;
         this.end = newEnd;
@@ -137,7 +137,7 @@ public class Play implements Serializable {
      *
      * @return endDate
      */
-    public int getTicketPrice() {
+    public long getTicketPrice() {
         return ticketPrice;
     }
     
@@ -172,6 +172,8 @@ public class Play implements Serializable {
      * a method to print a play
      */
     public void printPlay() {
-        System.out.println("Name: " + getName() + " Start: " + getStartString() + " End: " + getEndString());
+        System.out.println("Name: " + getName() + " Start: " + getStartString() 
+        		+ " End: " + getEndString() + " Startdate: " + startDate + " End Date: " + endDate
+        		+ " TicketPrice: " + ticketPrice);
     }
 }

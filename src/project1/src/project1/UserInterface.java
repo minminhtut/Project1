@@ -48,7 +48,6 @@ public class UserInterface {
 	private static final int LIST_ALL_CUSTOMERS = 8;
 	private static final int ADD_PLAY = 9;
 	private static final int LIST_ALL_PLAY = 10;
-	//private static final int GET_TRANSACTION = 11;
 	private static final int STORE_DATA = 11;
 	private static final int RETRIEVE_DATA = 12;
 	private static final int SELL_REGULAR_TICKETS = 13;
@@ -390,7 +389,7 @@ public class UserInterface {
 		String name = getToken("Enter the name of the show");
 		Calendar start = getDate("Enter the starting date mm/dd/yy");
 		Calendar end = getDate("Enter the endinging date mm/dd/yy");
-		int price = getNumber("ENter the cost of the ticket price");
+		long price = getNumber("ENter the cost of the ticket price");
 		Play newPlay = theater.addPlay(id, name, start, end, price);
 		if(newPlay == null) {
 			System.out.println("Could not add the play");
@@ -533,12 +532,13 @@ public class UserInterface {
 				retrieve();
 				break;
 			case SELL_REGULAR_TICKETS:
+				sellStudent();
 				break;
 			case SELL_ADVANCE_TICKETS:
-
+				sellAdvance();
 				break;
 			case SELL_STUDENT_TICKETS:
-
+				sellStudent();
 				break;
 			case PAY_CLIENT:
 

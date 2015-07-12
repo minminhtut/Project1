@@ -33,7 +33,7 @@ public class RegularTicket extends Ticket implements Serializable,
      * @param aPlay
      * @return the ticket price for a regular ticket
      */
-    public static int ticketPrice (Play aPlay) {
+    public static long ticketPrice (Play aPlay) {
         return aPlay.getTicketPrice();
     }
 }
