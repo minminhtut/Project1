@@ -22,7 +22,6 @@ public class Ticket implements Serializable {
 	private long creditCard;
 	private String extraMessage;
 	private double price;
-	private boolean paid = false;
 	
 	public Ticket() {
 	}

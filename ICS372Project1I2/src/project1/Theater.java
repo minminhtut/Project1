@@ -29,7 +29,7 @@ public class Theater implements Serializable {
 	private static int REGULAR_TICKET = 1;
 	private static int ADVANCE_TICKET = 2;
 	private static int ADVANCE_STUDENT = 3;
-
+	
     private Theater() {
         client = Client.instance();
         customer = Customer.instance();

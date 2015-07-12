@@ -432,7 +432,7 @@ public class UserInterface {
 		boolean flag = false;
 		int ticket = getNumber("Enter the number of ticket: ");
 		String id = getToken("Enter the ID number of the Customer");
-		long number = getLong("Enter the Credit Card Number");
+		long number = getLong("Enter the Credit Card Number\nThe number must match the card on file.");
 		Calendar date = getDate("Enter the starting date mm/dd/yy");
 		flag = theater.sellRegular(ticket, id, number, date);
 		if(flag == true)
@@ -448,7 +448,7 @@ public class UserInterface {
 		boolean flag = false;
 		int ticket = getNumber("Enter the number of ticket: ");
 		String id = getToken("Enter the ID number of the Customer");
-		long number = getLong("Enter the Credit Card Number");
+		long number = getLong("Enter the Credit Card Number\nThe number must match the card on file.");
 		Calendar date = getDate("Enter the starting date mm/dd/yy");
 		flag = theater.sellAdvance(ticket, id, number, date);
 		if(flag == true)
@@ -464,7 +464,7 @@ public class UserInterface {
 		boolean flag = false;
 		int ticket = getNumber("Enter the number of ticket: ");
 		String id = getToken("Enter the ID number of the Customer");
-		long number = getLong("Enter the Credit Card Number");
+		long number = getLong("Enter the Credit Card Number\nThe number must match the card on file.");
 		Calendar date = getDate("Enter the starting date mm/dd/yy");
 		flag = theater.sellStudentAdvance(ticket, id, number, date);
 		if(flag == true)
