@@ -36,4 +36,9 @@ public class RegularTicket extends Ticket implements Serializable,
     public static long ticketPrice (Play aPlay) {
         return aPlay.getTicketPrice();
     }
+    
+    public void print(){
+    	
+    }
+    
 }

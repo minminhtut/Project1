@@ -236,7 +236,7 @@ public class Theater implements Serializable {
      */
     public Play addPlay(String id, String name, Calendar start, Calendar end, long price) {
         Client aClient = clientList.searchClientID(id);
-        Play aPlay = new Play(name, start, end, price);
+        Play aPlay = new Play(name, start, end, price, id);
         boolean playAdded = clientList.addPlay(aClient, aPlay);
         if (playAdded == true) {
             return aPlay;
@@ -287,7 +287,7 @@ public class Theater implements Serializable {
      * @return ticket object if ticket successfully created
      */
     public Ticket makeTransaction(int type, Customer currentCustomer, List<Credit> creditCard, Calendar ticketDate, String studentID) {
-        
+        Client client;
         Play aPlay = clientList.searchTicketDate(ticketDateInt(ticketDate));
         
         if (aPlay == null) {
@@ -296,6 +296,7 @@ public class Theater implements Serializable {
         Ticket ticket = TicketFactory.instance().CreateTicket(
                 type, currentCustomer.getId(), creditCard, ticketDate, studentID, aPlay);
         if (currentCustomer.addTransaction(ticket)) {
+        	clientList.searchClientID(aPlay.getClientID()).addBalance(ticket.getPrice()/2);
             return (ticket);
         }
         return null;

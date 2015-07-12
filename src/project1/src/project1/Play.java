@@ -22,6 +22,7 @@ public class Play implements Serializable {
     private int startDate;
     private int endDate;
     private long ticketPrice;
+    private String clientID;
     
     public Play() {
     	
@@ -34,12 +35,13 @@ public class Play implements Serializable {
      * @param newStart
      * @param newEnd
      */
-    public Play(String newName, Calendar newStart, Calendar newEnd, long price) {
+    public Play(String newName, Calendar newStart, Calendar newEnd, long price, String id) {
         this.name = newName;
         this.start = newStart;
         this.end = newEnd;
         this.ticketPrice = price;
         setDateRange (this.start, this.end);
+        this.clientID = id;
     }
 
     /**
@@ -175,5 +177,9 @@ public class Play implements Serializable {
         System.out.println("Name: " + getName() + " Start: " + getStartString() 
         		+ " End: " + getEndString() + " Startdate: " + startDate + " End Date: " + endDate
         		+ " TicketPrice: " + ticketPrice);
+    }
+    
+    public String getClientID(){
+    	return clientID;
     }
 }

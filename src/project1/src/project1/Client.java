@@ -281,4 +281,13 @@ public class Client implements Serializable, Matchable<String>{
         }
         return null;
     }
+    
+    public void addBalance(long amount){
+    	balance += amount;
+    }
+    public long payClient(){
+    	long tempBalance = balance;
+    	balance=0;
+    	return tempBalance;
+    }
 }

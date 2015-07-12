@@ -86,11 +86,27 @@ public class Ticket implements Matchable<String>, Serializable {
                 case Theater.STUDENTADVANCE:
                     return StudentAdvance.ticketPrice(aPlay);   
                 default:
-                    return RegularTicket.ticketPrice(aPlay);
-                    
-                    
-                    
+                    return RegularTicket.ticketPrice(aPlay);    
             }
     }
+	@Override
+	public String toString() {
+		String typeString = "";
+		if(ticketType==1){
+			typeString= "Regular";
+		}
+		if(ticketType==2){
+			typeString= "Advance";
+		}
+		if(ticketType==3){
+			typeString= "Student Advance";
+		}
+		return "Ticket Customer ID= " + customerID + ", Serial Number="
+				+ serialNumber + ", Credit Card Number= " + creditCard + ", dateOfPlay= "
+				+ dateOfPlay + ", Ticket Type= " + typeString + 
+				", Ticket Play= " + ticketPlay + ", Ticket Price= " + ticketPrice;
+	}
+    
+    
     
 }
