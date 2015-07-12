@@ -6,6 +6,7 @@ package project1;
  */
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 
@@ -21,7 +22,7 @@ public class Play implements Serializable {
     private Calendar end;
     private int startDate;
     private int endDate;
-    private int ticketPrice;
+    private BigDecimal ticketPrice;
     
     public Play() {
     	
@@ -34,7 +35,7 @@ public class Play implements Serializable {
      * @param newStart
      * @param newEnd
      */
-    public Play(String newName, Calendar newStart, Calendar newEnd, int price) {
+    public Play(String newName, Calendar newStart, Calendar newEnd, BigDecimal price) {
         this.name = newName;
         this.start = newStart;
         this.end = newEnd;
@@ -133,11 +134,10 @@ public class Play implements Serializable {
         return this.startDate;
     }
     /**
-     * a getter method to get the ending date int
-     *
-     * @return endDate
+     * 
+     * @return ticket price
      */
-    public int getTicketPrice() {
+    public BigDecimal getTicketPrice() {
         return ticketPrice;
     }
     

@@ -2,6 +2,8 @@
 package project1;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Calendar;
 import java.util.List;
 
@@ -28,9 +30,10 @@ public class AdvanceTicket extends Ticket implements Serializable,
     /**
      *
      * @param aPlay
-     * @return ticket Price for aPlay argument
+     * @return ticket Price for play
      */
-    public static int ticketPrice (Play aPlay) {
-        return (int) (aPlay.getTicketPrice() * 0.7);
+    public static BigDecimal ticketPrice (Play aPlay) {
+        BigDecimal price = aPlay.getTicketPrice().multiply(new BigDecimal(0.7));
+        return price.setScale(2, RoundingMode.HALF_UP);
     }
 }

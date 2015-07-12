@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 
@@ -234,8 +235,12 @@ public class Theater implements Serializable {
      * @param price
      * @return Play object if it was successfully added to clientList
      */
-    public Play addPlay(String id, String name, Calendar start, Calendar end, int price) {
+    public Play addPlay(String id, String name, Calendar start, Calendar end, BigDecimal price) {
         Client aClient = clientList.searchClientID(id);
+        if (aClient == null) {
+            System.out.println("Could not find client ID");
+            return null;
+        }
         Play aPlay = new Play(name, start, end, price);
         boolean playAdded = clientList.addPlay(aClient, aPlay);
         if (playAdded == true) {

@@ -24,6 +24,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -160,24 +161,25 @@ public class UserInterface {
 		} while (true);
 	}
         
-//	/**
-//	 * Converts the string to a number
-//	 * @param prompt the string for prompting
-//	 * @return the integer corresponding to the string
-//	 * 
-//	 */
-//	public int getMoney(String prompt) {
-//		do {
-//			try {
-//				String item = getToken(prompt);
-//				//BigDecimal number = Integer.valueOf(item);
-//				return number.intValue();
-//			}
-//			catch (NumberFormatException nfe) {
-//				System.out.println("Please input a number.");
-//			}
-//		} while (true);
-//	}
+	/**
+	 * Converts the string to BigDecimal value
+	 * @param prompt the string for prompting
+	 * @return the BigDecimal value corresponding to the string
+	 * 
+	 */
+	public BigDecimal getMoney(String prompt) {
+		do {
+			try {
+				String item = getToken(prompt);
+				BigDecimal number = new BigDecimal(item);
+				return number.setScale(2, RoundingMode.HALF_UP);
+                                       
+			}
+			catch (NumberFormatException nfe) {
+				System.out.println("Please input a valid dollar amount.");
+			}
+		} while (true);
+	}
 
 	/**
 	 * Converts the string to a number
@@ -380,7 +382,7 @@ public class UserInterface {
 		String name = getToken("Enter the name of the show");
 		Calendar start = getDate("Enter the starting date mm/dd/yy");
 		Calendar end = getDate("Enter the endinging date mm/dd/yy");
-                int price = getNumber("ENter the cost of the ticket price");
+                BigDecimal price = getMoney("ENter the cost of the ticket price");
 		Play newPlay = theater.addPlay(id, name, start, end, price);
 		if(newPlay == null) {
 			System.out.println("Could not add the play");
@@ -466,9 +468,6 @@ public class UserInterface {
 
 	}
         
-        public void testData () {
-        
-        }
 	
 	public void process() {
 		int command;

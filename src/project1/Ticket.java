@@ -6,6 +6,7 @@
 package project1;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class Ticket implements Matchable<String>, Serializable {
     private Calendar dateOfPlay;
     private int ticketType;
     protected Play ticketPlay;
-    private int ticketPrice;
+    private BigDecimal ticketPrice;
             
     public Ticket (int type, String ID, String serial, List<Credit> credit, Calendar calandar, Play aPlay) {
         this.customerID = ID;
@@ -51,7 +52,7 @@ public class Ticket implements Matchable<String>, Serializable {
      * 
      * @return price of this ticket
      */
-    public int getPrice () {
+    public BigDecimal getPrice () {
         return ticketPrice;
     }
     
@@ -77,7 +78,7 @@ public class Ticket implements Matchable<String>, Serializable {
      * @param aPlay
      * @return the ticket price depending on ticket type
      */
-    private  int setTicketPrice (int type, Play aPlay) {
+    private  BigDecimal setTicketPrice (int type, Play aPlay) {
             switch (type) {
                 case Theater.REGULARTICKET:
                     return  RegularTicket.ticketPrice(aPlay);

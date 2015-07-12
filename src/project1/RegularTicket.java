@@ -6,6 +6,7 @@
 package project1;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class RegularTicket extends Ticket implements Serializable,
      * @param aPlay
      * @return the ticket price for a regular ticket
      */
-    public static int ticketPrice (Play aPlay) {
+    public static BigDecimal ticketPrice (Play aPlay) {
         return aPlay.getTicketPrice();
     }
 }
