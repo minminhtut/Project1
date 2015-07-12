@@ -20,7 +20,6 @@ public class Theater implements Serializable {
     private static Theater theater;
     private ClientList clientList;
     private CustomerList customerList;
-    Calendar calandar;
 
     public static final int REGULARTICKET = 1;
     public static final int ADVANCETICKET = 2;
@@ -271,27 +270,12 @@ public class Theater implements Serializable {
      * @param startd
      * @return int value for ticket date
      */
-    public int ticketDateInt (Calendar date) {
-        int year = date.get(Calendar.YEAR);
-        int month = date.get(Calendar.MONTH);
-        int day = date.get(Calendar.DATE);
+    public int ticketDateInt (Calendar startd) {
+        int year = startd.get(Calendar.YEAR);
+        int month = startd.get(Calendar.MONTH);
+        int day = startd.get(Calendar.DATE);
         return (year*10000) + ((month+1)*100) + day;  
     
-    }
-    
-    /**
-     * 
-     * @param type
-     * @param date
-     * @return true if the correct days in advance to purchase ticket
-     */
-    public boolean onDate(int type, Calendar date) {
-            this.calandar = Calendar.getInstance();
-            if (type == Theater.REGULARTICKET) {
-                return (ticketDateInt(date) <= ticketDateInt (calandar));
-            } else {
-                return (ticketDateInt(date) > ticketDateInt (calandar));
-            }
     }
     /**
      * 
@@ -304,11 +288,6 @@ public class Theater implements Serializable {
      */
     public Ticket makeTransaction(int type, Customer currentCustomer, List<Credit> creditCard, Calendar ticketDate, String studentID) {
         
-        boolean rightAdvance = onDate(type, ticketDate);
-        if (!rightAdvance) {
-            System.out.println("Invalid days in advance");
-            return null;
-        }
         Play aPlay = clientList.searchTicketDate(ticketDateInt(ticketDate));
         
         if (aPlay == null) {
