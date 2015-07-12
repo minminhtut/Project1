@@ -48,10 +48,15 @@ public class UserInterface {
 	private static final int LIST_ALL_CUSTOMERS = 8;
 	private static final int ADD_PLAY = 9;
 	private static final int LIST_ALL_PLAY = 10;
-        private static final int GET_TRANSACTION = 11;
-	private static final int STORE_DATA = 13;
-	private static final int RETRIEVE_DATA = 14;
-	private static final int HELP = 15;
+	//private static final int GET_TRANSACTION = 11;
+	private static final int STORE_DATA = 11;
+	private static final int RETRIEVE_DATA = 12;
+	private static final int SELL_REGULAR_TICKETS = 13;
+	private static final int SELL_ADVANCE_TICKETS = 14;
+	private static final int SELL_STUDENT_TICKETS = 15;
+	private static final int PAY_CLIENT = 16;
+	private static final int PRINT_ALL_TICKETS = 17;
+	private static final int HELP = 18;
 
 	private UserInterface() {
 		if (yesOrNo("Look for saved data and  use it?")) {
@@ -61,7 +66,7 @@ public class UserInterface {
 			theater = Theater.instance();
 		}
 	}
-	
+
 	/**
 	 * Supports the singleton pattern
 	 * @return the singleton object
@@ -74,7 +79,7 @@ public class UserInterface {
 			return userInterface;
 		}
 	}
-	
+
 	/**
 	 * Prompts for a command from the keyboard
 	 * @return a valid command
@@ -108,10 +113,15 @@ public class UserInterface {
 		System.out.println(REMOVE_CREDIT_CARD + " to Remove Credit Card");
 		System.out.println(LIST_ALL_CUSTOMERS + " to List all Customers");
 		System.out.println(ADD_PLAY + " to Add Play");
-                System.out.println(LIST_ALL_PLAY + " to List all Plays");
-		System.out.println(GET_TRANSACTION + " to start/access a transaction");
+		System.out.println(LIST_ALL_PLAY + " to List all Plays");
+		//System.out.println(GET_TRANSACTION + " to start/access a transaction");
 		System.out.println(STORE_DATA + " to Store the Data");
 		System.out.println(RETRIEVE_DATA + " to Retrieve Stored Data");
+		System.out.println(SELL_REGULAR_TICKETS + " to Sell Regular Tickets");
+		System.out.println(SELL_ADVANCE_TICKETS + " to Sell Advance Tickets");
+		System.out.println(SELL_STUDENT_TICKETS + " to Sell Student Advance Tickets");
+		System.out.println(PAY_CLIENT + " to Pay a client");
+		System.out.println(PRINT_ALL_TICKETS + " to Print all Tickets");
 		System.out.println(HELP + " for help");
 	}
 
@@ -138,7 +148,7 @@ public class UserInterface {
 			}
 		} while (true);
 	}
-        
+
 
 
 	/**
@@ -159,25 +169,25 @@ public class UserInterface {
 			}
 		} while (true);
 	}
-        
-//	/**
-//	 * Converts the string to a number
-//	 * @param prompt the string for prompting
-//	 * @return the integer corresponding to the string
-//	 * 
-//	 */
-//	public int getMoney(String prompt) {
-//		do {
-//			try {
-//				String item = getToken(prompt);
-//				//BigDecimal number = Integer.valueOf(item);
-//				return number.intValue();
-//			}
-//			catch (NumberFormatException nfe) {
-//				System.out.println("Please input a number.");
-//			}
-//		} while (true);
-//	}
+
+	//	/**
+	//	 * Converts the string to a number
+	//	 * @param prompt the string for prompting
+	//	 * @return the integer corresponding to the string
+	//	 * 
+	//	 */
+	//	public int getMoney(String prompt) {
+	//		do {
+	//			try {
+	//				String item = getToken(prompt);
+	//				//BigDecimal number = Integer.valueOf(item);
+	//				return number.intValue();
+	//			}
+	//			catch (NumberFormatException nfe) {
+	//				System.out.println("Please input a number.");
+	//			}
+	//		} while (true);
+	//	}
 
 	/**
 	 * Converts the string to a number
@@ -250,7 +260,7 @@ public class UserInterface {
 		} catch (Exception cnfe) {
 			cnfe.printStackTrace();
 		}
-		
+
 	}
 
 	/**
@@ -300,7 +310,7 @@ public class UserInterface {
 		String name = getToken("Enter the name");
 		String address = getToken("Enter the address");
 		String phone = getToken("Enter the phone number");
-                
+
 		Customer newCustomer = theater.addCustomer(name, address, phone);
 		if (newCustomer == null) {
 			System.out.println("Could not add the customer");
@@ -312,7 +322,7 @@ public class UserInterface {
 			System.out.println("Address: " + newCustomer.getAddress());
 			System.out.println("Phone: " + newCustomer.getPhone() + "\n");
 		}
-                addCreditCard();
+		addCreditCard();
 	}
 
 	/**
@@ -380,7 +390,7 @@ public class UserInterface {
 		String name = getToken("Enter the name of the show");
 		Calendar start = getDate("Enter the starting date mm/dd/yy");
 		Calendar end = getDate("Enter the endinging date mm/dd/yy");
-                int price = getNumber("ENter the cost of the ticket price");
+		int price = getNumber("ENter the cost of the ticket price");
 		Play newPlay = theater.addPlay(id, name, start, end, price);
 		if(newPlay == null) {
 			System.out.println("Could not add the play");
@@ -390,10 +400,10 @@ public class UserInterface {
 			System.out.println("Play Name: " + newPlay.getName());
 			System.out.println("Start Date: " + newPlay.getStartDate());
 			System.out.println("End Date: " + newPlay.getEndDate());
-                        System.out.println("Play Cost:" + newPlay.getTicketPrice());
+			System.out.println("Play Cost:" + newPlay.getTicketPrice());
 		}
 	}
-        
+
 
 
 	/**
@@ -402,47 +412,41 @@ public class UserInterface {
 	 * tickets.
 	 * 
 	 */
-        public void handleTransaction() {
-            Ticket result;
-            Customer currentCustomer;
-            String customerID = getToken("Enter customer id");
-            currentCustomer = theater.searchCustomerID(customerID);
-            if (currentCustomer == null) {
-                System.out.println("No such customer");
-                return;
-            }
-            do {
-                int type;
-                do {
-                    type = getNumber("Enter " + Theater.REGULARTICKET + " a regular ticket, "
-                            + Theater.ADVANCETICKET + " for an advance ticket, or "
-                            + Theater.STUDENTADVANCE + " fir student advance");
-                } while (type != Theater.REGULARTICKET && type != Theater.ADVANCETICKET && type != Theater.STUDENTADVANCE);
-                int quanity = Integer.parseInt(getToken("Enter quanity"));
-                Calendar playDate = getDate("Enter the play date mm/dd/yy");
-                
-                for (int i = 0; i < quanity; i++) {
-                String studentID = "";
-                if (type == Theater.STUDENTADVANCE) {
-                    studentID = getToken("Enter valid student id");
-                }
-                
-                result = theater.makeTransaction(type, currentCustomer, currentCustomer.getCards(), playDate, studentID);
-                if (result == null) {
-                    System.out.println("Could not add the ticket");
-                } else {
-                    System.out.println("Ticket was successfully added");
-                    System.out.println("Serial Number: " + result.getSerialNumber ()+ "\n");
-                    System.out.println("Ticket Price: $" + result.getPrice ()+ "\n");
-                }
-                }
-                if (!yesOrNo("Add more tickets?")) {
-                    break;
-                }
-                
-            } while (true);
-        }
-	
+	public void handleTransaction(int type) {
+		Ticket result;
+		Customer currentCustomer;
+		String customerID = getToken("Enter customer id");
+		currentCustomer = theater.searchCustomerID(customerID);
+		if (currentCustomer == null) {
+			System.out.println("No such customer");
+			return;
+		}
+		do {
+			int quanity = Integer.parseInt(getToken("Enter quanity"));
+			Calendar playDate = getDate("Enter the play date mm/dd/yy");
+
+			for (int i = 0; i < quanity; i++) {
+				String studentID = "";
+				if (type == Theater.STUDENTADVANCE) {
+					studentID = getToken("Enter valid student id");
+				}
+
+				result = theater.makeTransaction(type, currentCustomer, currentCustomer.getCards(), playDate, studentID);
+				if (result == null) {
+					System.out.println("Could not add the ticket");
+				} else {
+					System.out.println("Ticket was successfully added");
+					System.out.println("Serial Number: " + result.getSerialNumber ()+ "\n");
+					System.out.println("Ticket Price: $" + result.getPrice ()+ "\n");
+				}
+			}
+			if (!yesOrNo("Add more tickets?")) {
+				break;
+			}
+
+		} while (true);
+	}
+
 	/**
 	 * Lists all plays for the current theater
 	 * @param none
@@ -465,11 +469,25 @@ public class UserInterface {
 		}
 
 	}
-        
-        public void testData () {
-        
-        }
-	
+	public void sellRegular() {
+		handleTransaction(Theater.REGULARTICKET);
+	}
+	public void sellAdvance () {
+		handleTransaction(Theater.ADVANCETICKET);
+	}
+	public void sellStudent () {
+		handleTransaction(Theater.STUDENTADVANCE);
+	}
+	public void payClient () {
+
+	}
+	public void printTickets () {
+
+	}
+	public void testData () {
+
+	}
+
 	public void process() {
 		int command;
 		help();
@@ -508,15 +526,27 @@ public class UserInterface {
 			case LIST_ALL_PLAY:
 				listAllPlays();
 				break;
-			case GET_TRANSACTION:
-				handleTransaction();
-				break;
 			case STORE_DATA:
 				storeData();
 				break;
 			case RETRIEVE_DATA:
 				retrieve();
 				break;
+			case SELL_REGULAR_TICKETS:
+				break;
+			case SELL_ADVANCE_TICKETS:
+
+				break;
+			case SELL_STUDENT_TICKETS:
+
+				break;
+			case PAY_CLIENT:
+
+				break;
+			case PRINT_ALL_TICKETS:
+
+				break;
+
 			case HELP:
 				help();
 				break;
