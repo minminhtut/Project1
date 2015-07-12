@@ -6,6 +6,7 @@ package project1;
  */
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 
@@ -19,6 +20,9 @@ public class Play implements Serializable {
     private String name;
     private Calendar start;
     private Calendar end;
+    private int startDate;
+    private int endDate;
+    private BigDecimal ticketPrice;
     
     public Play() {
     	
@@ -31,10 +35,12 @@ public class Play implements Serializable {
      * @param newStart
      * @param newEnd
      */
-    public Play(String newName, Calendar newStart, Calendar newEnd) {
-        name = new String(newName);
-        start = newStart;
-        end = newEnd;
+    public Play(String newName, Calendar newStart, Calendar newEnd, BigDecimal price) {
+        this.name = newName;
+        this.start = newStart;
+        this.end = newEnd;
+        this.ticketPrice = price;
+        setDateRange (this.start, this.end);
     }
 
     /**
@@ -109,6 +115,31 @@ public class Play implements Serializable {
         SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
         return date.format(start.getTime());
     }
+    /**
+     * a getter method to get the ending date int
+     *
+     * @return end
+     */
+    public int getEndDate() {
+
+        return this.endDate;
+    }
+    
+    /**
+     * a getter method to get the ending date int
+     *
+     * @return startDate
+     */
+    public int getStartDate() {
+        return this.startDate;
+    }
+    /**
+     * 
+     * @return ticket price
+     */
+    public BigDecimal getTicketPrice() {
+        return ticketPrice;
+    }
     
     /**
      * check current date against play starting date
@@ -120,6 +151,21 @@ public class Play implements Serializable {
     		return false;
     	else
     		return true;
+    }
+    /**
+     * 
+     * @param startdate
+     * @param endDate 
+     */
+    public void setDateRange (Calendar startdate, Calendar endDate) {
+        int year = startdate.get(Calendar.YEAR);
+        int month = startdate.get(Calendar.MONTH);
+        int day = startdate.get(Calendar.DATE);
+        this.startDate= (year*10000) + ((month+1)*100) + day;  
+        year = endDate.get(Calendar.YEAR);
+        month = endDate.get(Calendar.MONTH);
+        day = endDate.get(Calendar.DATE);
+        this.endDate = (year*10000) + ((month+1)*100) + day;       
     }
     
     /**
