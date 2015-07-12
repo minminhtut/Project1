@@ -421,6 +421,7 @@ public class UserInterface {
                 int quanity = Integer.parseInt(getToken("Enter quanity"));
                 Calendar playDate = getDate("Enter the play date mm/dd/yy");
                 
+                
                 for (int i = 0; i < quanity; i++) {
                 String studentID = "";
                 if (type == Theater.STUDENTADVANCE) {
